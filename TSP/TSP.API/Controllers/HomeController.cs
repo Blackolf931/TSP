@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BLL_1.DTO;
-using BLL_1.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
