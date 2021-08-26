@@ -1,5 +1,5 @@
-﻿using BLL_1.Interface;
-using BLL_1.Services;
+﻿using BLL.Interface;
+using BLL.Services;
 using Ninject.Modules;
 using System;
 using System.Collections.Generic;

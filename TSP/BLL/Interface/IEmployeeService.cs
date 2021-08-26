@@ -1,7 +1,7 @@
-﻿using BLL_1.DTO;
+﻿using BLL.DTO;
 using System.Collections.Generic;
 
-namespace BLL_1.Interface
+namespace BLL.Interface
 {
     public interface IEmployeeService
     {

@@ -1,6 +1,6 @@
 ﻿
 
-using BLL_1.DTO;
+using BLL.DTO;
 
 namespace TSP.API.ViewModels
 {

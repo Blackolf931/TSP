@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using BLL_1.DTO;
-using BLL_1.Infastructure;
-using BLL_1.Interface;
+using BLL.DTO;
+using BLL.Infastructure;
+using BLL.Interface;
 using DAL.Entities;
 using DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace BLL_1.Services
+namespace BLL.Services
 {
     public class EmployeeService : IEmployeeService
     {
