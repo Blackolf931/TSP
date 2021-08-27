@@ -1,10 +1,12 @@
+<<<<<<< Updated upstream
 ﻿using AutoMapper;
 using BLL_1.DTO;
 using BLL_1.Interface;
+=======
+﻿using BLL.DTO;
+>>>>>>> Stashed changes
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using TSP.API.ViewModels;
 

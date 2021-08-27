@@ -1,13 +1,18 @@
+<<<<<<< Updated upstream
 using BLL_1.Interface;
 using BLL_1.Services;
 using DAL.Interfaces;
 using DAL.Repositories;
+=======
+>>>>>>> Stashed changes
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using NLog;
+using System.IO;
 
 namespace TSP.API
 {
@@ -15,6 +20,7 @@ namespace TSP.API
     {
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
         }
 
@@ -23,9 +29,8 @@ namespace TSP.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           // services.AddScoped(typeof(IEmployeeService), typeof(EmployeeService));
-            //services.AddScoped<IUnitOfWork, EFUnitOfWork>();
-            //services.AddScoped(typeof(IRepository<OfficeRepository>), typeof(OfficeRepository));
+
+            services.ConfigureLoggerService();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
