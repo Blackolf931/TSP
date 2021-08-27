@@ -1,10 +1,10 @@
-﻿using BLL_1.DTO;
+﻿
 
 namespace TSP.API.ViewModels
 {
     public class EmployeeViewModel
     {
-        public EmployeeViewModel()
+       /* public EmployeeViewModel()
         {
         }
 
@@ -19,6 +19,6 @@ namespace TSP.API.ViewModels
         public int Id { get; set; }
         public string Name { get; set; }
         public string SecondName { get; set; }
-        public int Age { get; set; }
+        public int Age { get; set; }*/
     }
 }

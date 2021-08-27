@@ -1,10 +1,3 @@
-<<<<<<< Updated upstream
-using BLL_1.Interface;
-using BLL_1.Services;
-using DAL.Interfaces;
-using DAL.Repositories;
-=======
->>>>>>> Stashed changes
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -31,6 +24,7 @@ namespace TSP.API
         {
 
             services.ConfigureLoggerService();
+            services.ConfigureSqlContext(Configuration);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
