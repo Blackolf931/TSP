@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 
+
 namespace DAL.Entities
 {
     public class OfficeContext : DbContext
