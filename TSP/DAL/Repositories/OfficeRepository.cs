@@ -9,7 +9,7 @@ using System.Data.Entity;
 
 namespace DAL.Repositories
 {
-    public class OfficeRepository : IRepository<Employee>
+   /* public class OfficeRepository : IRepository<Employee>
     {
         private OfficeContext db;
         public OfficeRepository(OfficeContext context)
@@ -19,12 +19,12 @@ namespace DAL.Repositories
 
         public void Create(Employee item)
         {
-            db.Employees.Add(item);
+       //     db.Employees.Add(item);
         }
 
         public void Delete(int id)
         {
-            Employee employee = db.Employees.Find(id);
+          /*  Employee employee = db.Employees.Find(id);
             if (employee != null)
             {
                 db.Employees.Remove(employee);
@@ -50,5 +50,5 @@ namespace DAL.Repositories
         {
             db.Entry(item).State = EntityState.Modified;
         }
-    }
+    }*/
 }

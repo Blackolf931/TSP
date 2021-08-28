@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class EFUnitOfWork : IUnitOfWork
+   /* public class EFUnitOfWork : IUnitOfWork
     {
-        private OfficeContext db;
-        private OfficeRepository officeRepository;
+      /*  private OfficeContext db;
+       // private OfficeRepository officeRepository;
         public EFUnitOfWork(string connectionString)
         {
-            db = new OfficeContext(connectionString);
+      //      db = new OfficeContext(connectionString);
         }
         public IRepository<Employee> Employes
         {
@@ -52,5 +52,5 @@ namespace DAL.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-    }
+    }*/
 }
