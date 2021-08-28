@@ -1,0 +1,28 @@
+2021-08-27 12:32:55.2587 INFO Here is info message from our values controller.
+2021-08-27 12:32:55.5128 DEBUG Here is debug message from our values controller.
+2021-08-27 12:32:55.5188 WARN Here is warn message from our values controller.
+2021-08-27 12:32:55.5188 ERROR Here is an error message from our values controller.
+2021-08-27 12:33:19.5618 INFO Here is info message from our values controller.
+2021-08-27 12:33:19.5695 DEBUG Here is debug message from our values controller.
+2021-08-27 12:33:19.5695 WARN Here is warn message from our values controller.
+2021-08-27 12:33:19.5832 ERROR Here is an error message from our values controller.
+2021-08-27 12:33:27.3418 INFO Here is info message from our values controller.
+2021-08-27 12:33:27.3418 DEBUG Here is debug message from our values controller.
+2021-08-27 12:33:27.3418 WARN Here is warn message from our values controller.
+2021-08-27 12:33:27.3501 ERROR Here is an error message from our values controller.
+2021-08-27 12:34:51.0796 INFO Here is info message from our values controller.
+2021-08-27 12:34:51.0811 DEBUG Here is debug message from our values controller.
+2021-08-27 12:34:51.0811 WARN Here is warn message from our values controller.
+2021-08-27 12:34:51.0811 ERROR Here is an error message from our values controller.
+2021-08-27 12:40:08.6302 INFO Here is info message from our values controller.
+2021-08-27 12:40:08.6302 DEBUG Here is debug message from our values controller.
+2021-08-27 12:40:08.6302 WARN Here is warn message from our values controller.
+2021-08-27 12:40:08.6302 ERROR Here is an error message from our values controller.
+2021-08-27 12:40:16.8781 INFO Here is info message from our values controller.
+2021-08-27 12:40:16.8781 DEBUG Here is debug message from our values controller.
+2021-08-27 12:40:16.9027 WARN Here is warn message from our values controller.
+2021-08-27 12:40:16.9268 ERROR Here is an error message from our values controller.
+2021-08-27 12:42:04.5503 INFO Here is info message from our values controller.
+2021-08-27 12:42:04.5503 DEBUG Here is debug message from our values controller.
+2021-08-27 12:42:04.5702 WARN Here is warn message from our values controller.
+2021-08-27 12:42:04.5702 ERROR Here is an error message from our values controller.

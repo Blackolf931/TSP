@@ -1,9 +1,5 @@
-﻿using AutoMapper;
-using BLL.DTO;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using TSP.API.ViewModels;
 
@@ -13,7 +9,7 @@ namespace TSP.API.Controllers
     [Route("[controller]")]
     public class HomeController : Controller
     {
-        [HttpGet("GetAllEmployee")]
+        /*[HttpGet("GetAllEmployee")]
         public ActionResult GetEmployee()
         {
             List<EmployeeViewModel> employess;
@@ -22,9 +18,9 @@ namespace TSP.API.Controllers
                 employess = db.Employess.ToArray().Select(x => new EmployeeViewModel(x)).ToList();
             }
             return Ok(employess);
-        }
+        }*/
 
-        [HttpPost("AddEmployee")]
+       /* [HttpPost("AddEmployee")]
         public ActionResult AddEmployee(EmployeeViewModel employee)
         {
             using(OfficeContext db = new OfficeContext())
@@ -38,7 +34,7 @@ namespace TSP.API.Controllers
                 db.SaveChanges();
             }
             return Ok();
-        }
+        }*/
 
     }
 

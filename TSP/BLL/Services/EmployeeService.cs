@@ -9,9 +9,9 @@ using System.Collections.Generic;
 
 namespace BLL.Services
 {
-    public class EmployeeService : IEmployeeService
+    public class EmployeeService
     {
-        IUnitOfWork Database { get; set; }
+      /*  IUnitOfWork Database { get; set; }
         public EmployeeService(IUnitOfWork unit)
         {
             Database = unit;
@@ -59,6 +59,6 @@ namespace BLL.Services
         public void Dispose()
         {
             Database.Dispose();
-        }
+        }*/
     }
 }
