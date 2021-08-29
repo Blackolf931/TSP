@@ -60,5 +60,7 @@ namespace BLL.Services
         {
             Database.Dispose();
         }*/
+
+        //Test string
     }
 }
