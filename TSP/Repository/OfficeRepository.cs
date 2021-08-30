@@ -1,6 +1,8 @@
 ﻿using Contracts;
 using Entities;
+using Entities.DTO;
 using Entities.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,18 +13,36 @@ namespace Repository
 {
     public class OfficeRepository : RepositoryBase<Office>, IOfficeRepository
     {
-        private RepositoryContext _repositoryContext;
+        private readonly RepositoryContext _repositoryContext;
         public OfficeRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
             _repositoryContext = repositoryContext;
         }
-        public void GetAll()
+        public IEnumerable<Office> GetAll()
         {
-            _repositoryContext.Offices.Any();
+            return _repositoryContext.Offices.Include(x => x.Employess).ToList();
+        }
+        public Office GetById(int id)
+        {
+             return _repositoryContext.Offices.Where(x => x.Id == id).FirstOrDefault();
         }
         public void Save()
         {
             throw new NotImplementedException();
+        }
+        public void RemoveById(int id)
+        {
+          _repositoryContext.Offices.Remove(_repositoryContext.Offices.Find(id));
+        }
+
+        public void Add(int id, string name, string address, string country)
+        {
+            _repositoryContext.Offices.Add(new OfficeDto(id,name,address, country));
+        }
+
+        public void Update(int id, string name, string address, string country)
+        {
+            _repositoryContext.Offices.Update(new OfficeDto(id, name, address, country));
         }
     }
 }
