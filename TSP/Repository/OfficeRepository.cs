@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities;
+using Entities.DTO;
 using Entities.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,7 +13,7 @@ namespace Repository
 {
     public class OfficeRepository : RepositoryBase<Office>, IOfficeRepository
     {
-        private RepositoryContext _repositoryContext;
+        private readonly RepositoryContext _repositoryContext;
         public OfficeRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
             _repositoryContext = repositoryContext;
@@ -32,6 +33,16 @@ namespace Repository
         public void RemoveById(int id)
         {
           _repositoryContext.Offices.Remove(_repositoryContext.Offices.Find(id));
+        }
+
+        public void Add(int id, string name, string address, string country)
+        {
+            _repositoryContext.Offices.Add(new OfficeDto(id,name,address, country));
+        }
+
+        public void Update(int id, string name, string address, string country)
+        {
+            _repositoryContext.Offices.Update(new OfficeDto(id, name, address, country));
         }
     }
 }

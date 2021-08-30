@@ -9,5 +9,7 @@ namespace Contracts
         IEnumerable<Office> GetAll();
         Office GetById(int id);
         void RemoveById(int id);
+        void Add(int id, string name, string address, string country);
+        void Update(int id, string name, string address, string country);
     }
 }

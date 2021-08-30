@@ -34,5 +34,17 @@ namespace TSP.API.Controllers
             _repository.Employee.DeleteById(id);
             return new string[] { "Employee has been delete"};
         }
+        [HttpPost("AddEmployee")]
+        public ActionResult<IEnumerable<string>> AddEmployee(int id, string name, string secondName, string patronomic, int age, string position, int officeId)
+        {
+            _repository.Employee.Add(id, name, secondName, patronomic, age, position, officeId);
+            return Ok("Employee has been add");
+        }
+        [HttpPost("UpdateEmployee")]
+        public ActionResult<IEnumerable<string>> UpdateEmployee(int id, string name, string secondName, string patronomic, int age, string position, int officeId)
+        {
+            _repository.Employee.Update(id, name, secondName, patronomic, age, position, officeId);
+            return Ok("Employee has been update");
+        }
     }
 }

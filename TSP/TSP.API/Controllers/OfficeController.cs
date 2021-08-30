@@ -37,5 +37,18 @@ namespace TSP.API.Controllers
             _repository.Office.RemoveById(id);
             return new string[] { "Office has been delete" };
         }
+        [HttpPost("AddOffice")]
+        public ActionResult AddOffice(int id, string name, string address, string country)
+        {
+            _repository.Office.Add(id, name, address, country);
+            return Ok("You has been add office");
+        }
+
+        [HttpPost("UpdateOffice")]
+        public ActionResult UpdateOffice(int id, string name, string address, string country)
+        {
+            _repository.Office.Update(id, name, address, country);
+            return Ok("You has been update office");
+        }
     }
 }

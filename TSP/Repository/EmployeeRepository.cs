@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities;
+using Entities.DTO;
 using Entities.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,11 +13,16 @@ namespace Repository
 {
     public class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepository
     {
-        private RepositoryContext _repositoryContext;
+        private readonly RepositoryContext _repositoryContext;
 
         public EmployeeRepository(RepositoryContext repositoryContext): base(repositoryContext)
         {
             _repositoryContext = repositoryContext;
+        }
+
+        public void Add(int id, string name, string secondName, string patronomic, int age, string position, int officeId)
+        {
+            _repositoryContext.Employees.Add(new EmployeeDto(id, name, secondName, patronomic, age, position, officeId));
         }
 
         public void DeleteById(int id)
@@ -32,6 +38,11 @@ namespace Repository
         public Employee GetById(int id)
         {
             return _repositoryContext.Employees.Find(id);
+        }
+
+        public void Update(int id, string name, string secondName, string patronomic, int age, string position, int officeId)
+        {
+            _repositoryContext.Employees.Update(new EmployeeDto(id, name, secondName, patronomic, age, position, officeId));
         }
     }
 }
