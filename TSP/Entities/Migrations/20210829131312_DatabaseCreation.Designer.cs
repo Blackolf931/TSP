@@ -3,14 +3,16 @@ using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Entities.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20210829131312_DatabaseCreation")]
+    partial class DatabaseCreation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,28 +58,6 @@ namespace Entities.Migrations
                     b.HasIndex("OfficeId");
 
                     b.ToTable("Employees");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Age = 26,
-                            Name = "Sam",
-                            OfficeId = 1,
-                            Patronomic = "Olovson",
-                            Position = "Software developer",
-                            SecondName = "Raiden"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Age = 26,
-                            Name = "Tom",
-                            OfficeId = 2,
-                            Patronomic = "Olovson",
-                            Position = "Junior",
-                            SecondName = "Potter"
-                        });
                 });
 
             modelBuilder.Entity("Entities.Model.Office", b =>
@@ -103,22 +83,6 @@ namespace Entities.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Offices");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "test",
-                            Country = "USA",
-                            Name = "Office Number 1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "test",
-                            Country = "USA",
-                            Name = "Office Number 1"
-                        });
                 });
 
             modelBuilder.Entity("Entities.Model.Employee", b =>
