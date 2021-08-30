@@ -1,3 +1,5 @@
+using Contracts;
+using Entities.Model;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,34 +9,24 @@ namespace TSP.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
-        /*[HttpGet("GetAllEmployee")]
-        public ActionResult GetEmployee()
-        {
-            List<EmployeeViewModel> employess;
-            using(OfficeContext db = new OfficeContext())
-            {
-                employess = db.Employess.ToArray().Select(x => new EmployeeViewModel(x)).ToList();
-            }
-            return Ok(employess);
-        }*/
+        private readonly IRepositoryManager _repository;
 
-       /* [HttpPost("AddEmployee")]
-        public ActionResult AddEmployee(EmployeeViewModel employee)
+        public HomeController(IRepositoryManager repository)
         {
-            using(OfficeContext db = new OfficeContext())
-            {
-                EmployeeDTO dto = new EmployeeDTO();
-                dto.Name = employee.Name;
-                dto.SecondName = employee.SecondName;
-                dto.Age = employee.Age;
-                dto.Id = employee.Id;
-                db.Employess.Add(dto);
-                db.SaveChanges();
-            }
-            return Ok();
-        }*/
+            _repository = repository;
+        }
+
+        [HttpGet("GetAllOfficeAndEmployee")]
+        public ActionResult<IEnumerable<string>> Get()
+        {
+          //   _repository.Office.AnyMethodFromOfficeRepository();
+          //   _repository.Employee.AnyMethodFromEmployeeRepository();
+         //   _repository.Office.Save();
+            _repository.Office.GetAll();
+            return new string[] { "value1", "value2" };
+        }
 
     }
 
