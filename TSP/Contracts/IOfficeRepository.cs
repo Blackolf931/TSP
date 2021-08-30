@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Entities.Model;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Contracts
 {
     public interface IOfficeRepository
     {
         void Save();
-        void GetAll();
+        IEnumerable<Office> GetAll();
+        Office GetById(int id);
+        void RemoveById(int id);
     }
 }
