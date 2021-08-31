@@ -9,12 +9,12 @@ namespace Entities.Configuration
     {
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
-            builder.HasData(
+         /*   builder.HasData(
            new Employee { Id = 1, Name = "Sam", SecondName = "Raiden", Patronomic = "Olovson", Age = 26, Position = "Software developer",
                 OfficeId = 1 },
            new Employee { Id = 2, Name = "Tom", SecondName = "Potter", Patronomic = "Olovson", Age = 26, Position = "Junior",
              OfficeId = 2}
-        );
+        );*/
         }
     }
 }

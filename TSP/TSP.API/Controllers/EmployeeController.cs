@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Entities.DTO;
 using Entities.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ namespace TSP.API.Controllers
     {
 
         private readonly IRepositoryManager _repository;
+        private readonly CheckData checkData = new();
 
         public EmployeeController(IRepositoryManager repository)
         {
@@ -37,12 +39,26 @@ namespace TSP.API.Controllers
         [HttpPost("AddEmployee")]
         public ActionResult<IEnumerable<string>> AddEmployee(int id, string name, string secondName, string patronomic, int age, string position, int officeId)
         {
+            checkData.CheckStringOnValid(name);
+            checkData.CheckStringOnValid(secondName);
+            checkData.CheckStringOnValid(patronomic);
+            checkData.CheckStringOnValid(position);
+            checkData.CheckAge(age);
+            checkData.CheckOfficeId(id, _repository);
             _repository.Employee.Add(id, name, secondName, patronomic, age, position, officeId);
             return Ok("Employee has been add");
         }
         [HttpPost("UpdateEmployee")]
         public ActionResult<IEnumerable<string>> UpdateEmployee(int id, string name, string secondName, string patronomic, int age, string position, int officeId)
         {
+           
+            checkData.CheckEmployeeId(id, _repository);
+            checkData.CheckStringOnValid(name);
+            checkData.CheckStringOnValid(secondName);
+            checkData.CheckStringOnValid(patronomic);
+            checkData.CheckStringOnValid(position);
+            checkData.CheckOfficeId(id, _repository);
+            checkData.CheckAge(age);
             _repository.Employee.Update(id, name, secondName, patronomic, age, position, officeId);
             return Ok("Employee has been update");
         }
