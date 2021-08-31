@@ -1,10 +1,9 @@
 ﻿using Contracts;
+using Entities.DTO;
 using Entities.Model;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using TSP.API.Exceptions;
 
 namespace TSP.API.Controllers
 {
@@ -13,7 +12,6 @@ namespace TSP.API.Controllers
     public class OfficeController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
-        private readonly CheckData checkData = new();
 
         public OfficeController(IRepositoryManager repository)
         {
@@ -41,9 +39,7 @@ namespace TSP.API.Controllers
         [HttpPost("AddOffice")]
         public ActionResult AddOffice(int id, string name, string address, string country)
         {
-            checkData.CheckStringOnValid(name);
-            checkData.CheckStringOnValid(country);
-            checkData.CheckOfficeId(id, _repository);
+            ValidData(new OfficeDto(id, name, address, country));
             _repository.Office.Add(id, name, address, country);
             return Ok("You has been add office");
         }
@@ -51,11 +47,14 @@ namespace TSP.API.Controllers
         [HttpPost("UpdateOffice")]
         public ActionResult UpdateOffice(int id, string name, string address, string country)
         {
-            checkData.CheckStringOnValid(name);
-            checkData.CheckStringOnValid(country);
-            checkData.CheckOfficeId(id, _repository);
+            ValidData(new OfficeDto(id, name, address, country));
             _repository.Office.Update(id, name, address, country);
             return Ok("You has been update office");
+        }
+
+        private void ValidData(OfficeDto dto)
+        {
+            new GenerateOfficeException(dto);
         }
     }
 }

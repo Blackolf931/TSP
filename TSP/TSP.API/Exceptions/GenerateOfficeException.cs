@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Entities.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,11 @@ namespace TSP.API.Exceptions
 {
     public class GenerateOfficeException
     {
-        public GenerateOfficeException()
+        public GenerateOfficeException(OfficeDto officeDto)
         {
+            CheckData(officeDto.Id);
+            CheckData(officeDto.Name);
+            CheckData(officeDto.Country);
         }
 
         public void CheckData(int id)
@@ -27,13 +31,6 @@ namespace TSP.API.Exceptions
             if (r.IsMatch(str))
             {
                 throw new OfficeException("String have wrong symbols");
-            }
-        }
-        public void CheckOfficeId(int id, IRepositoryManager repositoryManager)
-        {
-            if (repositoryManager.Office.GetById(id) is null)
-            {
-                throw new OfficeException("Office does not exist");
             }
         }
     }

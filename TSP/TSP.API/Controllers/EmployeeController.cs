@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TSP.API.Exceptions;
 
 namespace TSP.API.Controllers
 {
@@ -13,7 +14,6 @@ namespace TSP.API.Controllers
     {
 
         private readonly IRepositoryManager _repository;
-        private readonly CheckData checkData = new();
 
         public EmployeeController(IRepositoryManager repository)
         {
@@ -39,28 +39,21 @@ namespace TSP.API.Controllers
         [HttpPost("AddEmployee")]
         public ActionResult<IEnumerable<string>> AddEmployee(int id, string name, string secondName, string patronomic, int age, string position, int officeId)
         {
-            checkData.CheckStringOnValid(name);
-            checkData.CheckStringOnValid(secondName);
-            checkData.CheckStringOnValid(patronomic);
-            checkData.CheckStringOnValid(position);
-            checkData.CheckAge(age);
-            checkData.CheckOfficeId(id, _repository);
+            ValidData(new EmployeeDto(id, name, secondName, patronomic, age, position, officeId));
             _repository.Employee.Add(id, name, secondName, patronomic, age, position, officeId);
             return Ok("Employee has been add");
         }
         [HttpPost("UpdateEmployee")]
         public ActionResult<IEnumerable<string>> UpdateEmployee(int id, string name, string secondName, string patronomic, int age, string position, int officeId)
         {
-           
-            checkData.CheckEmployeeId(id, _repository);
-            checkData.CheckStringOnValid(name);
-            checkData.CheckStringOnValid(secondName);
-            checkData.CheckStringOnValid(patronomic);
-            checkData.CheckStringOnValid(position);
-            checkData.CheckOfficeId(id, _repository);
-            checkData.CheckAge(age);
+            ValidData(new EmployeeDto(id, name, secondName, patronomic, age, position, officeId));
             _repository.Employee.Update(id, name, secondName, patronomic, age, position, officeId);
             return Ok("Employee has been update");
+        }
+
+        private void ValidData(EmployeeDto dto)
+        {
+            new GenerateEmployeeException(dto);
         }
     }
 }
