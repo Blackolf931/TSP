@@ -23,11 +23,13 @@ namespace Repository
         public void Add(int id, string name, string secondName, string patronomic, int age, string position, int officeId)
         {
             _repositoryContext.Employees.Add(new EmployeeDto(id, name, secondName, patronomic, age, position, officeId));
+            _repositoryContext.SaveChanges();
         }
 
         public void DeleteById(int id)
         {
             _repositoryContext.Employees.Remove(_repositoryContext.Employees.Find(id));
+            _repositoryContext.SaveChanges();
         }
 
         public IEnumerable<Employee> GetAll()
@@ -43,6 +45,7 @@ namespace Repository
         public void Update(int id, string name, string secondName, string patronomic, int age, string position, int officeId)
         {
             _repositoryContext.Employees.Update(new EmployeeDto(id, name, secondName, patronomic, age, position, officeId));
+            _repositoryContext.SaveChanges();
         }
     }
 }

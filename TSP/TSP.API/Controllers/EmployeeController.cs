@@ -1,10 +1,12 @@
 ﻿using Contracts;
+using Entities.DTO;
 using Entities.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TSP.API.Exceptions;
 
 namespace TSP.API.Controllers
 {
@@ -37,14 +39,21 @@ namespace TSP.API.Controllers
         [HttpPost("AddEmployee")]
         public ActionResult<IEnumerable<string>> AddEmployee(int id, string name, string secondName, string patronomic, int age, string position, int officeId)
         {
+            ValidData(new EmployeeDto(id, name, secondName, patronomic, age, position, officeId));
             _repository.Employee.Add(id, name, secondName, patronomic, age, position, officeId);
             return Ok("Employee has been add");
         }
         [HttpPost("UpdateEmployee")]
         public ActionResult<IEnumerable<string>> UpdateEmployee(int id, string name, string secondName, string patronomic, int age, string position, int officeId)
         {
+            ValidData(new EmployeeDto(id, name, secondName, patronomic, age, position, officeId));
             _repository.Employee.Update(id, name, secondName, patronomic, age, position, officeId);
             return Ok("Employee has been update");
+        }
+
+        private static void ValidData(EmployeeDto dto)
+        {
+            new GenerateEmployeeException(dto);
         }
     }
 }

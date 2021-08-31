@@ -33,16 +33,19 @@ namespace Repository
         public void RemoveById(int id)
         {
           _repositoryContext.Offices.Remove(_repositoryContext.Offices.Find(id));
+          _repositoryContext.SaveChanges();
         }
 
         public void Add(int id, string name, string address, string country)
         {
             _repositoryContext.Offices.Add(new OfficeDto(id,name,address, country));
+            _repositoryContext.SaveChanges();
         }
 
         public void Update(int id, string name, string address, string country)
         {
             _repositoryContext.Offices.Update(new OfficeDto(id, name, address, country));
+            _repositoryContext.SaveChanges();
         }
     }
 }
