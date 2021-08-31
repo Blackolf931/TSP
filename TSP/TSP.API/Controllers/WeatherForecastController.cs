@@ -12,12 +12,6 @@ namespace TSP.API.Controllers
     public class WeatherForecastController : ControllerBase
     {
         private readonly ILoggerManager _logger;
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-      //  private readonly ILogger<WeatherForecastController> _logger;
 
         public WeatherForecastController(ILoggerManager logger)
         {

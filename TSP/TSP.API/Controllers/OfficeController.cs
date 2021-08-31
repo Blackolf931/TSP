@@ -52,7 +52,7 @@ namespace TSP.API.Controllers
             return Ok("You has been update office");
         }
 
-        private void ValidData(OfficeDto dto)
+        private static void ValidData(OfficeDto dto)
         {
             new GenerateOfficeException(dto);
         }

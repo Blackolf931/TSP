@@ -51,7 +51,7 @@ namespace TSP.API.Controllers
             return Ok("Employee has been update");
         }
 
-        private void ValidData(EmployeeDto dto)
+        private static void ValidData(EmployeeDto dto)
         {
             new GenerateEmployeeException(dto);
         }

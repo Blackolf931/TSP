@@ -5,7 +5,7 @@ using System;
 
 namespace Entities.Configuration
 {
-    class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
+    /*class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
     {
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
@@ -14,7 +14,7 @@ namespace Entities.Configuration
                 OfficeId = 1 },
            new Employee { Id = 2, Name = "Tom", SecondName = "Potter", Patronomic = "Olovson", Age = 26, Position = "Junior",
              OfficeId = 2}
-        );*/
+        );
         }
-    }
+    }*/
 }
