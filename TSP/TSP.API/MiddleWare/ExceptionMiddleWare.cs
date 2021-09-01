@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BLL.Infastructure;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Threading.Tasks;
-using TSP.API.Exceptions;
 
 namespace TSP.API.MiddleWare
 {

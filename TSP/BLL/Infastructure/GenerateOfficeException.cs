@@ -1,16 +1,11 @@
-﻿using Contracts;
-using Entities.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using BLL.DTO;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace TSP.API.Exceptions
+namespace BLL.Infastructure
 {
     public class GenerateOfficeException
     {
-        public GenerateOfficeException(OfficeDto officeDto)
+        public GenerateOfficeException(Office officeDto)
         {
             CheckData(officeDto.Id);
             CheckData(officeDto.Name);
