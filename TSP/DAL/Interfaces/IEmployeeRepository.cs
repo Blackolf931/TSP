@@ -1,15 +1,15 @@
 ﻿using DAL.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
     public interface IEmployeeRepository
     {
-        IEnumerable<EmployeeEntity> GetAll();
-        EmployeeEntity GetById(int id);
-        void DeleteById(int id);
-        void Add(EmployeeEntity entity);
-
-        void Update(EmployeeEntity entity);
+        Task<IEnumerable<EmployeeEntity>> GetAllAsync();
+        Task<EmployeeEntity> GetByIdAsync(int id);
+        Task DeleteByIdAsync(int id);
+        Task Add(EmployeeEntity entity);
+        Task UpdateAsync(EmployeeEntity entity);
     }
 }

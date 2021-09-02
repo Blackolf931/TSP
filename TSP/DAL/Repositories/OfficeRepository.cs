@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DAL.BusinessLogic
 {
@@ -15,34 +16,35 @@ namespace DAL.BusinessLogic
         {
             _repositoryContext = repositoryContext;
         }
-        public IEnumerable<OfficeEntity> GetAll()
+        public async Task<IEnumerable<OfficeEntity>> GetAllAsync()
         {
-            return _repositoryContext.Offices.Include(x => x.Employess).ToList();
+            return await _repositoryContext.Offices.Include(x => x.Employess).ToListAsync();
         }
-        public OfficeEntity GetById(int id)
+        public async Task<OfficeEntity> GetByIdAsync(int id)
         {
-            return _repositoryContext.Offices.Where(x => x.Id == id).FirstOrDefault();
+           return await _repositoryContext.Offices.AsNoTracking().Where(x => x.Id == id).FirstOrDefaultAsync();
         }
         public void Save()
         {
             throw new NotImplementedException();
         }
-        public void RemoveById(int id)
+        public async Task RemoveByIdAsync(int id)
         {
-            _repositoryContext.Offices.Remove(_repositoryContext.Offices.Find(id));
-            _repositoryContext.SaveChanges();
+            var officeId = await _repositoryContext.Offices.FindAsync(id);
+           _repositoryContext.Offices.Remove(officeId);
+           await _repositoryContext.SaveChangesAsync();
         }
 
-        public void Add(OfficeEntity entity)
+        public async Task Add(OfficeEntity entity)
         {
-            _repositoryContext.Offices.Add(entity);
-            _repositoryContext.SaveChanges();
+            await _repositoryContext.Offices.AddAsync(entity);
+            await _repositoryContext.SaveChangesAsync();
         }
 
-        public new void Update(OfficeEntity entity)
+        public async Task Update(OfficeEntity entity)
         {
-            _repositoryContext.Offices.Update(entity);
-            _repositoryContext.SaveChanges();
+           _repositoryContext.Offices.Update(entity);
+           await _repositoryContext.SaveChangesAsync();
         }
     }
 }
