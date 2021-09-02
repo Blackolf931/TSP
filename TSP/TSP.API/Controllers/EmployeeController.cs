@@ -1,31 +1,25 @@
-﻿using Contracts;
-using Entities.DTO;
-using Entities.Model;
+﻿using BLL.Models;
+using BLL.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TSP.API.Exceptions;
 
 namespace TSP.API.Controllers
 {
     public class EmployeeController : ControllerBase
     {
+        private readonly IEmployeeService _service;
 
-        private readonly IRepositoryManager _repository;
-
-        public EmployeeController(IRepositoryManager repository)
+        public EmployeeController(IEmployeeService service)
         {
-            _repository = repository;
+            _service = service;
         }
         [HttpGet("GetAllEmployee")]
         public ActionResult<IEnumerable<Employee>> GetAllEmployee()
         {
-          return Ok(_repository.Employee.GetAll());    
+            return Ok(_service.GetAll()); 
         }
 
-        [HttpGet("GetEmployeeById")]
+      /*  [HttpGet("GetEmployeeById")]
         public ActionResult<Employee> GetEmployeeById(int id)
         {
             return _repository.Employee.GetById(id);
@@ -53,7 +47,7 @@ namespace TSP.API.Controllers
 
         private static void ValidData(EmployeeDto dto)
         {
-            new GenerateEmployeeException(dto);
-        }
+            _ = new GenerateEmployeeException(dto);
+        }*/
     }
 }

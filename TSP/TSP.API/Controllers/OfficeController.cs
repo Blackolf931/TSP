@@ -1,9 +1,9 @@
-﻿using Contracts;
-using Entities.DTO;
-using Entities.Model;
+﻿
+using BLL.Models;
+using BLL.Services;
+
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using TSP.API.Exceptions;
 
 namespace TSP.API.Controllers
 {
@@ -11,20 +11,21 @@ namespace TSP.API.Controllers
     [Route("[controller]")]
     public class OfficeController : ControllerBase
     {
-        private readonly IRepositoryManager _repository;
+        private readonly IOfficeService _service;
 
-        public OfficeController(IRepositoryManager repository)
+
+        public OfficeController(IOfficeService service)
         {
-            _repository = repository;
+            _service = service;
         }
 
         [HttpGet("GetAllOffice")]
-        public ActionResult<IEnumerable<Employee>> Get()
+        public ActionResult<IEnumerable<Office>> GetAllOfice()
         {
-           return Ok(_repository.Office.GetAll());
+           return Ok(_service.GetAll());
         }
 
-        [HttpGet("GetOfficeById")]
+      /*  [HttpGet("GetOfficeById")]
         public ActionResult<Office> GetOfficeById(int id)
         {
            return _repository.Office.GetById(id);
@@ -54,7 +55,7 @@ namespace TSP.API.Controllers
 
         private static void ValidData(OfficeDto dto)
         {
-            new GenerateOfficeException(dto);
-        }
+            _ = new GenerateOfficeException(dto);
+        }*/
     }
 }

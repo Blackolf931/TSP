@@ -1,16 +1,11 @@
 ﻿using Contracts;
 using Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository
 {
     public class RepositoryManager : IRepositoryManager
     {
-        private RepositoryContext _repositoryContext;
+        private readonly RepositoryContext _repositoryContext;
         public IOfficeRepository _officeRepository;
         public IEmployeeRepository _employeeRepository;
 

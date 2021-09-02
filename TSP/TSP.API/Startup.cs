@@ -1,6 +1,6 @@
+using BLL.DI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,10 +25,8 @@ namespace TSP.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.ConfigureLoggerService();
-            services.ConfigureSqlContext(Configuration);
-            services.ConfigureRepositoryManager();
+            services.RegistarBuisnessComponents(Configuration);
             services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             services.AddSwaggerGen(c =>
             {

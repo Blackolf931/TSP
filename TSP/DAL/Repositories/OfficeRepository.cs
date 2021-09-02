@@ -1,54 +1,48 @@
-﻿using DAL.Entities;
+﻿using DAl.BusinessLogic;
+using DAL.Entities;
 using DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
 
-namespace DAL.Repositories
+namespace DAL.BusinessLogic
 {
-   /* public class OfficeRepository : IRepository<Employee>
+    public class OfficeRepository : RepositoryBase<OfficeEntity>, IOfficeRepository
     {
-        private OfficeContext db;
-        public OfficeRepository(OfficeContext context)
+        private readonly RepositoryContext _repositoryContext;
+        public OfficeRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
-            this.db = context;
+            _repositoryContext = repositoryContext;
+        }
+        public IEnumerable<OfficeEntity> GetAll()
+        {
+            return _repositoryContext.Offices.Include(x => x.Employess).ToList();
+        }
+        public OfficeEntity GetById(int id)
+        {
+            return _repositoryContext.Offices.Where(x => x.Id == id).FirstOrDefault();
+        }
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+        public void RemoveById(int id)
+        {
+            _repositoryContext.Offices.Remove(_repositoryContext.Offices.Find(id));
+            _repositoryContext.SaveChanges();
         }
 
-        public void Create(Employee item)
+        public void Add(OfficeEntity entity)
         {
-       //     db.Employees.Add(item);
+            _repositoryContext.Offices.Add(entity);
+            _repositoryContext.SaveChanges();
         }
 
-        public void Delete(int id)
+        public new void Update(OfficeEntity entity)
         {
-          /*  Employee employee = db.Employees.Find(id);
-            if (employee != null)
-            {
-                db.Employees.Remove(employee);
-            }
+            _repositoryContext.Offices.Update(entity);
+            _repositoryContext.SaveChanges();
         }
-
-        public IEnumerable<Employee> Find(Func<Employee, bool> predicate)
-        {
-            return db.Employees.Where(predicate).ToList();
-        }
-
-        public Employee Get(int id)
-        {
-            return db.Employees.Find(id);
-        }
-
-        public IEnumerable<Employee> GetAll()
-        {
-            return db.Employees;
-        }
-
-        public void Update(Employee item)
-        {
-            db.Entry(item).State = EntityState.Modified;
-        }
-    }*/
+    }
 }

@@ -1,17 +1,11 @@
-﻿using Contracts;
-using Entities.DTO;
-using Entities.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using BLL.Models;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace TSP.API.Exceptions
+namespace BLL.Infastructure
 {
     public class GenerateEmployeeException
     {
-        public GenerateEmployeeException(EmployeeDto dto)
+        public GenerateEmployeeException(Employee dto)
         {
             CheckData(dto.Id);
             CheckData(dto.Name);
