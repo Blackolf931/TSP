@@ -1,4 +1,4 @@
-﻿using BLL.DTO;
+﻿using BLL.Models;
 using System.Collections.Generic;
 
 namespace BLL.Services

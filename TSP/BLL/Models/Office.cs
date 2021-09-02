@@ -1,7 +1,7 @@
 ﻿
 using System.Collections.Generic;
 
-namespace BLL.DTO
+namespace BLL.Models
 {
     public class Office
     {

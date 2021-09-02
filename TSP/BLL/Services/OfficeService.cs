@@ -1,4 +1,4 @@
-﻿using BLL.DTO;
+﻿using BLL.Models;
 using DAL.Interfaces;
 using System.Collections.Generic;
 
