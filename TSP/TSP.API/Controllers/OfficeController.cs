@@ -1,9 +1,10 @@
-﻿
+﻿using AutoMapper;
 using BLL.Models;
 using BLL.Services;
-
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using TSP.API.ViewModels;
 
 namespace TSP.API.Controllers
 {
@@ -12,50 +13,53 @@ namespace TSP.API.Controllers
     public class OfficeController : ControllerBase
     {
         private readonly IOfficeService _service;
+        private readonly IMapper _mapper;
 
 
-        public OfficeController(IOfficeService service)
+        public OfficeController(IOfficeService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
 
         [HttpGet("GetAllOffice")]
-        public ActionResult<IEnumerable<Office>> GetAllOfice()
+        public async Task<ActionResult<IEnumerable<Office>>> GetAllOficeAsync()
         {
-           return Ok(_service.GetAll());
+           return Ok(await _service.GetAllAsync());
         }
 
-      /*  [HttpGet("GetOfficeById")]
-        public ActionResult<Office> GetOfficeById(int id)
+        [HttpGet("GetOfficeById")]
+        public async Task<ActionResult<Office>> GetOfficeById(int id)
         {
-           return _repository.Office.GetById(id);
+            return Ok(_mapper.Map<OfficeViewModel>(await _service.GetByIdAsync(id)));
         }
 
         [HttpDelete("DeleteById")]
-        public ActionResult<IEnumerable<string>> Delete(int id)
+        public async Task<ActionResult<bool>> DeleteByIdAsync(int id)
         {
-            _repository.Office.RemoveById(id);
-            return new string[] { "Office has been delete" };
+            if(await _service.DeleteByIdAsync(id) == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+            
         }
         [HttpPost("AddOffice")]
-        public ActionResult AddOffice(int id, string name, string address, string country)
+        public async Task<ActionResult<Employee>> AddOffice([FromBody]OfficeAddViewModel model)
         {
-            ValidData(new OfficeDto(id, name, address, country));
-            _repository.Office.Add(id, name, address, country);
-            return Ok("You has been add office");
+            var mapped = _mapper.Map<Office>(model);
+            return Ok(await _service.AddAsync(mapped));
         }
 
-        [HttpPost("UpdateOffice")]
-        public ActionResult UpdateOffice(int id, string name, string address, string country)
+        [HttpPut("UpdateOffice")]
+        public async Task<ActionResult<Office>> UpdateOffice([FromQuery] int id, [FromBody] OfficeViewModel model)
         {
-            ValidData(new OfficeDto(id, name, address, country));
-            _repository.Office.Update(id, name, address, country);
-            return Ok("You has been update office");
+            var mapped = _mapper.Map<Office>(model);
+            mapped.Id = id;
+            return Ok(await _service.UpdateOfficeByAsync(mapped));
         }
-
-        private static void ValidData(OfficeDto dto)
-        {
-            _ = new GenerateOfficeException(dto);
-        }*/
     }
 }

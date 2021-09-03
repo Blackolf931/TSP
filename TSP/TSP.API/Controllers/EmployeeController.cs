@@ -1,53 +1,63 @@
-﻿using BLL.Models;
+﻿using AutoMapper;
+using BLL.Models;
 using BLL.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using TSP.API.ViewModels;
 
 namespace TSP.API.Controllers
 {
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _service;
+        private readonly IMapper _mapper;
 
-        public EmployeeController(IEmployeeService service)
+        public EmployeeController(IEmployeeService service, IMapper mapper)
         {
+            _mapper = mapper;
             _service = service;
         }
         [HttpGet("GetAllEmployee")]
-        public ActionResult<IEnumerable<Employee>> GetAllEmployee()
+        public async Task<ActionResult<IEnumerable<EmployeeViewModel>>> GetAllEmployeeAsync()
         {
-            return Ok(_service.GetAll()); 
+            var employees = await _service.GetAllAsync();
+            var mappedEmployees = _mapper.Map<IEnumerable<EmployeeViewModel>>(employees);
+            return Ok(mappedEmployees); 
         }
 
-      /*  [HttpGet("GetEmployeeById")]
-        public ActionResult<Employee> GetEmployeeById(int id)
+        [HttpGet("GetEmployeeById")]
+        public async Task<ActionResult<Employee>> GetEmployeeByIdAsync([FromQuery]int id)
         {
-            return _repository.Employee.GetById(id);
+            var employees = await _service.GetEmployeeByIdAsync(id);
+            var mappedEmployees = _mapper.Map<EmployeeViewModel>(employees);
+            return Ok(mappedEmployees);
         }
         [HttpDelete("DeleteEmployeeById")]
-        public ActionResult<IEnumerable<string>> DeleteEmployee(int id)
+        public async Task<ActionResult<bool>> DeleteEmployeeAsync([FromQuery]int id)
         {
-            _repository.Employee.DeleteById(id);
-            return new string[] { "Employee has been delete"};
-        }
-        [HttpPost("AddEmployee")]
-        public ActionResult<IEnumerable<string>> AddEmployee(int id, string name, string secondName, string patronomic, int age, string position, int officeId)
-        {
-            ValidData(new EmployeeDto(id, name, secondName, patronomic, age, position, officeId));
-            _repository.Employee.Add(id, name, secondName, patronomic, age, position, officeId);
-            return Ok("Employee has been add");
-        }
-        [HttpPost("UpdateEmployee")]
-        public ActionResult<IEnumerable<string>> UpdateEmployee(int id, string name, string secondName, string patronomic, int age, string position, int officeId)
-        {
-            ValidData(new EmployeeDto(id, name, secondName, patronomic, age, position, officeId));
-            _repository.Employee.Update(id, name, secondName, patronomic, age, position, officeId);
-            return Ok("Employee has been update");
+            if (await _service.DeleteByIdAsync(id) == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
-        private static void ValidData(EmployeeDto dto)
-        {
-            _ = new GenerateEmployeeException(dto);
-        }*/
+         [HttpPost("AddEmployee")]
+         public async Task<ActionResult<Employee>> AddEmployee([FromBody] EmployeeAddViewModel employee)
+         {
+            var mapped = _mapper.Map<Employee>(employee);
+            return Ok(await _service.AddAsync(mapped));
+         }
+         [HttpPut("UpdateEmployee")]
+         public async Task<ActionResult<Employee>> UpdateEmployeeAsync([FromQuery]int id, [FromBody]EmployeeAddViewModel employee)
+         {
+            var mapped = _mapper.Map<Employee>(employee);
+            mapped.Id = id;
+            return Ok(await _service.UpdateAsync(mapped));
+         }
     }
 }

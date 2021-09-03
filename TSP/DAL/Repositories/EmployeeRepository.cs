@@ -4,8 +4,7 @@ using DAL.Entities;
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace DAL.BusinessLogic
 {
@@ -18,29 +17,45 @@ namespace DAL.BusinessLogic
             _repositoryContext = repositoryContext;
         }
 
-        public void Add(EmployeeEntity entity)
+        public async Task<EmployeeEntity> AddAsync(EmployeeEntity entity)
         {
-            _repositoryContext.Employees.Add(entity);
+            await _repositoryContext.Employees.AddAsync(entity);
+            await _repositoryContext.SaveChangesAsync();
+            return entity;
         }
 
-        public void DeleteById(int id)
+        public async Task<bool> DeleteByIdAsync(int id)
         {
-            _repositoryContext.Employees.Remove(_repositoryContext.Employees.Find(id));
+            var employee = await _repositoryContext.Employees.FindAsync(id);
+            if (employee is null)
+            {
+                return false;
+            }
+            else
+            {
+                _repositoryContext.Employees.Remove(employee);
+                await _repositoryContext.SaveChangesAsync();
+                return true;
+            }
         }
 
-        public IEnumerable<EmployeeEntity> GetAll()
+        public async Task<IEnumerable<EmployeeEntity>> GetAllAsync()
         {
-            return _repositoryContext.Employees.Include(x => x.Office).ToList();
+            return await _repositoryContext.Employees.Include(x => x.Office).ToListAsync();
         }
 
-        public EmployeeEntity GetById(int id)
+        public async Task<EmployeeEntity> GetByIdAsync(int id)
         {
-            return _repositoryContext.Employees.Find(id);
+            return await _repositoryContext.Employees.FindAsync(id);
         }
 
-        public new void Update(EmployeeEntity entity)
+        public async Task<EmployeeEntity> UpdateAsync(EmployeeEntity entity)
         {
-            _repositoryContext.Employees.Update(entity);
+           _repositoryContext.Employees.Update(entity);
+           _repositoryContext.Entry(entity).State = EntityState.Unchanged;
+           await _repositoryContext.SaveChangesAsync();
+           return entity;
+
         }
     }
 }

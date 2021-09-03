@@ -1,3 +1,4 @@
+using BLL.AutoMapper;
 using BLL.DI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using NLog;
 using System.IO;
 using System.Text.Json.Serialization;
+using TSP.API.AutoMapper;
 using TSP.API.MiddleWare;
 
 namespace TSP.API
@@ -25,6 +27,7 @@ namespace TSP.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(ApiProfile),typeof(BllProfile));
             services.ConfigureLoggerService();
             services.RegistarBuisnessComponents(Configuration);
             services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
