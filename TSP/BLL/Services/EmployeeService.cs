@@ -24,9 +24,9 @@ namespace BLL.Services
             return _mapper.Map<Employee>(await _repository.AddAsync(mappedEmployee));
         }
 
-        public async Task<bool> DeleteByIdAsync(int id)
+        public Task<bool> DeleteByIdAsync(int id)
         {
-           return await _repository.DeleteByIdAsync(id);
+           return _repository.DeleteByIdAsync(id);
         }
 
         public async Task<IEnumerable<Employee>> GetAllAsync()

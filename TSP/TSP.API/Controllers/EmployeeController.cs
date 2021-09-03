@@ -34,19 +34,19 @@ namespace TSP.API.Controllers
             return Ok(mappedEmployees);
         }
         [HttpDelete("DeleteEmployeeById")]
-        public async Task<ActionResult<string>> DeleteEmployeeAsync([FromQuery]int id)
+        public async Task<ActionResult<bool>> DeleteEmployeeAsync([FromQuery]int id)
         {
             if (await _service.DeleteByIdAsync(id) == true)
             {
-                return "Employee has been delete";
+                return Ok();
             }
             else
             {
-                Response.StatusCode = 500;
-                return "Employee can't been find";
+                return NotFound();
             }
         }
-        [HttpPost("AddEmployee")]
+
+         [HttpPost("AddEmployee")]
          public async Task<ActionResult<Employee>> AddEmployee([FromBody] EmployeeAddViewModel employee)
          {
             var mapped = _mapper.Map<Employee>(employee);

@@ -35,16 +35,15 @@ namespace TSP.API.Controllers
         }
 
         [HttpDelete("DeleteById")]
-        public async Task<ActionResult<string>> DeleteByIdAsync(int id)
+        public async Task<ActionResult<bool>> DeleteByIdAsync(int id)
         {
-            if(await _service.RemoveByIdAsync(id) == true)
+            if(await _service.DeleteByIdAsync(id) == true)
             {
-                return "Office has been delete" ;
+                return Ok();
             }
             else
             {
-                Response.StatusCode = 500;
-                return "Office hasn't been delete";
+                return NotFound();
             }
             
         }

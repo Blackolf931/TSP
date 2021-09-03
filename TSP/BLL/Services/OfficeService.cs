@@ -30,7 +30,7 @@ namespace BLL.Services
             return mappedOffice;
 
         }
-        public async Task<bool> RemoveByIdAsync(int id) => await _repository.DeleteByIdAsync(id);
+        public Task<bool> DeleteByIdAsync(int id) =>  _repository.DeleteByIdAsync(id);
 
         public async Task<Office> AddAsync(Office office)
         {
