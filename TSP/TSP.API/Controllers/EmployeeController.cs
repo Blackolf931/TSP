@@ -4,6 +4,7 @@ using BLL.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TSP.API.Filter;
 using TSP.API.ViewModels;
 
 namespace TSP.API.Controllers
@@ -49,12 +50,20 @@ namespace TSP.API.Controllers
          [HttpPost("AddEmployee")]
          public async Task<ActionResult<Employee>> AddEmployee([FromBody] EmployeeAddViewModel employee)
          {
+            if (!ModelState.IsValid)
+            {
+                return NoContent();
+            }
             var mapped = _mapper.Map<Employee>(employee);
             return Ok(await _service.AddAsync(mapped));
          }
          [HttpPut("UpdateEmployee")]
          public async Task<ActionResult<Employee>> UpdateEmployeeAsync([FromQuery]int id, [FromBody]EmployeeAddViewModel employee)
          {
+            if (!ModelState.IsValid)
+            {
+                return NoContent();
+            }
             var mapped = _mapper.Map<Employee>(employee);
             mapped.Id = id;
             return Ok(await _service.UpdateAsync(mapped));
