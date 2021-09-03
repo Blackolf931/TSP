@@ -18,35 +18,33 @@ namespace BLL.Services
             _mapper = mapper;
         }
 
-        public async Task AddAsync(Employee employee)
+        public async Task<Employee> AddAsync(Employee employee)
         {
             var mappedEmployee = _mapper.Map<EmployeeEntity>(employee);
-            await _repository.Add(mappedEmployee);
+            return _mapper.Map<Employee>(await _repository.AddAsync(mappedEmployee));
         }
 
-        public async Task DeleteByIdAsync(int id)
+        public async Task<bool> DeleteByIdAsync(int id)
         {
-            await _repository.DeleteByIdAsync(id);
+           return await _repository.DeleteByIdAsync(id);
         }
 
         public async Task<IEnumerable<Employee>> GetAllAsync()
         {
             var employee = await _repository.GetAllAsync();
             return _mapper.Map<IEnumerable<Employee>>(employee);
-           
         }
 
         public async Task<Employee> GetEmployeeByIdAsync(int id)
         {
             var employee = await _repository.GetByIdAsync(id);
-            var mapped = _mapper.Map<Employee>(employee);
-            return mapped;
+            return _mapper.Map<Employee>(employee);
         }
 
-        public async Task UpdateAsync(Employee employee)
+        public async Task<Employee> UpdateAsync(Employee employee)
         {
             var mapped = _mapper.Map<EmployeeEntity>(employee);
-            await _repository.UpdateAsync(mapped);
+            return _mapper.Map<Employee>(await _repository.UpdateAsync(mapped));
         }
     }
 }

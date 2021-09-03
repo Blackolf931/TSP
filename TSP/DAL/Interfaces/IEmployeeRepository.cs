@@ -8,8 +8,8 @@ namespace DAL.Interfaces
     {
         Task<IEnumerable<EmployeeEntity>> GetAllAsync();
         Task<EmployeeEntity> GetByIdAsync(int id);
-        Task DeleteByIdAsync(int id);
-        Task Add(EmployeeEntity entity);
-        Task UpdateAsync(EmployeeEntity entity);
+        Task<bool> DeleteByIdAsync(int id);
+        Task<EmployeeEntity> AddAsync(EmployeeEntity entity);
+        Task<EmployeeEntity> UpdateAsync(EmployeeEntity entity);
     }
 }

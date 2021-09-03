@@ -30,17 +30,17 @@ namespace BLL.Services
             return mappedOffice;
 
         }
-        public async Task RemoveByIdAsync(int id) => await _repository.RemoveByIdAsync(id);
+        public async Task<bool> RemoveByIdAsync(int id) => await _repository.DeleteByIdAsync(id);
 
-        public async Task AddAsync(Office office)
+        public async Task<Office> AddAsync(Office office)
         {
             var mappedOffice = _mapper.Map<OfficeEntity>(office);
-            await _repository.Add(mappedOffice);
+            return _mapper.Map<Office>(await _repository.AddAsync(mappedOffice));
         }
-        public async Task UpdateOfficeByAsync(Office office)
+        public async Task<Office> UpdateOfficeByAsync(Office office)
         {
             var mappedOffice = _mapper.Map<OfficeEntity>(office);
-            await _repository.Add(mappedOffice);
+            return _mapper.Map<Office>(await _repository.UpdateAsync(mappedOffice));
         }
     }
 }

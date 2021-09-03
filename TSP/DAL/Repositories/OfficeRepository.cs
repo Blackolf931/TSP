@@ -28,23 +28,33 @@ namespace DAL.BusinessLogic
         {
             throw new NotImplementedException();
         }
-        public async Task RemoveByIdAsync(int id)
+        public async Task<bool> DeleteByIdAsync(int id)
         {
-            var officeId = await _repositoryContext.Offices.FindAsync(id);
-           _repositoryContext.Offices.Remove(officeId);
-           await _repositoryContext.SaveChangesAsync();
+            var office = await _repositoryContext.Offices.FindAsync(id);
+            if (office is null)
+            {
+                return false;
+            }
+            else
+            {
+                _repositoryContext.Offices.Remove(office);
+                await _repositoryContext.SaveChangesAsync();
+                return true;
+            }
         }
 
-        public async Task Add(OfficeEntity entity)
+        public async Task<OfficeEntity> AddAsync(OfficeEntity entity)
         {
             await _repositoryContext.Offices.AddAsync(entity);
             await _repositoryContext.SaveChangesAsync();
+            return entity;
         }
 
-        public async Task Update(OfficeEntity entity)
+        public async Task<OfficeEntity> UpdateAsync(OfficeEntity entity)
         {
            _repositoryContext.Offices.Update(entity);
            await _repositoryContext.SaveChangesAsync();
+            return entity;
         }
     }
 }

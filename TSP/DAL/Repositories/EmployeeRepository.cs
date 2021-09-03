@@ -17,17 +17,26 @@ namespace DAL.BusinessLogic
             _repositoryContext = repositoryContext;
         }
 
-        public async Task Add(EmployeeEntity entity)
+        public async Task<EmployeeEntity> AddAsync(EmployeeEntity entity)
         {
             await _repositoryContext.Employees.AddAsync(entity);
             await _repositoryContext.SaveChangesAsync();
+            return entity;
         }
 
-        public async Task DeleteByIdAsync(int id)
+        public async Task<bool> DeleteByIdAsync(int id)
         {
             var employee = await _repositoryContext.Employees.FindAsync(id);
-            _repositoryContext.Employees.Remove(employee);
-            await _repositoryContext.SaveChangesAsync();
+            if (employee is null)
+            {
+                return false;
+            }
+            else
+            {
+                _repositoryContext.Employees.Remove(employee);
+                await _repositoryContext.SaveChangesAsync();
+                return true;
+            }
         }
 
         public async Task<IEnumerable<EmployeeEntity>> GetAllAsync()
@@ -40,10 +49,13 @@ namespace DAL.BusinessLogic
             return await _repositoryContext.Employees.FindAsync(id);
         }
 
-        public async Task UpdateAsync(EmployeeEntity entity)
+        public async Task<EmployeeEntity> UpdateAsync(EmployeeEntity entity)
         {
            _repositoryContext.Employees.Update(entity);
+           _repositoryContext.Entry(entity).State = EntityState.Unchanged;
            await _repositoryContext.SaveChangesAsync();
+           return entity;
+
         }
     }
 }

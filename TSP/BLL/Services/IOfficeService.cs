@@ -8,8 +8,8 @@ namespace BLL.Services
     {
         Task<IEnumerable<Office>> GetAllAsync();
         Task<Office> GetByIdAsync(int id);
-        Task RemoveByIdAsync(int id);
-        Task AddAsync(Office office);
-        Task UpdateOfficeByAsync(Office office);
+        Task<bool> RemoveByIdAsync(int id);
+        Task<Office> AddAsync(Office office);
+        Task<Office> UpdateOfficeByAsync(Office office);
     }
 }

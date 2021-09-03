@@ -11,12 +11,10 @@ namespace TSP.API.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _service;
-        private readonly IOfficeService _officeService;
         private readonly IMapper _mapper;
 
-        public EmployeeController(IEmployeeService service, IMapper mapper, IOfficeService officeService)
+        public EmployeeController(IEmployeeService service, IMapper mapper)
         {
-            _officeService = officeService;
             _mapper = mapper;
             _service = service;
         }
@@ -29,34 +27,37 @@ namespace TSP.API.Controllers
         }
 
         [HttpGet("GetEmployeeById")]
-        public async Task<ActionResult<Employee>> GetEmployeeByIdAsync(int id)
+        public async Task<ActionResult<Employee>> GetEmployeeByIdAsync([FromQuery]int id)
         {
             var employees = await _service.GetEmployeeByIdAsync(id);
             var mappedEmployees = _mapper.Map<EmployeeViewModel>(employees);
             return Ok(mappedEmployees);
         }
         [HttpDelete("DeleteEmployeeById")]
-        public async Task<ActionResult<IEnumerable<string>>> DeleteEmployeeAsync(int id)
+        public async Task<ActionResult<string>> DeleteEmployeeAsync([FromQuery]int id)
         {
-            await _service.DeleteByIdAsync(id);
-            return new string[] { "Employee has been delete" };
+            if (await _service.DeleteByIdAsync(id) == true)
+            {
+                return "Employee has been delete";
+            }
+            else
+            {
+                Response.StatusCode = 500;
+                return "Employee can't been find";
+            }
         }
         [HttpPost("AddEmployee")]
-         public async Task<ActionResult<IEnumerable<string>>> AddEmployee(EmployeeViewModel employee)
+         public async Task<ActionResult<Employee>> AddEmployee([FromBody] EmployeeAddViewModel employee)
          {
             var mapped = _mapper.Map<Employee>(employee);
-            await _service.AddAsync(mapped);
-            return Ok("Employee has been add");
+            return Ok(await _service.AddAsync(mapped));
          }
          [HttpPut("UpdateEmployee")]
-         public async Task<ActionResult<IEnumerable<string>>> UpdateEmployeeAsync([FromQuery]int id, [FromBody]EmployeeAddViewModel employee)
+         public async Task<ActionResult<Employee>> UpdateEmployeeAsync([FromQuery]int id, [FromBody]EmployeeAddViewModel employee)
          {
-            var office = await _officeService.GetByIdAsync(2);
             var mapped = _mapper.Map<Employee>(employee);
             mapped.Id = id;
-            mapped.Office = office;
-            await _service.UpdateAsync(mapped);
-             return Ok("Employee has been update");
+            return Ok(await _service.UpdateAsync(mapped));
          }
     }
 }

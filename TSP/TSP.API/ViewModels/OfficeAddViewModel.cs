@@ -7,8 +7,6 @@ namespace TSP.API.ViewModels
 {
     public class OfficeAddViewModel
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string Address { get; set; }

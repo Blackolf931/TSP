@@ -33,7 +33,6 @@ namespace TSP.API.MiddleWare
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 await context.Response.WriteAsync($"{ex.Message}");
             }
-            
         }
     }
 }
