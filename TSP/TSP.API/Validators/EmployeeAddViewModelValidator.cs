@@ -7,11 +7,11 @@ namespace TSP.API.Validators
     {
         public EmployeeAddViewModelValidator()
         {
-            RuleFor(x => x.Name).NotEmpty().Matches("^[A-Z][a-zA-Z]*$").WithMessage("This field doesn't empty!").LessThan("3");
-            RuleFor(x => x.SecondName).NotEmpty().Matches("^[A-Z][a-zA-Z]*$").WithMessage("This field doesn't empty!").LessThan("3");
-            RuleFor(x => x.Patronomic).NotEmpty().Matches("^[A-Z][a-zA-Z]*$").WithMessage("This field doesn't empty!").LessThan("3");
+            RuleFor(x => x.Name).NotEmpty().Matches("^[A-Z][a-zA-Z]*$").WithMessage("This field is not meant to be empty!").MinimumLength(3);
+            RuleFor(x => x.SecondName).NotEmpty().Matches("^[A-Z][a-zA-Z]*$").WithMessage("This field is not meant to be empty!").MinimumLength(3);
+            RuleFor(x => x.Patronomic).NotEmpty().Matches("^[A-Z][a-zA-Z]*$").WithMessage("This field is not meant to be empty!").MinimumLength(3);
             RuleFor(x => x.Age).GreaterThan(18);
-            RuleFor(x => x.Position).NotEmpty().Matches("^[A-Z][a-zA-Z]*$").WithMessage("This field doesn't empty!").LessThan("3");
+            RuleFor(x => x.Position).NotEmpty().Matches("^[A-Z][a-zA-Z]*$").WithMessage("This field is not meant to be empty!").MinimumLength(3);
             RuleFor(x => x.OfficeId).GreaterThan(0);
         }
     }

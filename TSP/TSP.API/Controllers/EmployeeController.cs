@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BLL.Models;
 using BLL.Services;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,11 +14,13 @@ namespace TSP.API.Controllers
     {
         private readonly IEmployeeService _service;
         private readonly IMapper _mapper;
+        private readonly IValidator<EmployeeAddViewModel> _validator;
 
-        public EmployeeController(IEmployeeService service, IMapper mapper)
+        public EmployeeController(IEmployeeService service, IMapper mapper, IValidator<EmployeeAddViewModel> validator)
         {
             _mapper = mapper;
             _service = service;
+            _validator = validator;
         }
         [HttpGet("GetAllEmployee")]
         public async Task<ActionResult<IEnumerable<EmployeeViewModel>>> GetAllEmployeeAsync()
@@ -50,6 +53,7 @@ namespace TSP.API.Controllers
          [HttpPost("AddEmployee")]
          public async Task<ActionResult<Employee>> AddEmployee([FromBody] EmployeeAddViewModel employee)
          {
+            await _validator.ValidateAsync(employee);
             if (!ModelState.IsValid)
             {
                 return NoContent();
@@ -60,6 +64,7 @@ namespace TSP.API.Controllers
          [HttpPut("UpdateEmployee")]
          public async Task<ActionResult<Employee>> UpdateEmployeeAsync([FromQuery]int id, [FromBody]EmployeeAddViewModel employee)
          {
+            await _validator.ValidateAsync(employee);
             if (!ModelState.IsValid)
             {
                 return NoContent();

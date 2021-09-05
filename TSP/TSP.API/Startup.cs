@@ -1,5 +1,6 @@
 using BLL.AutoMapper;
 using BLL.DI;
+using BLL.Models;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -33,7 +34,7 @@ namespace TSP.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(ApiProfile),typeof(BllProfile));
-            services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ValidationFilter>());
+            services.AddValidatorsFromAssemblyContaining<ValidationFilter>(ServiceLifetime.Transient);
             services.ConfigureLoggerService();
             services.RegistarBuisnessComponents(Configuration);
             services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
