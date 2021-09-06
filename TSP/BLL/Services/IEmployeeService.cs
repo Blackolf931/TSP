@@ -11,6 +11,5 @@ namespace BLL.Services
        Task<bool> DeleteByIdAsync(int id);
        Task<Employee> AddAsync(Employee employee);
        Task<Employee> UpdateAsync(Employee employee);
-       string GetAdditionalInformation(int age);
     }
 }
