@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using BLL.Models;
 using BLL.Services;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TSP.API.Validators;
 using TSP.API.ViewModels;
 
 namespace TSP.API.Controllers
@@ -14,12 +16,16 @@ namespace TSP.API.Controllers
     {
         private readonly IOfficeService _service;
         private readonly IMapper _mapper;
+        private readonly IValidator<OfficeAddViewModel> _validator;
+        private readonly IValidator<OfficeViewModel> _validatorViewModel;
 
 
-        public OfficeController(IOfficeService service, IMapper mapper)
+        public OfficeController(IOfficeService service, IMapper mapper, IValidator<OfficeAddViewModel> validator, IValidator<OfficeViewModel> validatorViewModel)
         {
             _service = service;
             _mapper = mapper;
+            _validator = validator;
+            _validatorViewModel = validatorViewModel;
         }
 
         [HttpGet("GetAllOffice")]
@@ -50,6 +56,7 @@ namespace TSP.API.Controllers
         [HttpPost("AddOffice")]
         public async Task<ActionResult<Employee>> AddOffice([FromBody]OfficeAddViewModel model)
         {
+            await _validator.ValidateAndThrowAsync(model);
             var mapped = _mapper.Map<Office>(model);
             return Ok(await _service.AddAsync(mapped));
         }
@@ -57,6 +64,7 @@ namespace TSP.API.Controllers
         [HttpPut("UpdateOffice")]
         public async Task<ActionResult<Office>> UpdateOffice([FromQuery] int id, [FromBody] OfficeViewModel model)
         {
+            await _validatorViewModel.ValidateAndThrowAsync(model);
             var mapped = _mapper.Map<Office>(model);
             mapped.Id = id;
             return Ok(await _service.UpdateOfficeByAsync(mapped));
