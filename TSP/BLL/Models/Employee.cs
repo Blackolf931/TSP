@@ -16,5 +16,6 @@ namespace BLL.Models
         public string Position { get; set; }
         public Office Office { get; set; }
         public int OfficeId { get; set; }
+
     }
 }
