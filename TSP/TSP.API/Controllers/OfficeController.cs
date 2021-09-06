@@ -57,10 +57,6 @@ namespace TSP.API.Controllers
         public async Task<ActionResult<Employee>> AddOffice([FromBody]OfficeAddViewModel model)
         {
             await _validator.ValidateAsync(model);
-            if (!ModelState.IsValid)
-            {
-                return NoContent();
-            }
             var mapped = _mapper.Map<Office>(model);
             return Ok(await _service.AddAsync(mapped));
         }
@@ -69,10 +65,6 @@ namespace TSP.API.Controllers
         public async Task<ActionResult<Office>> UpdateOffice([FromQuery] int id, [FromBody] OfficeViewModel model)
         {
             await _validatorViewModel.ValidateAsync(model);
-            if (!ModelState.IsValid)
-            {
-                return NoContent();
-            }
             var mapped = _mapper.Map<Office>(model);
             mapped.Id = id;
             return Ok(await _service.UpdateOfficeByAsync(mapped));

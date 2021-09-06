@@ -54,10 +54,6 @@ namespace TSP.API.Controllers
          public async Task<ActionResult<Employee>> AddEmployee([FromBody] EmployeeAddViewModel employee)
          {
             await _validator.ValidateAsync(employee);
-            if (!ModelState.IsValid)
-            {
-                return NoContent();
-            }
             var mapped = _mapper.Map<Employee>(employee);
             return Ok(await _service.AddAsync(mapped));
          }
@@ -65,10 +61,6 @@ namespace TSP.API.Controllers
          public async Task<ActionResult<Employee>> UpdateEmployeeAsync([FromQuery]int id, [FromBody]EmployeeAddViewModel employee)
          {
             await _validator.ValidateAsync(employee);
-            if (!ModelState.IsValid)
-            {
-                return NoContent();
-            }
             var mapped = _mapper.Map<Employee>(employee);
             mapped.Id = id;
             return Ok(await _service.UpdateAsync(mapped));
