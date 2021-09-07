@@ -8,6 +8,7 @@ namespace BLL.Services
 {
     public interface IStrategyService
     {
-        string ISValidStrategy(int age);
+        string SetInformation();
+        bool IsValidStrategy(int age);
     }
 }

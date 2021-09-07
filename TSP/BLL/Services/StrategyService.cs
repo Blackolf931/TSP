@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    class StrategyService : IStrategyService
+    class StrategyService 
     {
-        public string ISValidStrategy(int age)
+        public string SetInformation()
         {
-            return new GetAdditionalInformationAboutRetirePeople().ISValidStrategy(age);
+            throw new NotImplementedException();
         }
+
     }
 }

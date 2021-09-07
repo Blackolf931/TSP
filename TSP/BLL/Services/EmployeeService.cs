@@ -11,13 +11,13 @@ namespace BLL.Services
     {
         private readonly IEmployeeRepository _repository;
         private readonly IMapper _mapper;
-        private readonly IStrategyService _strategyService;
+        private readonly IEnumerable<IStrategyService> listStrategy;
 
-        public EmployeeService(IEmployeeRepository repository, IMapper mapper, IStrategyService strategy)
+        public EmployeeService(IEmployeeRepository repository, IMapper mapper, IEnumerable<IStrategyService> strategy)
         {
             _repository = repository;
             _mapper = mapper;
-            _strategyService = strategy;
+            listStrategy = strategy;
         }
 
         public async Task<Employee> AddAsync(Employee employee)
@@ -41,7 +41,14 @@ namespace BLL.Services
         {
             var employee = await _repository.GetByIdAsync(id);
             var mappedEmployee = _mapper.Map<EmployeeGetById>(employee);
-            mappedEmployee.AdditionalInformation = _strategyService.ISValidStrategy(employee.Id);
+            foreach (var strategy in listStrategy)
+            {
+                if (strategy.IsValidStrategy(employee.Age))
+                {
+                    mappedEmployee.AdditionalInformation = strategy.SetInformation();
+                    break;
+                }
+            }
             return mappedEmployee;
         }
 
