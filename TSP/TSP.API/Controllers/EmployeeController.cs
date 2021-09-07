@@ -34,7 +34,7 @@ namespace TSP.API.Controllers
         public async Task<ActionResult<Employee>> GetEmployeeByIdAsync([FromQuery]int id)
         {
             var employees = await _service.GetEmployeeByIdAsync(id);
-            var mappedEmployees = _mapper.Map<EmployeeViewModel>(employees);
+            var mappedEmployees = _mapper.Map<EmployeeGetByIdViewModel>(employees);
             return Ok(mappedEmployees);
         }
         [HttpDelete("DeleteEmployeeById")]
