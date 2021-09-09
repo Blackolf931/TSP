@@ -41,7 +41,7 @@ namespace DAL.BusinessLogic
 
         public async Task<IEnumerable<EmployeeEntity>> GetAllAsync()
         {
-            return await _repositoryContext.Employees.Include(x => x.Office).ToListAsync();
+            return await _repositoryContext.Employees.ToListAsync();
         }
 
         public async Task<EmployeeEntity> GetByIdAsync(int id)

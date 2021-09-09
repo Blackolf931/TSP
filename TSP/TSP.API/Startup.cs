@@ -33,11 +33,12 @@ namespace TSP.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(ApiProfile),typeof(BllProfile));
+            services.AddAutoMapper(typeof(ApiProfile), typeof(BllProfile));
             services.AddValidatorsFromAssemblyContaining<ValidationFilter>(ServiceLifetime.Transient);
             services.ConfigureLoggerService();
             services.RegistarBuisnessComponents(Configuration);
-            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            services.AddCors();
+            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TSP.API", Version = "v1" });
@@ -58,6 +59,11 @@ namespace TSP.API
 
             app.UseHttpsRedirection();
 
+            app.UseCors(x => x
+                       .AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .SetIsOriginAllowed(origin => true)
+                       .AllowCredentials());
             app.UseRouting();
 
             app.UseAuthorization();
@@ -69,3 +75,4 @@ namespace TSP.API
         }
     }
 }
+

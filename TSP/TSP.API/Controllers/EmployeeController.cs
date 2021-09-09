@@ -23,11 +23,11 @@ namespace TSP.API.Controllers
             _validator = validator;
         }
         [HttpGet("GetAllEmployee")]
-        public async Task<ActionResult<IEnumerable<EmployeeViewModel>>> GetAllEmployeeAsync()
+        public async Task<IEnumerable<EmployeeViewModel>> GetAllEmployeeAsync()
         {
             var employees = await _service.GetAllAsync();
             var mappedEmployees = _mapper.Map<IEnumerable<EmployeeViewModel>>(employees);
-            return Ok(mappedEmployees); 
+            return mappedEmployees; 
         }
 
         [HttpGet("GetEmployeeById")]
