@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public interface IStrategyService
+    public interface IStrategy
     {
         string SetInformation();
         bool IsValidStrategy(int age);

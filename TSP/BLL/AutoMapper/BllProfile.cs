@@ -12,8 +12,6 @@ namespace BLL.AutoMapper
             CreateMap<Employee, EmployeeEntity>();
             CreateMap<OfficeEntity, Office>();
             CreateMap<Office, OfficeEntity>();
-            CreateMap<EmployeeGetById, Employee>().ReverseMap();
-            CreateMap<EmployeeGetById, EmployeeEntity>().ReverseMap();
         }
     }
 }

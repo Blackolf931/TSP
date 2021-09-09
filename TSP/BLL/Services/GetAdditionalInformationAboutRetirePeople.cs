@@ -2,14 +2,14 @@
 
 namespace BLL.Services
 {
-    class GetAdditionalInformationAboutRetirePeople : IStrategyService
+    class GetAdditionalInformationAboutRetirePeople : IStrategy
     {
         public string SetInformation()
         {
             return new StringBuilder().Append("Your are retire").ToString();
         }
 
-        bool IStrategyService.IsValidStrategy(int age)
+        public bool IsValidStrategy(int age)
         {
             if (age > 60)
             {

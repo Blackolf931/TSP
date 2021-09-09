@@ -2,7 +2,7 @@
 
 namespace BLL.Services
 {
-    public class GetAdditionalInformationAboutMiddlePeople : IStrategyService
+    public class GetAdditionalInformationAboutMiddlePeople : IStrategy
     {
         public bool IsValidStrategy(int age)
         {

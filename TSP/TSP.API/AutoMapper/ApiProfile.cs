@@ -12,7 +12,6 @@ namespace TSP.API.AutoMapper
             CreateMap<EmployeeAddViewModel, Employee>();
             CreateMap<Office, OfficeViewModel>().ReverseMap();
             CreateMap<OfficeAddViewModel, Office>();
-            CreateMap<EmployeeGetByIdViewModel, EmployeeGetById>().ReverseMap();
         }
     }
 }

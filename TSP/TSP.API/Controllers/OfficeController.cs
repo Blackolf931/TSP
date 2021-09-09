@@ -5,7 +5,6 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TSP.API.Validators;
 using TSP.API.ViewModels;
 
 namespace TSP.API.Controllers
