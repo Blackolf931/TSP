@@ -52,7 +52,6 @@ namespace DAL.BusinessLogic
         public async Task<EmployeeEntity> UpdateAsync(EmployeeEntity entity)
         {
            _repositoryContext.Employees.Update(entity);
-        //   _repositoryContext.Entry(entity).State = EntityState.Unchanged;
            await _repositoryContext.SaveChangesAsync();
            return entity;
 
