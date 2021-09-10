@@ -4,9 +4,9 @@ using BLL.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TSP.API.Filter;
 using TSP.API.ViewModels;
 
 namespace TSP.API.Controllers
@@ -16,12 +16,14 @@ namespace TSP.API.Controllers
         private readonly IEmployeeService _service;
         private readonly IMapper _mapper;
         private readonly IValidator<EmployeeAddViewModel> _validator;
+        private readonly ILogger<EmployeeController> _logger;
 
-        public EmployeeController(IEmployeeService service, IMapper mapper, IValidator<EmployeeAddViewModel> validator)
+        public EmployeeController(IEmployeeService service, IMapper mapper, IValidator<EmployeeAddViewModel> validator, ILogger<EmployeeController> logger)
         {
             _mapper = mapper;
             _service = service;
             _validator = validator;
+            _logger = logger;
         }
         [HttpGet("GetAllEmployee")]
         public async Task<ActionResult<IEnumerable<EmployeeViewModel>>> GetAllEmployeeAsync()
@@ -34,9 +36,17 @@ namespace TSP.API.Controllers
         [HttpGet("GetEmployeeById")]
         public async Task<ActionResult<Employee>> GetEmployeeByIdAsync([FromQuery]int id)
         {
-            var employees = await _service.GetEmployeeByIdAsync(id);
-            var mappedEmployees = _mapper.Map<EmployeeViewModel>(employees);
-            return Ok(mappedEmployees);
+            try 
+            {
+               var employees = await _service.GetEmployeeByIdAsync(id);
+                var mappedEmployees = _mapper.Map<EmployeeViewModel>(employees);
+                return Ok(mappedEmployees);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "Search error");
+                return NotFound();
+            }
         }
         [HttpDelete("DeleteEmployeeById")]
         public async Task<ActionResult<bool>> DeleteEmployeeAsync([FromQuery]int id)
