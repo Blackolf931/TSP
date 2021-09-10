@@ -1,5 +1,4 @@
-﻿
-using DAl.BusinessLogic;
+﻿using DAl.BusinessLogic;
 using DAL.Entities;
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
