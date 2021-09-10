@@ -14,13 +14,11 @@ namespace BLL.Services
     {
         private readonly IOfficeRepository _repository;
         private readonly IMapper _mapper;
-        private readonly ILogger<OfficeService> _logger;
 
-        public OfficeService(IOfficeRepository repository, IMapper mapper, ILogger<OfficeService> logger)
+        public OfficeService(IOfficeRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
-            _logger = logger;
         }
         public async Task<IEnumerable<Office>> GetAllAsync()
         {
@@ -30,55 +28,23 @@ namespace BLL.Services
 
         public async Task<Office> GetByIdAsync(int id)
         {
-            try
-            {
-                var office = await _repository.GetByIdAsync(id);
-                var mappedOffice = _mapper.Map<Office>(office);
-                return mappedOffice;
-            }
-            catch(Exception ex)
-            {
-                _logger.LogInformation(ex, "Office not found");
-                throw new OfficeException("Office not found");
-            }
+            var office = await _repository.GetByIdAsync(id);
+            var mappedOffice = _mapper.Map<Office>(office);
+            return mappedOffice;
         }
         public Task<bool> DeleteByIdAsync(int id)
         {
-            try
-            {
-                return _repository.DeleteByIdAsync(id);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogInformation(ex, "The Office has not been deleted");
-                throw new OfficeException("The Office has not been deleted");
-            }
+            return _repository.DeleteByIdAsync(id);
         }
         public async Task<Office> AddAsync(Office office)
         {
-            try
-            {
-                var mappedOffice = _mapper.Map<OfficeEntity>(office);
-                return _mapper.Map<Office>(await _repository.AddAsync(mappedOffice));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogInformation(ex, "The office has not been added");
-                throw new OfficeException("The office has not been added");
-            }
+            var mappedOffice = _mapper.Map<OfficeEntity>(office);
+            return _mapper.Map<Office>(await _repository.AddAsync(mappedOffice));
         }
         public async Task<Office> UpdateOfficeByAsync(Office office)
         {
-            try
-            {
-                var mappedOffice = _mapper.Map<OfficeEntity>(office);
-                return _mapper.Map<Office>(await _repository.UpdateAsync(mappedOffice));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogInformation(ex, "The office has not been added");
-                throw new OfficeException("The office has not been updated");
-            }
+            var mappedOffice = _mapper.Map<OfficeEntity>(office);
+            return _mapper.Map<Office>(await _repository.UpdateAsync(mappedOffice));
         }
     }
 }

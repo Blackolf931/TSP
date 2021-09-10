@@ -15,40 +15,23 @@ namespace BLL.Services
         private readonly IEmployeeRepository _repository;
         private readonly IMapper _mapper;
         private readonly IEnumerable<IStrategy> _strategy;
-        private readonly ILogger<EmployeeService> _logger;
 
-        public EmployeeService(IEmployeeRepository repository, IMapper mapper, IEnumerable<IStrategy> strategy, ILogger<EmployeeService> logger)
+        public EmployeeService(IEmployeeRepository repository, IMapper mapper, IEnumerable<IStrategy> strategy)
         {
             _repository = repository;
             _mapper = mapper;
             _strategy = strategy;
-            _logger = logger;
         }
 
         public async Task<Employee> AddAsync(Employee employee)
         {
-            try {
-                var mappedEmployee = _mapper.Map<EmployeeEntity>(employee);
-                return _mapper.Map<Employee>(await _repository.AddAsync(mappedEmployee));
-            }
-            catch(Exception ex)
-            {
-                _logger.LogInformation(ex, "The employee has not been added");
-                throw new EmployeeException("The employee has not been added");
-            }
+            var mappedEmployee = _mapper.Map<EmployeeEntity>(employee);
+            return _mapper.Map<Employee>(await _repository.AddAsync(mappedEmployee));
         }
 
         public Task<bool> DeleteByIdAsync(int id)
         {
-            try 
-            {
-                return _repository.DeleteByIdAsync(id);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogInformation(ex, "The employee has not been deleted");
-                throw new EmployeeException("The employee has not been deleted");
-            }
+            return _repository.DeleteByIdAsync(id);
         }
 
         public async Task<IEnumerable<Employee>> GetAllAsync()
@@ -59,39 +42,23 @@ namespace BLL.Services
 
         public async Task<Employee> GetEmployeeByIdAsync(int id)
         {
-            try
+            var employee = await _repository.GetByIdAsync(id);
+            var mappedEmployee = _mapper.Map<Employee>(employee);
+            foreach (var strategy in _strategy)
             {
-                var employee = await _repository.GetByIdAsync(id);
-                var mappedEmployee = _mapper.Map<Employee>(employee);
-                foreach (var strategy in _strategy)
+                if (strategy.IsValidStrategy(employee.Age))
                 {
-                    if (strategy.IsValidStrategy(employee.Age))
-                    {
-                        mappedEmployee.AdditionalInformation = strategy.SetInformation();
-                        break;
-                    }
+                    mappedEmployee.AdditionalInformation = strategy.SetInformation();
+                    break;
                 }
-                return mappedEmployee;
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Employee not found");
-                throw new EmployeeException("Employee not found");
-            }
+            return mappedEmployee;
         }
 
         public async Task<Employee> UpdateAsync(Employee employee)
         {
-            try
-            {
-                var mapped = _mapper.Map<EmployeeEntity>(employee);
-                return _mapper.Map<Employee>(await _repository.UpdateAsync(mapped));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Erorr the employee has not been updated");
-                throw new EmployeeException("The employee has not been updated");
-            }
+            var mapped = _mapper.Map<EmployeeEntity>(employee);
+            return _mapper.Map<Employee>(await _repository.UpdateAsync(mapped));
         }
     }
 }
