@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using BLL.Infastructure;
 using BLL.Models;
 using DAL.Entities;
 using DAL.Interfaces;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -28,10 +31,11 @@ namespace BLL.Services
             var office = await _repository.GetByIdAsync(id);
             var mappedOffice = _mapper.Map<Office>(office);
             return mappedOffice;
-
         }
-        public Task<bool> DeleteByIdAsync(int id) =>  _repository.DeleteByIdAsync(id);
-
+        public Task<bool> DeleteByIdAsync(int id)
+        {
+            return _repository.DeleteByIdAsync(id);
+        }
         public async Task<Office> AddAsync(Office office)
         {
             var mappedOffice = _mapper.Map<OfficeEntity>(office);

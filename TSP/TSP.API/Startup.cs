@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using TSP.API.AutoMapper;
 using TSP.API.Filter;
@@ -28,6 +29,7 @@ namespace TSP.API
             services.AddAutoMapper(typeof(ApiProfile),typeof(BllProfile));
             services.AddValidatorsFromAssemblyContaining<ValidationFilter>(ServiceLifetime.Transient);
             services.RegistarBuisnessComponents(Configuration);
+            services.AddLogging();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
