@@ -51,30 +51,46 @@ namespace TSP.API.Controllers
         [HttpDelete("DeleteEmployeeById")]
         public async Task<ActionResult<bool>> DeleteEmployeeAsync([FromQuery]int id)
         {
-            if (await _service.DeleteByIdAsync(id) == true)
+            try
             {
+                await _service.DeleteByIdAsync(id);
                 return Ok();
             }
-            else
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Delete error");
                 return NotFound();
             }
         }
 
-         [HttpPost("AddEmployee")]
-         public async Task<ActionResult<Employee>> AddEmployee([FromBody] EmployeeAddViewModel employee)
-         {
-            await _validator.ValidateAndThrowAsync(employee);
-            var mapped = _mapper.Map<Employee>(employee);
-            return Ok(await _service.AddAsync(mapped));
+        [HttpPost("AddEmployee")]
+        public async Task<ActionResult<Employee>> AddEmployee([FromBody] EmployeeAddViewModel employee)
+        {
+            try {
+                await _validator.ValidateAndThrowAsync(employee);
+                var mapped = _mapper.Map<Employee>(employee);
+                return Ok(await _service.AddAsync(mapped));
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "Add Error");
+                return NoContent();
+            }
          }
-         [HttpPut("UpdateEmployee")]
-         public async Task<ActionResult<Employee>> UpdateEmployeeAsync([FromQuery]int id, [FromBody]EmployeeAddViewModel employee)
-         {
-            await _validator.ValidateAndThrowAsync(employee);
-            var mapped = _mapper.Map<Employee>(employee);
-            mapped.Id = id;
-            return Ok(await _service.UpdateAsync(mapped));
-         }
+        [HttpPut("UpdateEmployee")]
+        public async Task<ActionResult<Employee>> UpdateEmployeeAsync([FromQuery] int id, [FromBody] EmployeeAddViewModel employee)
+        {
+            try {
+                await _validator.ValidateAndThrowAsync(employee);
+                var mapped = _mapper.Map<Employee>(employee);
+                mapped.Id = id;
+                return Ok(await _service.UpdateAsync(mapped));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Update Eror");
+                return NoContent();
+            }
+            }
     }
 }
