@@ -2,7 +2,7 @@
 
 namespace BLL.Services
 {
-    class GetAdditionalInformationAboutRetirePeople : IStrategy
+    class RetirePeopleSetadditionalInfo : IStrategy
     {
         public string SetInformation()
         {
