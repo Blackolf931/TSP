@@ -16,7 +16,10 @@ namespace BLL.DI
             services.AddScoped<IOfficeService, OfficeService>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IOfficeRepository, OfficeRepository>();
-            
+            services.AddScoped<IStrategy, RetirePeopleSetadditionalInfo>();
+            services.AddScoped<IStrategy, MiddlePeopleSetAdditionalInfo>();
+            services.AddScoped<IStrategy, YoungPeopleSetAdditionalInfo>();
+
             services.ConfigureSqlContext(configuration);
         }
         private static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>

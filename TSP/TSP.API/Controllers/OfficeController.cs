@@ -5,7 +5,6 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TSP.API.Validators;
 using TSP.API.ViewModels;
 
 namespace TSP.API.Controllers
@@ -29,9 +28,11 @@ namespace TSP.API.Controllers
         }
 
         [HttpGet("GetAllOffice")]
-        public async Task<ActionResult<IEnumerable<Office>>> GetAllOficeAsync()
+        public async Task<ActionResult<IEnumerable<OfficeViewModel>>> GetAllOficeAsync()
         {
-           return Ok(await _service.GetAllAsync());
+            var office = await _service.GetAllAsync();
+            var mapped = _mapper.Map<List<OfficeViewModel>>(office);
+            return Ok(mapped);
         }
 
         [HttpGet("GetOfficeById")]

@@ -1,0 +1,165 @@
+[33mcommit 53efe668df5eb3896cac3e2e5b11c19cb053c0f5[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: DenisKahukin <denis.kagukin@gmail.com>
+Date:   Mon Sep 6 16:24:47 2021 +0300
+
+    Revert "Add strategy"
+    
+    This reverts commit 91affbf69a0bc4012c797aa38cd17341da8c30dd.
+
+[33mcommit 91affbf69a0bc4012c797aa38cd17341da8c30dd[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mWorkWithStrategyPattern[m[33m)[m
+Author: DenisKahukin <denis.kagukin@gmail.com>
+Date:   Mon Sep 6 15:55:59 2021 +0300
+
+    Add strategy
+
+[33mcommit c827c80fd8a93dffc1c996480c21e09472e4fb02[m[33m ([m[1;32mAdd_Stategy_Pattern[m[33m)[m
+Author: Denis Kagykin <52563506+Blackolf931@users.noreply.github.com>
+Date:   Mon Sep 6 12:55:26 2021 +0300
+
+    Add Fluent Validation (#9)
+    
+    * Add Fluent Validation
+    
+    * bugfix
+    
+    * bugfixV2
+    
+    * Bugfix V3
+
+[33mcommit 5cfd0950a02cce7239c1f95fc65601d57a0f2ec1[m
+Author: Denis Kagykin <52563506+Blackolf931@users.noreply.github.com>
+Date:   Fri Sep 3 13:50:35 2021 +0300
+
+    Add sync and async method (#8)
+    
+    * Add sync and async method
+    
+    * Update Async and await
+    
+    * bugfix
+
+[33mcommit cd0300d43e82420c22dc7c754bfc91182fbbcffa[m
+Author: Denis Kagykin <52563506+Blackolf931@users.noreply.github.com>
+Date:   Thu Sep 2 10:40:13 2021 +0300
+
+    Code Review (#7)
+    
+    * Code Review
+    
+    * Change namespace
+
+[33mcommit 5aa1e229faaff6bc5c0fce0410ab776e1f57a6f2[m
+Author: Denis Kagykin <52563506+Blackolf931@users.noreply.github.com>
+Date:   Tue Aug 31 16:37:16 2021 +0300
+
+    Add Midleware and Exception (#6)
+    
+    * Add Midleware and Exception
+    
+    * bugfix
+    
+    * Remove unnecessary code
+    
+    * delete files
+    
+    * bugfix
+
+[33mcommit 8c3f81a8d6d97dedbc8f9c0866a1ab96f9144c52[m
+Author: Denis Kagykin <52563506+Blackolf931@users.noreply.github.com>
+Date:   Mon Aug 30 17:44:45 2021 +0300
+
+    Impliment Interfaces and Add Controllers For office and Employee (#5)
+    
+    * Impliment Interfaces and Add Controllers For office and Employee
+    
+    * Add Update and Add for Office and Employee
+
+[33mcommit 1899c3848185872ed7e5bba04972dbca81a42ec8[m
+Author: Denis Kagykin <52563506+Blackolf931@users.noreply.github.com>
+Date:   Mon Aug 30 12:02:19 2021 +0300
+
+    Feature/add data base connection (#4)
+    
+    * test
+    
+    * Success Migration
+    
+    * Add DataBase Connection
+
+[33mcommit 382e59b3cad479f74fedea0ef8828b43e042475e[m
+Author: Denis Kagykin <52563506+Blackolf931@users.noreply.github.com>
+Date:   Sat Aug 28 22:18:15 2021 +0300
+
+    Feature/add loging service (#3)
+    
+    * Add and Get Employee
+    
+    * Delete BLL
+    Delete DALA
+    Delete Razor pages
+    BLL_1 rename to BLL
+    
+    * Resolve
+    
+    * Solve merge problem
+    
+    * Add DataBase
+    
+    * Update
+    
+    * Try to repair Solution
+
+[33mcommit a3a74c181197893f6013636916a3873b420f88f5[m
+Author: DenisKahukin <denis.kagukin@gmail.com>
+Date:   Thu Aug 26 17:54:42 2021 +0300
+
+    feature
+
+[33mcommit 827b44a331944a8972158d3c4b6f66d6caf831e6[m
+Author: Denis Kagykin <52563506+Blackolf931@users.noreply.github.com>
+Date:   Thu Aug 26 17:46:07 2021 +0300
+
+    Add and Get Employee (#1)
+    
+    * Add and Get Employee
+    
+    * Delete BLL
+    Delete DALA
+    Delete Razor pages
+    BLL_1 rename to BLL
+    
+    * Delete BLL (#2)
+    
+    Delete DALA
+    Delete Razor pages
+    BLL_1 rename to BLL
+
+[33mcommit 838bfde332c016bd077acc7ed0061854ed38457e[m
+Author: Denis Kagykin <52563506+Blackolf931@users.noreply.github.com>
+Date:   Wed Aug 25 16:16:07 2021 +0300
+
+    Update dotnet.yml
+
+[33mcommit 84540a99d0da1d8e656ad07cf04bdb41e3a91c90[m
+Author: Denis Kagykin <52563506+Blackolf931@users.noreply.github.com>
+Date:   Wed Aug 25 16:10:17 2021 +0300
+
+    Update dotnet.yml
+
+[33mcommit dfd83cd857f15388d8be1602022ed951b26945c5[m
+Author: Denis Kagykin <52563506+Blackolf931@users.noreply.github.com>
+Date:   Wed Aug 25 16:08:58 2021 +0300
+
+    Create dotnet.yml
+
+[33mcommit 27860d8a3fc1b4f69180df3829b1e731599193f7[m
+Author: DenisKahukin <denis.kagukin@gmail.com>
+Date:   Wed Aug 25 16:02:10 2021 +0300
+
+    TSP
+
+[33mcommit b067b2717a1bb5d0894ef5281fa359bbbb0b6cec[m
+Author: Denis Kagykin <52563506+Blackolf931@users.noreply.github.com>
+Date:   Wed Aug 25 15:42:07 2021 +0300
+
+    Initial commit
