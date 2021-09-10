@@ -10,13 +10,10 @@ namespace TSP.API
     {
         public static void Main(string[] args)
         {
-          //  var configuration = new ConfigurationBuilder().AddJsonFile("appsetting.json").Build();
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
-                .WriteTo.Debug()
-                .WriteTo.File(@"E:\Innowise\TSP\Serilog\log.json")
                 .CreateLogger();
             try {
                 Log.Information("Starting web host");
