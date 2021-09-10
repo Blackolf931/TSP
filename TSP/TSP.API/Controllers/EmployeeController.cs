@@ -3,6 +3,7 @@ using BLL.Models;
 using BLL.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TSP.API.Filter;
@@ -24,7 +25,7 @@ namespace TSP.API.Controllers
         }
         [HttpGet("GetAllEmployee")]
         public async Task<ActionResult<IEnumerable<EmployeeViewModel>>> GetAllEmployeeAsync()
-        {
+        { 
             var employees = await _service.GetAllAsync();
             var mappedEmployees = _mapper.Map<IEnumerable<EmployeeViewModel>>(employees);
             return Ok(mappedEmployees); 
