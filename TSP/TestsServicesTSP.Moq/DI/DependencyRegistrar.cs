@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BLL.DI
+namespace TestsServicesTSP.Moq.DI
 {
     public static class DependencyRegistrar
     {
