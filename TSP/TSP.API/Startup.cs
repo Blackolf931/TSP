@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using TSP.API.AutoMapper;
 using TSP.API.Filter;
@@ -18,7 +17,7 @@ namespace TSP.API
     {
         public Startup(IConfiguration configuration)
         {
-           Configuration = configuration;
+            Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -26,7 +25,7 @@ namespace TSP.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(ApiProfile),typeof(BllProfile));
+            services.AddAutoMapper(typeof(ApiProfile), typeof(BllProfile));
             services.AddValidatorsFromAssemblyContaining<ValidationFilter>(ServiceLifetime.Transient);
             services.RegistarBuisnessComponents(Configuration);
             services.AddLogging();

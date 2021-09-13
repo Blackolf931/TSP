@@ -3,7 +3,6 @@ using BLL.Models;
 using BLL.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TSP.API.ViewModels;
@@ -24,10 +23,10 @@ namespace TSP.API.Controllers
         }
         [HttpGet("GetAllEmployee")]
         public async Task<ActionResult<IEnumerable<EmployeeViewModel>>> GetAllEmployeeAsync()
-        { 
+        {
             var employees = await _service.GetAllAsync();
             var mappedEmployees = _mapper.Map<IEnumerable<EmployeeViewModel>>(employees);
-            return Ok(mappedEmployees); 
+            return Ok(mappedEmployees);
         }
 
         [HttpGet("GetEmployeeById")]
@@ -38,10 +37,10 @@ namespace TSP.API.Controllers
             return Ok(mappedEmployees);
         }
         [HttpDelete("DeleteEmployeeById")]
-        public async Task<ActionResult<bool>> DeleteEmployeeAsync([FromQuery]int id)
+        public async Task<ActionResult<bool>> DeleteEmployeeAsync([FromQuery] int id)
         {
-                await _service.DeleteByIdAsync(id);
-                return Ok();
+            await _service.DeleteByIdAsync(id);
+            return Ok();
         }
 
         [HttpPost("AddEmployee")]
