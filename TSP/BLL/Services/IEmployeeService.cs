@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public interface IEmployeeService
+    public interface IEmployeeService<T>
     {
        Task<IEnumerable<Employee>> GetAllAsync();
        Task<Employee> GetEmployeeByIdAsync(int id);

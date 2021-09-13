@@ -1,22 +1,19 @@
 ﻿using AutoMapper;
-using BLL.Infastructure;
 using BLL.Models;
 using DAL.Entities;
 using DAL.Interfaces;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class EmployeeService : IEmployeeService
+    public class EmployeeService<T> : IEmployeeService<T> where T : Employee
     {
-        private readonly IEmployeeRepository _repository;
+        private readonly IRepositoryBase<T> _repository;
         private readonly IMapper _mapper;
         private readonly IEnumerable<IStrategy> _strategy;
 
-        public EmployeeService(IEmployeeRepository repository, IMapper mapper, IEnumerable<IStrategy> strategy)
+        public EmployeeService(IRepositoryBase<T> repository, IMapper mapper, IEnumerable<IStrategy> strategy)
         {
             _repository = repository;
             _mapper = mapper;
@@ -29,20 +26,30 @@ namespace BLL.Services
             return _mapper.Map<Employee>(await _repository.AddAsync(mappedEmployee));
         }
 
-        public Task<bool> DeleteByIdAsync(int id)
+        public async Task<bool> DeleteByIdAsync(int id)
         {
-            return _repository.DeleteByIdAsync(id);
+            var employee = _repository.FindByIdAsync(id);
+            if (employee is null)
+            {
+                return false;
+            }
+            else
+            {
+                var mapped = _mapper.Map<EmployeeEntity>(employee);
+           //     await _repository.DeleteByIdAsync(mapped);
+                return true;
+            }
         }
 
         public async Task<IEnumerable<Employee>> GetAllAsync()
         {
-            var employee = await _repository.GetAllAsync();
+            var employee = await _repository.FindAllAsync();
             return _mapper.Map<IEnumerable<Employee>>(employee);
         }
 
         public async Task<Employee> GetEmployeeByIdAsync(int id)
         {
-            var employee = await _repository.GetByIdAsync(id);
+            var employee = await _repository.FindByIdAsync(id);
             var mappedEmployee = _mapper.Map<Employee>(employee);
             if(employee is null)
             {
@@ -62,9 +69,10 @@ namespace BLL.Services
         public async Task<Employee> UpdateAsync(Employee employee)
         {
             var mapped = _mapper.Map<EmployeeEntity>(employee);
-            var updateEmployee = await _repository.UpdateAsync(mapped);
-            var mappedEmployee = _mapper.Map<Employee>(updateEmployee);
-            return mappedEmployee;
+            //   var updateEmployee = await _repository.UpdateAsync(mapped);
+            //  var mappedEmployee = _mapper.Map<Employee>(updateEmployee);
+            //      return mappedEmployee;
+            return null;
         }
     }
 }

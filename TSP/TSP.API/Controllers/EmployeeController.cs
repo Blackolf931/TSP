@@ -11,11 +11,11 @@ namespace TSP.API.Controllers
 {
     public class EmployeeController : ControllerBase
     {
-        private readonly IEmployeeService _service;
+        private readonly IEmployeeService<Employee> _service;
         private readonly IMapper _mapper;
         private readonly IValidator<EmployeeAddViewModel> _validator;
 
-        public EmployeeController(IEmployeeService service, IMapper mapper, IValidator<EmployeeAddViewModel> validator)
+        public EmployeeController(IEmployeeService<Employee> service, IMapper mapper, IValidator<EmployeeAddViewModel> validator)
         {
             _mapper = mapper;
             _service = service;

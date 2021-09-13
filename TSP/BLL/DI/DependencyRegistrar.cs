@@ -1,6 +1,7 @@
 ﻿using BLL.Services;
 using DAl.BusinessLogic;
 using DAL.BusinessLogic;
+using DAL.Entities;
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,9 +13,10 @@ namespace BLL.DI
     {
         public static void RegistarBuisnessComponents(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped(typeof(IEmployeeService<>), typeof(EmployeeService<>));
             services.AddScoped<IOfficeService, OfficeService>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped(typeof(IRepository<EmployeeEntity>), typeof(RepositoryBase<>));
             services.AddScoped<IOfficeRepository, OfficeRepository>();
             services.AddScoped<IStrategy, RetirePeopleSetadditionalInfoStrategy>();
             services.AddScoped<IStrategy, MiddlePeopleSetAdditionalInfoStrategy>();

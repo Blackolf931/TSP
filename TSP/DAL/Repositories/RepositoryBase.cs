@@ -1,28 +1,56 @@
 ﻿using DAl.BusinessLogic;
+using DAL.Entities;
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-
+using System.Threading.Tasks;
 
 namespace DAL.BusinessLogic
 {
    public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
-        protected RepositoryContext RepositoryContext;
+        protected RepositoryContext _repositoryContext;
 
         protected RepositoryBase(RepositoryContext repositoryContext)
         {
-            RepositoryContext = repositoryContext;
+            _repositoryContext = repositoryContext;
         }
-        public IQueryable<T> FindAll(bool trackChanges) => !trackChanges ? RepositoryContext.Set<T>().AsNoTracking()
-            : RepositoryContext.Set<T>();
+        public async Task<IEnumerable<T>> FindAllAsync()
+        {
+            return await _repositoryContext.Set<T>().ToListAsync();
+        }
 
-        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges) =>
-            !trackChanges ? RepositoryContext.Set<T>().Where(expression).AsNoTracking() : RepositoryContext.Set<T>().Where(expression);
-        public void Create(T entity) => RepositoryContext.Set<T>().Add(entity);
-        public void Delete(T entity) => RepositoryContext.Set<T>().Remove(entity);
-        public void Update(T entity) => RepositoryContext.Set<T>().Update(entity);
+        public async Task<T> FindByIdAsync(int id)
+        {
+            return await _repositoryContext.Set<Task<T>>().Find(id);
+        }
+
+        public async Task DeleteByIdAsync(T entity)
+        {
+            _repositoryContext.Set<T>().Remove(entity);
+            await _repositoryContext.SaveChangesAsync();
+        }
+
+        public async Task<T> AddAsync(T entity)
+        {
+            _repositoryContext.Set<T>().Add(entity);
+            await _repositoryContext.SaveChangesAsync();
+            return entity;
+        }
+
+        public async Task<T> UpdateAsync(T entity)
+        {
+            _repositoryContext.Set<T>().Update(entity);
+            await _repositoryContext.SaveChangesAsync();
+            return entity;
+        }
+
+        public Task<object> AddAsync(EmployeeEntity mappedEmployee)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
