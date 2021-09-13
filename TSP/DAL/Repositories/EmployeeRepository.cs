@@ -1,5 +1,4 @@
-﻿
-using DAl.BusinessLogic;
+﻿using DAl.BusinessLogic;
 using DAL.Entities;
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -52,7 +51,6 @@ namespace DAL.BusinessLogic
         public async Task<EmployeeEntity> UpdateAsync(EmployeeEntity entity)
         {
            _repositoryContext.Employees.Update(entity);
-           _repositoryContext.Entry(entity).State = EntityState.Unchanged;
            await _repositoryContext.SaveChangesAsync();
            return entity;
 

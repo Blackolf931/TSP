@@ -5,7 +5,6 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TSP.API.Validators;
 using TSP.API.ViewModels;
 
 namespace TSP.API.Controllers
@@ -33,7 +32,11 @@ namespace TSP.API.Controllers
         {
             var office = await _service.GetAllAsync();
             var mapped = _mapper.Map<List<OfficeViewModel>>(office);
+<<<<<<< HEAD
            return Ok(mapped);
+=======
+            return Ok(mapped);
+>>>>>>> main
         }
 
         [HttpGet("GetOfficeById")]
@@ -45,18 +48,11 @@ namespace TSP.API.Controllers
         [HttpDelete("DeleteById")]
         public async Task<ActionResult<bool>> DeleteByIdAsync(int id)
         {
-            if(await _service.DeleteByIdAsync(id) == true)
-            {
-                return Ok();
-            }
-            else
-            {
-                return NotFound();
-            }
-            
+            await _service.DeleteByIdAsync(id);
+            return Ok();
         }
         [HttpPost("AddOffice")]
-        public async Task<ActionResult<Employee>> AddOffice([FromBody]OfficeAddViewModel model)
+        public async Task<ActionResult<Employee>> AddOffice([FromBody] OfficeAddViewModel model)
         {
             await _validator.ValidateAndThrowAsync(model);
             var mapped = _mapper.Map<Office>(model);

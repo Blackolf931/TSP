@@ -1,0 +1,20 @@
+2021-09-10 11:06:43.965 +03:00 [INF] Starting web host
+2021-09-10 11:06:48.772 +03:00 [INF] Now listening on: https://localhost:5001
+2021-09-10 11:06:48.786 +03:00 [INF] Now listening on: http://localhost:5000
+2021-09-10 11:06:48.794 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-10 11:06:48.801 +03:00 [INF] Hosting environment: Development
+2021-09-10 11:06:48.817 +03:00 [INF] Content root path: E:\Innowise\TSP\TSP.API
+2021-09-10 11:06:51.277 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-09-10 11:06:52.349 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 1090.3439ms
+2021-09-10 11:06:53.406 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-09-10 11:06:53.867 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 460.7974ms
+2021-09-10 11:07:30.763 +03:00 [INF] Starting web host
+2021-09-10 11:07:34.117 +03:00 [INF] Now listening on: https://localhost:5001
+2021-09-10 11:07:34.132 +03:00 [INF] Now listening on: http://localhost:5000
+2021-09-10 11:07:34.163 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-10 11:07:34.170 +03:00 [INF] Hosting environment: Development
+2021-09-10 11:07:34.177 +03:00 [INF] Content root path: E:\Innowise\TSP\TSP.API
+2021-09-10 11:07:37.020 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2021-09-10 11:07:37.572 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 542.6224ms
+2021-09-10 11:07:38.185 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2021-09-10 11:07:38.568 +03:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 383.1419ms
