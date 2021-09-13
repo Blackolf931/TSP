@@ -44,6 +44,10 @@ namespace BLL.Services
         {
             var employee = await _repository.GetByIdAsync(id);
             var mappedEmployee = _mapper.Map<Employee>(employee);
+            if(employee is null)
+            {
+                return null;
+            }
             foreach (var strategy in _strategy)
             {
                 if (strategy.IsValidStrategy(employee.Age))
@@ -58,7 +62,9 @@ namespace BLL.Services
         public async Task<Employee> UpdateAsync(Employee employee)
         {
             var mapped = _mapper.Map<EmployeeEntity>(employee);
-            return _mapper.Map<Employee>(await _repository.UpdateAsync(mapped));
+            var updateEmployee = await _repository.UpdateAsync(mapped);
+            var mappedEmployee = _mapper.Map<Employee>(updateEmployee);
+            return mappedEmployee;
         }
     }
 }

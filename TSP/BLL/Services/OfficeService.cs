@@ -44,7 +44,8 @@ namespace BLL.Services
         public async Task<Office> UpdateOfficeByAsync(Office office)
         {
             var mappedOffice = _mapper.Map<OfficeEntity>(office);
-            return _mapper.Map<Office>(await _repository.UpdateAsync(mappedOffice));
+            var updatedOffice = await _repository.UpdateAsync(mappedOffice);
+            return _mapper.Map<Office>(updatedOffice);
         }
     }
 }
