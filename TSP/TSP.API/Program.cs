@@ -17,5 +17,3 @@ namespace TSP.API
                     webBuilder.UseStartup<Startup>();
                 });
     }
-}
-
