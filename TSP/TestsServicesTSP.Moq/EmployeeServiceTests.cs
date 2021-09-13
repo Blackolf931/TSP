@@ -16,7 +16,7 @@ namespace TestsServicesTSP.Moq
     {
         private readonly EmployeeService _sut;
         private readonly Mock<IEmployeeRepository> _employeeRepoMock = new();
-        private readonly IEnumerable<IStrategy> strategies = new List<IStrategy> { new MiddlePeopleSetAdditionalInfo(), new RetirePeopleSetadditionalInfo(), new YoungPeopleSetAdditionalInfo() };
+        private readonly IEnumerable<IStrategy> strategies = new List<IStrategy> { new MiddlePeopleSetAdditionalInfoStrategy(), new RetirePeopleSetadditionalInfoStrategy(), new YoungPeopleSetAdditionalInfoStrategy() };
 
 
         public EmployeeServiceTests()
