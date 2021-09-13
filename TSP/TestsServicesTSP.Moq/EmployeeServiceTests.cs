@@ -44,10 +44,10 @@ namespace TestsServicesTSP.Moq
                 Position = "Test",
                 OfficeId = 2
             };
-            _employeeRepoMock.Setup(x => x.GetByIdAsync(19)).ReturnsAsync(employeeEntity);
+            _employeeRepoMock.Setup(x => x.GetByIdAsync(employeeId)).ReturnsAsync(employeeEntity);
 
             //Act
-            var employee = await _sut.GetEmployeeByIdAsync(19);
+            var employee = await _sut.GetEmployeeByIdAsync(employeeId);
 
             //Assert
             Assert.Equal(employeeId, employee.Id);
@@ -101,7 +101,7 @@ namespace TestsServicesTSP.Moq
                 Position = "Test",
                 OfficeId = 2
             };
-            _employeeRepoMock.Setup(x => x.UpdateAsync(employeeEntity)).ReturnsAsync(employeeEntity);
+            _employeeRepoMock.Setup(x => x.UpdateAsync(It.IsAny<EmployeeEntity>())).ReturnsAsync(employeeEntity);
             var updateEmployee = await _sut.UpdateAsync(employee);
             Assert.Equal(employee.Id, updateEmployee.Id);
         }

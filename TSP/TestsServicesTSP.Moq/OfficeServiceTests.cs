@@ -6,9 +6,6 @@ using DAL.Entities;
 using DAL.Interfaces;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -95,8 +92,8 @@ namespace TestsServicesTSP.Moq
                 Address = "Test",
                 Country = "Test"
             };
-            _officeRepoMock.Setup(x => x.UpdateAsync(officeEntity)).ReturnsAsync(officeEntity);
-            var office = await _ost.UpdateOfficeByAsync(new Office { Id = 2, Name = "Test", Address = "Test", Country = "Test" });
+            _officeRepoMock.Setup(x => x.UpdateAsync(It.IsAny<OfficeEntity>())).ReturnsAsync(officeEntity);
+            var office = await _ost.UpdateOfficeByAsync(offices);
             Assert.Equal(2, office.Id);
         }
     }
