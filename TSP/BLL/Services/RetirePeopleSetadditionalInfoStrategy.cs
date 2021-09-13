@@ -8,7 +8,6 @@ namespace BLL.Services
         {
             return new StringBuilder().Append("Your are retire").ToString();
         }
-
         public bool IsValidStrategy(int age)
         {
             if (age > 60)
