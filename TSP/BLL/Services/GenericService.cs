@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using DAL.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,13 +9,11 @@ namespace BLL.Services
     {
         private readonly IRepositoryBase<TEntity> _repository;
         private readonly IMapper _mapper;
-    //    private readonly IEnumerable<IStrategy> _strategy;
 
         public GenericService(IRepositoryBase<TEntity> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
-          //  _strategy = strategy;
         }
 
         public async Task<T> AddAsync(T entity)
@@ -46,7 +43,7 @@ namespace BLL.Services
             return _mapper.Map<IEnumerable<T>>(objectList);
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(int id)
         {
             var entityObject = await _repository.FindByIdAsync(id);
             var mappedEmployee = _mapper.Map<T>(entityObject);
@@ -59,26 +56,6 @@ namespace BLL.Services
             var mappedObjectResult = _mapper.Map<T>(updateObject);
             return mappedObjectResult;
         }
-      /*  public override async Task<Employee> GetByIdAsync(int id)
-        {
-            var entityObject = await _repository.FindByIdAsync(id);
-            var mappedEmployee = _mapper.Map<Employee>(entityObject);
-            if (entityObject is not null)
-            {
-                foreach (var strategy in _strategy)
-                {
-                    if (strategy.IsValidStrategy(mappedEmployee.Age))
-                    {
-                        mappedEmployee.AdditionalInformation = strategy.SetInformation();
-                        break;
-                    }
-                }
-                return mappedEmployee;
-            }
-            else
-            {
-                return null;
-            }
-        }*/
+
     }
 }
