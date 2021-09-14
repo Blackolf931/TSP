@@ -9,16 +9,16 @@ using TSP.API.ViewModels;
 
 namespace TSP.API.Controllers
 {
-    public class EmployeeController : ControllerBase
+   /* public class EmployeeController : ControllerBase
     {
-        private readonly IEmployeeService _service;
+      //  private readonly IGenericService<Employee,Emplo> _service;
         private readonly IMapper _mapper;
         private readonly IValidator<EmployeeAddViewModel> _validator;
 
-        public EmployeeController(IEmployeeService service, IMapper mapper, IValidator<EmployeeAddViewModel> validator)
+        public EmployeeController(IGenericService<Employee> service, IMapper mapper, IValidator<EmployeeAddViewModel> validator)
         {
             _mapper = mapper;
-            _service = service;
+      //      _service = service;
             _validator = validator;
         }
         [HttpGet("GetAllEmployee")]
@@ -32,7 +32,8 @@ namespace TSP.API.Controllers
         [HttpGet("GetEmployeeById")]
         public async Task<ActionResult<Employee>> GetEmployeeByIdAsync([FromQuery] int id)
         {
-            var employees = await _service.GetEmployeeByIdAsync(id);
+            var employees = await _service.GetByIdAsync(id); 
+              //  _service.GetEmployeeByIdAsync(id);
             var mappedEmployees = _mapper.Map<EmployeeViewModel>(employees);
             return Ok(mappedEmployees);
         }
@@ -58,5 +59,5 @@ namespace TSP.API.Controllers
             mapped.Id = id;
             return Ok(await _service.UpdateAsync(mapped));
         }
-    }
+    }*/
 }

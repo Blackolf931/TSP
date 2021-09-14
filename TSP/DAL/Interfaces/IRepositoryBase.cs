@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using DAL.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-    public interface IRepositoryBase<T>
+    public interface IRepositoryBase<TEntity>
     {
-        Task<IEnumerable<T>> FindAllAsync();
-        Task<T> FindByIdAsync(int id);
-        Task DeleteByIdAsync(T entity);
-        Task<T> AddAsync(T entity);
-        Task<T> UpdateAsync(T entity);
+        Task<IEnumerable<TEntity>> FindAllAsync();
+        Task<TEntity> FindByIdAsync(int id);
+        Task DeleteByIdAsync(TEntity entity);
+        Task<TEntity> AddAsync(TEntity entity);
+        Task<TEntity> UpdateAsync(TEntity entity);
     }
 }

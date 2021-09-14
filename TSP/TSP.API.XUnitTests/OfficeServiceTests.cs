@@ -13,7 +13,7 @@ namespace TestsServicesTSP.Moq
 {
     public class OfficeServiceTests
     {
-        private readonly OfficeService _ost;
+        private readonly GenericService<Office, OfficeEntity> _ost;
         private readonly Mock<IRepositoryBase<OfficeEntity>> _officeRepoMock = new();
         private readonly IMapper _mapper;
 
@@ -24,7 +24,7 @@ namespace TestsServicesTSP.Moq
                 cfg.AddProfile(new BllProfile());
             });
             _mapper = mockMapper.CreateMapper();
-            _ost = new OfficeService(_officeRepoMock.Object, _mapper);
+            _ost = new GenericService<Office, OfficeEntity>(_officeRepoMock.Object, _mapper);
         }
 
         [Fact]
@@ -104,7 +104,7 @@ namespace TestsServicesTSP.Moq
                 Country = "Test"
             };
             _officeRepoMock.Setup(x => x.UpdateAsync(It.IsAny<OfficeEntity>())).ReturnsAsync(officeEntity);
-            var office = await _ost.UpdateOfficeByAsync(offices);
+            var office = await _ost.UpdateAsync(offices);
             Assert.Equal(2, office.Id);
         }
     }

@@ -6,7 +6,6 @@ using DAL.Entities;
 using DAL.Interfaces;
 using Moq;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -15,9 +14,9 @@ namespace TSP.API.XUnitTests
 
     public class EmployeeServiceTests
     {
-        private readonly EmployeeService _sut;
+        private readonly GenericService<Employee, EmployeeEntity> _sut;
         private readonly Mock<IRepositoryBase<EmployeeEntity>> _employeeRepoMock = new();
-        private readonly IEnumerable<IStrategy> strategies = new List<IStrategy> { new MiddlePeopleSetAdditionalInfoStrategy(), new RetirePeopleSetadditionalInfoStrategy(), new YoungPeopleSetAdditionalInfoStrategy() };
+       // private readonly IEnumerable<IStrategy> strategies = new List<IStrategy> { new MiddlePeopleSetAdditionalInfoStrategy(), new RetirePeopleSetadditionalInfoStrategy(), new YoungPeopleSetAdditionalInfoStrategy() };
         private readonly IMapper _mapper;
 
         public EmployeeServiceTests()
@@ -27,7 +26,7 @@ namespace TSP.API.XUnitTests
                     cfg.AddProfile(new BllProfile());
                 });
             _mapper = mockMapper.CreateMapper();
-            _sut = new EmployeeService(_employeeRepoMock.Object, _mapper, strategies);
+            _sut = new GenericService<Employee, EmployeeEntity>(_employeeRepoMock.Object, _mapper);
         }
 
         [Fact]
@@ -48,7 +47,7 @@ namespace TSP.API.XUnitTests
             _employeeRepoMock.Setup(x => x.FindByIdAsync(employeeId)).ReturnsAsync(employeeEntity);
 
             //Act
-            var employee = await _sut.GetEmployeeByIdAsync(employeeId);
+            var employee = await _sut.GetByIdAsync(employeeId);
 
             //Assert
             Assert.Equal(employeeId, employee.Id);
@@ -60,7 +59,7 @@ namespace TSP.API.XUnitTests
             _employeeRepoMock.Setup(x => x.FindByIdAsync(It.IsAny<int>())).ReturnsAsync(() => null);
 
             //Act
-            var employee = await _sut.GetEmployeeByIdAsync(9999999);
+            var employee = await _sut.GetByIdAsync(9999999);
 
             //Assert
             Assert.Null(employee);
@@ -79,7 +78,7 @@ namespace TSP.API.XUnitTests
                 Position = "Test",
                 OfficeId = 2
             };
-           _employeeRepoMock.Setup(x => x.FindByIdAsync(employeeId)).ReturnsAsync(employeeEntity);
+            _employeeRepoMock.Setup(x => x.FindByIdAsync(employeeId)).ReturnsAsync(employeeEntity);
             var result = await _sut.DeleteByIdAsync(employeeId);
             Assert.True(result);
         }

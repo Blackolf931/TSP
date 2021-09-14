@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class RepositoryBase<T> : IRepositoryBase<T> where T : class
+    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
     {
         protected RepositoryContext _repositoryContext;
 
@@ -14,32 +14,32 @@ namespace DAL.Repositories
         {
             _repositoryContext = repositoryContext;
         }
-        public async Task<IEnumerable<T>> FindAllAsync()
+        public async Task<IEnumerable<TEntity>> FindAllAsync()
         {
-            return await _repositoryContext.Set<T>().ToListAsync();
+            return await _repositoryContext.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<T> FindByIdAsync(int id)
+        public async Task<TEntity> FindByIdAsync(int id)
         {
-            return await _repositoryContext.Set<Task<T>>().Find(id);
+            return await _repositoryContext.Set<Task<TEntity>>().Find(id);
         }
 
-        public async Task DeleteByIdAsync(T entity)
+        public async Task DeleteByIdAsync(TEntity entity)
         {
-            _repositoryContext.Set<T>().Remove(entity);
+            _repositoryContext.Set<TEntity>().Remove(entity);
             await _repositoryContext.SaveChangesAsync();
         }
 
-        public async Task<T> AddAsync(T entity)
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
-            _repositoryContext.Set<T>().Add(entity);
+            _repositoryContext.Set<TEntity>().Add(entity);
             await _repositoryContext.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<T> UpdateAsync(T entity)
+        public async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            _repositoryContext.Set<T>().Update(entity);
+            _repositoryContext.Set<TEntity>().Update(entity);
             await _repositoryContext.SaveChangesAsync();
             return entity;
         }
