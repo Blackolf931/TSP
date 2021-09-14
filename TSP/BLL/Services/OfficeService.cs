@@ -26,12 +26,16 @@ namespace BLL.Services
         public async Task<Office> GetByIdAsync(int id)
         {
             var office = await _repository.FindByIdAsync(id);
+            if (office is null)
+            {
+                return null;
+            }
             var mappedOffice = _mapper.Map<Office>(office);
             return mappedOffice;
         }
         public async Task<bool> DeleteByIdAsync(int id)
         {
-            var office = _repository.FindByIdAsync(id);
+            var office = await _repository.FindByIdAsync(id);
             if (office is null)
             {
                 return false;

@@ -12,6 +12,8 @@ namespace BLL.AutoMapper
             CreateMap<Employee, EmployeeEntity>();
             CreateMap<OfficeEntity, Office>();
             CreateMap<Office, OfficeEntity>();
+            CreateMap<object, OfficeEntity>();
+            CreateMap<object, EmployeeEntity>();
         }
     }
 }

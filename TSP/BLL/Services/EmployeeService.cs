@@ -28,7 +28,7 @@ namespace BLL.Services
 
         public async Task<bool> DeleteByIdAsync(int id)
         {
-            var employee = _repository.FindByIdAsync(id);
+            var employee = await _repository.FindByIdAsync(id);
             if (employee is null)
             {
                 return false;

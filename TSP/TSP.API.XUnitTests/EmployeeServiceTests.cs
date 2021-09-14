@@ -16,9 +16,9 @@ namespace TSP.API.XUnitTests
     public class EmployeeServiceTests
     {
         private readonly EmployeeService _sut;
-        private readonly Mock<IEmployeeRepository> _employeeRepoMock = new();
+        private readonly Mock<IRepositoryBase<EmployeeEntity>> _employeeRepoMock = new();
         private readonly IEnumerable<IStrategy> strategies = new List<IStrategy> { new MiddlePeopleSetAdditionalInfoStrategy(), new RetirePeopleSetadditionalInfoStrategy(), new YoungPeopleSetAdditionalInfoStrategy() };
-
+        private readonly IMapper _mapper;
 
         public EmployeeServiceTests()
         {
@@ -26,8 +26,8 @@ namespace TSP.API.XUnitTests
                 {
                     cfg.AddProfile(new BllProfile());
                 });
-            var mapper = mockMapper.CreateMapper();
-            _sut = new EmployeeService(_employeeRepoMock.Object, mapper, strategies);
+            _mapper = mockMapper.CreateMapper();
+            _sut = new EmployeeService(_employeeRepoMock.Object, _mapper, strategies);
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace TSP.API.XUnitTests
                 Position = "Test",
                 OfficeId = 2
             };
-            _employeeRepoMock.Setup(x => x.GetByIdAsync(employeeId)).ReturnsAsync(employeeEntity);
+            _employeeRepoMock.Setup(x => x.FindByIdAsync(employeeId)).ReturnsAsync(employeeEntity);
 
             //Act
             var employee = await _sut.GetEmployeeByIdAsync(employeeId);
@@ -57,7 +57,7 @@ namespace TSP.API.XUnitTests
         public async Task GetEmployeeById_ShouldReturnNothing_WhereEmployeeDoesNotExists()
         {
             //Arange
-            _employeeRepoMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(() => null);
+            _employeeRepoMock.Setup(x => x.FindByIdAsync(It.IsAny<int>())).ReturnsAsync(() => null);
 
             //Act
             var employee = await _sut.GetEmployeeByIdAsync(9999999);
@@ -68,16 +68,26 @@ namespace TSP.API.XUnitTests
         [Fact]
         public async Task DeleteEmployeeById_ShouldBeReturnTrue_WhereEmployeeExists()
         {
-            _employeeRepoMock.Setup(x => x.DeleteByIdAsync(19)).ReturnsAsync(() => true);
-            var employee = await _sut.DeleteByIdAsync(19);
-            Assert.True(employee);
+            var employeeId = new Random().Next(1, 20);
+            var employeeEntity = new EmployeeEntity
+            {
+                Id = employeeId,
+                Name = "Test",
+                SecondName = "Test",
+                Patronomic = "Test",
+                Age = 25,
+                Position = "Test",
+                OfficeId = 2
+            };
+           _employeeRepoMock.Setup(x => x.FindByIdAsync(employeeId)).ReturnsAsync(employeeEntity);
+            var result = await _sut.DeleteByIdAsync(employeeId);
+            Assert.True(result);
         }
         [Fact]
         public async Task DeleteEmployeeById_ShouldBeReturnFalse_WhereEmployeeDoesNotExists()
         {
-            _employeeRepoMock.Setup(x => x.DeleteByIdAsync(99999)).ReturnsAsync(() => false);
-            var employee = await _sut.DeleteByIdAsync(999999);
-            Assert.False(employee);
+            var result = await _sut.DeleteByIdAsync(int.MaxValue);
+            Assert.False(result);
         }
         [Fact]
         public async Task UpdateEmployee_shouldBeReturnEmployee()
