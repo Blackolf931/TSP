@@ -74,8 +74,8 @@ namespace TestsServicesTSP.Moq
                 Country = "Test",
             };
             _officeRepoMock.Setup(x => x.FindByIdAsync(officeId)).ReturnsAsync(officeEntity);
-            var office = _ost.GetByIdAsync(officeId);
-            var mapped = _mapper.Map<OfficeEntity>(office);
+            var office = await _ost.GetByIdAsync(officeId);
+            var mapped =  _mapper.Map<OfficeEntity>(office);
             _officeRepoMock.Setup(x => x.DeleteByIdAsync(mapped));
             var result = await _ost.DeleteByIdAsync(officeId);
             Assert.True(result);

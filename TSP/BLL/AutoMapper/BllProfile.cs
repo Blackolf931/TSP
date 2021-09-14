@@ -8,12 +8,8 @@ namespace BLL.AutoMapper
     {
         public BllProfile()
         {
-            CreateMap<EmployeeEntity, Employee>();
-            CreateMap<Employee, EmployeeEntity>();
-            CreateMap<OfficeEntity, Office>();
-            CreateMap<Office, OfficeEntity>();
-            CreateMap<object, OfficeEntity>();
-            CreateMap<object, EmployeeEntity>();
+            CreateMap<EmployeeEntity, Employee>().ReverseMap();
+            CreateMap<OfficeEntity, Office>().ReverseMap();
         }
     }
 }

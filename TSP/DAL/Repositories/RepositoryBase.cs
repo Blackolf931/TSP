@@ -21,7 +21,7 @@ namespace DAL.Repositories
 
         public async Task<TEntity> FindByIdAsync(int id)
         {
-            return await _repositoryContext.Set<Task<TEntity>>().Find(id);
+            return _repositoryContext.Set<TEntity>().Find(id);
         }
 
         public async Task DeleteByIdAsync(TEntity entity)

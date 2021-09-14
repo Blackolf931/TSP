@@ -1,5 +1,4 @@
-﻿using BLL.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BLL.Services
