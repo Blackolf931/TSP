@@ -1,7 +1,7 @@
 ﻿using DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAl.BusinessLogic
+namespace DAl.EF
 {
     public class RepositoryContext : DbContext
     {
@@ -9,6 +9,6 @@ namespace DAl.BusinessLogic
         {
         }
         public DbSet<OfficeEntity> Offices { get; set; }
-        public DbSet<EmployeeEntity> Employees {get;set; }
+        public DbSet<EmployeeEntity> Employees { get; set; }
     }
 }

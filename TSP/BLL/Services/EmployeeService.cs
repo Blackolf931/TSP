@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class EmployeeService<T> : IEmployeeService<T> where T : Employee
+    public class EmployeeService : IEmployeeService
     {
-        private readonly IRepositoryBase<T> _repository;
+        private readonly IRepositoryBase<EmployeeEntity> _repository;
         private readonly IMapper _mapper;
         private readonly IEnumerable<IStrategy> _strategy;
 
-        public EmployeeService(IRepositoryBase<T> repository, IMapper mapper, IEnumerable<IStrategy> strategy)
+        public EmployeeService(IRepositoryBase<EmployeeEntity> repository, IMapper mapper, IEnumerable<IStrategy> strategy)
         {
             _repository = repository;
             _mapper = mapper;
@@ -36,7 +36,7 @@ namespace BLL.Services
             else
             {
                 var mapped = _mapper.Map<EmployeeEntity>(employee);
-           //     await _repository.DeleteByIdAsync(mapped);
+                await _repository.DeleteByIdAsync(mapped);
                 return true;
             }
         }
@@ -51,7 +51,7 @@ namespace BLL.Services
         {
             var employee = await _repository.FindByIdAsync(id);
             var mappedEmployee = _mapper.Map<Employee>(employee);
-            if(employee is null)
+            if (employee is null)
             {
                 return null;
             }
@@ -65,14 +65,12 @@ namespace BLL.Services
             }
             return mappedEmployee;
         }
-
         public async Task<Employee> UpdateAsync(Employee employee)
         {
             var mapped = _mapper.Map<EmployeeEntity>(employee);
-            //   var updateEmployee = await _repository.UpdateAsync(mapped);
-            //  var mappedEmployee = _mapper.Map<Employee>(updateEmployee);
-            //      return mappedEmployee;
-            return null;
+            var updateEmployee = await _repository.UpdateAsync(mapped);
+            var mappedEmployee = _mapper.Map<Employee>(updateEmployee);
+            return mappedEmployee;
         }
     }
 }

@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
-using BLL.Infastructure;
 using BLL.Models;
 using DAL.Entities;
 using DAL.Interfaces;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,29 +9,39 @@ namespace BLL.Services
 {
     public class OfficeService : IOfficeService
     {
-        private readonly IOfficeRepository _repository;
+        private readonly IRepositoryBase<OfficeEntity> _repository;
         private readonly IMapper _mapper;
 
-        public OfficeService(IOfficeRepository repository, IMapper mapper)
+        public OfficeService(IRepositoryBase<OfficeEntity> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
         public async Task<IEnumerable<Office>> GetAllAsync()
         {
-            var office = await _repository.GetAllAsync();
+            var office = await _repository.FindAllAsync();
             return _mapper.Map<IEnumerable<Office>>(office);
         }
 
         public async Task<Office> GetByIdAsync(int id)
         {
-            var office = await _repository.GetByIdAsync(id);
+            var office = await _repository.FindByIdAsync(id);
             var mappedOffice = _mapper.Map<Office>(office);
             return mappedOffice;
         }
-        public Task<bool> DeleteByIdAsync(int id)
+        public async Task<bool> DeleteByIdAsync(int id)
         {
-            return _repository.DeleteByIdAsync(id);
+            var office = _repository.FindByIdAsync(id);
+            if (office is null)
+            {
+                return false;
+            }
+            else
+            {
+                var mapped = _mapper.Map<OfficeEntity>(office);
+                await _repository.DeleteByIdAsync(mapped);
+                return true;
+            }
         }
         public async Task<Office> AddAsync(Office office)
         {

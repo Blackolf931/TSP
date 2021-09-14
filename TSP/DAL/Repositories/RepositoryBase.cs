@@ -1,20 +1,16 @@
-﻿using DAl.BusinessLogic;
-using DAL.Entities;
+﻿using DAl.EF;
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace DAL.BusinessLogic
+namespace DAL.Repositories
 {
-   public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
+    public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
         protected RepositoryContext _repositoryContext;
 
-        protected RepositoryBase(RepositoryContext repositoryContext)
+        public RepositoryBase(RepositoryContext repositoryContext)
         {
             _repositoryContext = repositoryContext;
         }
@@ -46,11 +42,6 @@ namespace DAL.BusinessLogic
             _repositoryContext.Set<T>().Update(entity);
             await _repositoryContext.SaveChangesAsync();
             return entity;
-        }
-
-        public Task<object> AddAsync(EmployeeEntity mappedEmployee)
-        {
-            throw new NotImplementedException();
         }
     }
 }
