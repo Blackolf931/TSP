@@ -19,9 +19,9 @@ namespace DAL.Repositories
             return await _repositoryContext.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<TEntity> FindByIdAsync(int id)
+        public ValueTask<TEntity> FindByIdAsync(int id)
         {
-            return _repositoryContext.Set<TEntity>().Find(id);
+            return  _repositoryContext.Set<TEntity>().FindAsync(id);
         }
 
         public async Task DeleteByIdAsync(TEntity entity)
