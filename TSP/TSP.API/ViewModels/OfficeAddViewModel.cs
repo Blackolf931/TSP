@@ -7,4 +7,5 @@
         public string Address { get; set; }
         public string Country { get; set; }
     }
+#nullable enable
 }

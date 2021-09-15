@@ -9,7 +9,7 @@ using TSP.API.ViewModels;
 
 namespace TSP.API.Controllers
 {
-    public class EmployeeController : ControllerBase 
+    public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _service;
         private readonly IMapper _mapper;
@@ -30,9 +30,9 @@ namespace TSP.API.Controllers
         }
 
         [HttpGet("GetEmployeeById")]
-        public async Task<ActionResult<Employee>> GetEmployeeByIdAsync([FromQuery] int id)
+        public async Task<ActionResult<EmployeeViewModel>> GetEmployeeByIdAsync([FromQuery] int id)
         {
-            var employees = await _service.GetByIdAsync(id); 
+            var employees = await _service.GetByIdAsync(id);
             var mappedEmployees = _mapper.Map<EmployeeViewModel>(employees);
             return Ok(mappedEmployees);
         }

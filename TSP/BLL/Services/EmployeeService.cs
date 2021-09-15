@@ -9,8 +9,8 @@ namespace BLL.Services
 {
     public class EmployeeService : GenericService<Employee?, EmployeeEntity>, IEmployeeService
     {
-        public IRepositoryBase<EmployeeEntity> _repository;
-        public IMapper _mapper;
+        private readonly IRepositoryBase<EmployeeEntity> _repository;
+        private readonly IMapper _mapper;
         private readonly IEnumerable<IStrategy> _strategy;
 
         public EmployeeService(IRepositoryBase<EmployeeEntity> repository, IMapper mapper, IEnumerable<IStrategy> strategy) : base(repository, mapper)
