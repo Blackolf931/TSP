@@ -15,7 +15,7 @@ namespace TSP.API.XUnitTests
 
     public class EmployeeServiceTests
     {
-        private GenericService<Employee, EmployeeEntity> _sut;
+        private readonly IEmployeeService _sut;
         private readonly Mock<IRepositoryBase<EmployeeEntity>> _employeeRepoMock = new();
         private readonly IEnumerable<IStrategy> strategies = new List<IStrategy> { new MiddlePeopleSetAdditionalInfoStrategy(), new RetirePeopleSetadditionalInfoStrategy(), new YoungPeopleSetAdditionalInfoStrategy() };
         private readonly IMapper _mapper;
@@ -27,13 +27,12 @@ namespace TSP.API.XUnitTests
                     cfg.AddProfile(new BllProfile());
                 });
             _mapper = mockMapper.CreateMapper();
-            _sut = new GenericService<Employee, EmployeeEntity>(_employeeRepoMock.Object, _mapper);
+            _sut = new EmployeeService(_employeeRepoMock.Object, _mapper, strategies);
         }
 
         [Fact]
         public async Task GetEmployeeById_ShouldReturnEmployee_WhereEmployeeExists()
         {
-            _sut = new EmployeeService(_employeeRepoMock.Object, _mapper, strategies);
             //Arange
             var employeeId = new Random().Next(1, 20);
             var employeeEntity = new EmployeeEntity
@@ -119,7 +118,6 @@ namespace TSP.API.XUnitTests
         [Fact]
         public async Task GetEmployeeById_ShouldReturnAdditionalInfo_WhereEmployeeHaveMiddleAge()
         {
-            _sut = new EmployeeService(_employeeRepoMock.Object, _mapper, strategies);
             //Arange
             var employeeId = new Random().Next(1, 20);
             var employeeEntity = new EmployeeEntity
@@ -143,7 +141,6 @@ namespace TSP.API.XUnitTests
         [Fact]
         public async Task GetEmployeeById_ShouldReturnAdditionalInfo_WhereEmployeeUnderEighteen()
         {
-            _sut = new EmployeeService(_employeeRepoMock.Object, _mapper, strategies);
             //Arange
             var employeeId = new Random().Next(1, 20);
             var employeeEntity = new EmployeeEntity
@@ -167,7 +164,6 @@ namespace TSP.API.XUnitTests
         [Fact]
         public async Task GetEmployeeById_ShouldReturnAdditionalInfo_WhereEmployeeUnderSixty()
         {
-            _sut = new EmployeeService(_employeeRepoMock.Object, _mapper, strategies);
             //Arange
             var employeeId = new Random().Next(1, 20);
             var employeeEntity = new EmployeeEntity

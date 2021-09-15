@@ -13,7 +13,7 @@ namespace TestsServicesTSP.Moq
 {
     public class OfficeServiceTests
     {
-        private readonly GenericService<Office, OfficeEntity> _ost;
+        private readonly IOfficeService _ost;
         private readonly Mock<IRepositoryBase<OfficeEntity>> _officeRepoMock = new();
         private readonly IMapper _mapper;
 
@@ -24,7 +24,7 @@ namespace TestsServicesTSP.Moq
                 cfg.AddProfile(new BllProfile());
             });
             _mapper = mockMapper.CreateMapper();
-            _ost = new GenericService<Office, OfficeEntity>(_officeRepoMock.Object, _mapper);
+            _ost = new OfficeService(_officeRepoMock.Object, _mapper);
         }
 
         [Fact]
@@ -75,7 +75,7 @@ namespace TestsServicesTSP.Moq
             };
             _officeRepoMock.Setup(x => x.FindByIdAsync(officeId)).ReturnsAsync(officeEntity);
             var office = await _ost.GetByIdAsync(officeId);
-            var mapped =  _mapper.Map<OfficeEntity>(office);
+            var mapped = _mapper.Map<OfficeEntity>(office);
             _officeRepoMock.Setup(x => x.DeleteByIdAsync(mapped));
             var result = await _ost.DeleteByIdAsync(officeId);
             Assert.True(result);

@@ -1,6 +1,5 @@
 using BLL.AutoMapper;
 using BLL.DI;
-using BLL.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using TSP.API.AutoMapper;
-using TSP.API.Controllers;
 using TSP.API.Filter;
 using TSP.API.MiddleWare;
 
