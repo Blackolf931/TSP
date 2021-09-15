@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using BLL.Models;
-using DAL.Entities;
 using DAL.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,7 +12,6 @@ namespace BLL.Services
 
         public GenericService(IRepositoryBase<TEntity> repository, IMapper mapper)
         {
-         //   var test = _repository.GetType();
             _repository = repository;
             _mapper = mapper;
         }
@@ -34,8 +31,7 @@ namespace BLL.Services
             }
             else
             {
-                var mapped = _mapper.Map<TEntity>(entityObject);
-                await _repository.DeleteByIdAsync(mapped);
+                await _repository.DeleteByIdAsync(entityObject);
                 return true;
             }
         }
