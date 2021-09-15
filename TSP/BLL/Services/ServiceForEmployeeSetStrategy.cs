@@ -1,25 +1,26 @@
 ﻿using AutoMapper;
 using BLL.Models;
+using DAL.Entities;
 using DAL.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class EmployeeServiceGettAdditionalInfo<T, TEntity> : GenericService<T,TEntity>, IGenericService<T,TEntity>
+    public class ServiceForEmployeeSetStrategy : GenericService<Employee,EmployeeEntity>
     {
-        public IRepositoryBase<TEntity> _repository;
+        public IRepositoryBase<EmployeeEntity> _repository;
         public IMapper _mapper;
         private readonly IEnumerable<IStrategy> _strategy;
 
-        public EmployeeServiceGettAdditionalInfo(IRepositoryBase<TEntity> repository, IMapper mapper, IEnumerable<IStrategy> strategy) : base(repository, mapper)
+        public ServiceForEmployeeSetStrategy(IRepositoryBase<EmployeeEntity> repository, IMapper mapper, IEnumerable<IStrategy> strategy) : base(repository, mapper)
         {
             _repository = repository;
             _mapper = mapper;
             _strategy = strategy;
         }
 
-        public override async Task<T> GetByIdAsync(int id)
+        public override async Task<Employee> GetByIdAsync(int id)
         {
             var entityObject = await _repository.FindByIdAsync(id);
             var mappedEmployee = _mapper.Map<Employee>(entityObject);
@@ -33,11 +34,11 @@ namespace BLL.Services
                         break;
                     }
                 }
-                return _mapper.Map<T>(mappedEmployee);
+                return _mapper.Map<Employee>(mappedEmployee);
             }
             else
             {
-                return _mapper.Map<T>(entityObject);
+                return _mapper.Map<Employee>(entityObject);
             }
         }
     }

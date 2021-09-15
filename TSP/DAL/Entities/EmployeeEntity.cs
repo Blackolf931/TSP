@@ -10,24 +10,24 @@ namespace DAL.Entities
 
         [Required(ErrorMessage = "Name is requared")]
         [MaxLength(20,ErrorMessage = "Maximum Length for Name is 20 characters")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Required(ErrorMessage = "SecondName is requared")]
         [MaxLength(30, ErrorMessage = "Maximum Length for SecondName is 20 characters")]
-        public string SecondName { get; set; }
+        public string? SecondName { get; set; }
 
         [Required(ErrorMessage = "Patronomic is requared")]
         [MaxLength(20, ErrorMessage = "Maximum Length for Patronomic is 20 characters")]
-        public string Patronomic { get; set; }
+        public string? Patronomic { get; set; }
 
         [Required(ErrorMessage ="Age is requared")]
         public int Age { get; set; }
 
         [Required(ErrorMessage ="Position is requared")]
-        public string Position { get; set; }
+        public string? Position { get; set; }
 
         [ForeignKey(nameof(Office))]
         public int OfficeId { get; set; }
-        public OfficeEntity Office { get; set; }
+        public OfficeEntity? Office { get; set; }
     }
 }
