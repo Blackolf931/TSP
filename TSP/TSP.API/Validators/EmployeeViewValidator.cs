@@ -7,7 +7,6 @@ namespace TSP.API.Validators
     {
         public EmployeeViewValidator()
         {
-            RuleFor(x => x.Id).GreaterThan(0);
             RuleFor(x => x.Name).NotEmpty().Matches("^[A-Z][a-zA-Z]*$").WithMessage("This field is not meant to be empty!").MinimumLength(3);
             RuleFor(x => x.SecondName).NotEmpty().Matches("^[A-Z][a-zA-Z]*$").WithMessage("This field is not meant to be empty!").MinimumLength(3);
             RuleFor(x => x.Patronomic).NotEmpty().Matches("^[A-Z][a-zA-Z]*$").WithMessage("This field is not meant to be empty!").MinimumLength(3);

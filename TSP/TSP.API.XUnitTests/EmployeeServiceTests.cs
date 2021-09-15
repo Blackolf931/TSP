@@ -33,7 +33,7 @@ namespace TSP.API.XUnitTests
         [Fact]
         public async Task GetEmployeeById_ShouldReturnEmployee_WhereEmployeeExists()
         {
-            _sut = new ServiceForEmployeeSetStrategy(_employeeRepoMock.Object, _mapper, strategies);
+            _sut = new EmployeeService(_employeeRepoMock.Object, _mapper, strategies);
             //Arange
             var employeeId = new Random().Next(1, 20);
             var employeeEntity = new EmployeeEntity
@@ -119,7 +119,7 @@ namespace TSP.API.XUnitTests
         [Fact]
         public async Task GetEmployeeById_ShouldReturnAdditionalInfo_WhereEmployeeHaveMiddleAge()
         {
-            _sut = new ServiceForEmployeeSetStrategy(_employeeRepoMock.Object, _mapper, strategies);
+            _sut = new EmployeeService(_employeeRepoMock.Object, _mapper, strategies);
             //Arange
             var employeeId = new Random().Next(1, 20);
             var employeeEntity = new EmployeeEntity
@@ -143,7 +143,7 @@ namespace TSP.API.XUnitTests
         [Fact]
         public async Task GetEmployeeById_ShouldReturnAdditionalInfo_WhereEmployeeUnderEighteen()
         {
-            _sut = new ServiceForEmployeeSetStrategy(_employeeRepoMock.Object, _mapper, strategies);
+            _sut = new EmployeeService(_employeeRepoMock.Object, _mapper, strategies);
             //Arange
             var employeeId = new Random().Next(1, 20);
             var employeeEntity = new EmployeeEntity
@@ -167,7 +167,7 @@ namespace TSP.API.XUnitTests
         [Fact]
         public async Task GetEmployeeById_ShouldReturnAdditionalInfo_WhereEmployeeUnderSixty()
         {
-            _sut = new ServiceForEmployeeSetStrategy(_employeeRepoMock.Object, _mapper, strategies);
+            _sut = new EmployeeService(_employeeRepoMock.Object, _mapper, strategies);
             //Arange
             var employeeId = new Random().Next(1, 20);
             var employeeEntity = new EmployeeEntity

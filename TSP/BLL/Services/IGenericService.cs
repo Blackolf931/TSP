@@ -8,7 +8,7 @@ namespace BLL.Services
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
         Task<bool> DeleteByIdAsync(int id);
-        Task<T> AddAsync(T employee);
-        Task<T> UpdateAsync(T employee);
+        Task<T> AddAsync(T entity);
+        Task<T> UpdateAsync(T entity);
     }
 }

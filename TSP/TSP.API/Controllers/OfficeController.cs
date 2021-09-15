@@ -13,11 +13,10 @@ namespace TSP.API.Controllers
     [Route("[controller]")]
     public class OfficeController : ControllerBase
     {
-        /*  private readonly IMapper _mapper;
+          private readonly IOfficeService _service;
+          private readonly IMapper _mapper;
           private readonly IValidator<OfficeAddViewModel> _validator;
           private readonly IValidator<OfficeViewModel> _validatorViewModel;
-
-
           public OfficeController(IOfficeService service, IMapper mapper, IValidator<OfficeAddViewModel> validator, IValidator<OfficeViewModel> validatorViewModel)
           {
               _service = service;
@@ -47,7 +46,7 @@ namespace TSP.API.Controllers
               return Ok();
           }
           [HttpPost("AddOffice")]
-          public async Task<ActionResult<Employee>> AddOffice([FromBody] OfficeAddViewModel model)
+          public async Task<ActionResult<Office>> AddOffice([FromBody] OfficeAddViewModel model)
           {
               await _validator.ValidateAndThrowAsync(model);
               var mapped = _mapper.Map<Office>(model);
@@ -60,7 +59,7 @@ namespace TSP.API.Controllers
               await _validatorViewModel.ValidateAndThrowAsync(model);
               var mapped = _mapper.Map<Office>(model);
               mapped.Id = id;
-              return Ok(await _service.UpdateOfficeByAsync(mapped));
-          }*/
+              return Ok(await _service.UpdateAsync(mapped));
+          }
     }
 }

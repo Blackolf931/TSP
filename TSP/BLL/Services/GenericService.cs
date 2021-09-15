@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BLL.Models;
+using DAL.Entities;
 using DAL.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ namespace BLL.Services
 
         public GenericService(IRepositoryBase<TEntity> repository, IMapper mapper)
         {
+         //   var test = _repository.GetType();
             _repository = repository;
             _mapper = mapper;
         }

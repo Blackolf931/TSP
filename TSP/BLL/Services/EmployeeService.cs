@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class ServiceForEmployeeSetStrategy : GenericService<Employee,EmployeeEntity>
+    public class EmployeeService : GenericService<Employee,EmployeeEntity>, IEmployeeService
     {
         public IRepositoryBase<EmployeeEntity> _repository;
         public IMapper _mapper;
         private readonly IEnumerable<IStrategy> _strategy;
 
-        public ServiceForEmployeeSetStrategy(IRepositoryBase<EmployeeEntity> repository, IMapper mapper, IEnumerable<IStrategy> strategy) : base(repository, mapper)
+        public EmployeeService(IRepositoryBase<EmployeeEntity> repository, IMapper mapper, IEnumerable<IStrategy> strategy) : base(repository, mapper)
         {
             _repository = repository;
             _mapper = mapper;
