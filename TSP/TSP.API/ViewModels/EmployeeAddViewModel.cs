@@ -10,4 +10,5 @@
         public string Position { get; set; }
         public int OfficeId { get; set; }
     }
+#nullable enable
 }
