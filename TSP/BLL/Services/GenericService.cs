@@ -5,24 +5,24 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class GenericService<T, TEntity> : IGenericService<T, TEntity>
+    public class GenericService<T> : IGenericService<T>
     {
-        private readonly IRepositoryBase<TEntity> _repository;
+        private readonly IRepositoryBase<T> _repository;
         private readonly IMapper _mapper;
 
-        public GenericService(IRepositoryBase<TEntity> repository, IMapper mapper)
+        public GenericService(IRepositoryBase<T> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<T> AddAsync(T entity)
+        public virtual async Task<T> AddAsync(T entity)
         {
-            var mappedObject = _mapper.Map<TEntity>(entity);
+            var mappedObject = _mapper.Map<T>(entity);
             return _mapper.Map<T>(await _repository.AddAsync(mappedObject));
         }
 
-        public async Task<bool> DeleteByIdAsync(int id)
+        public virtual async Task<bool> DeleteByIdAsync(int id)
         {
             var entityObject = await _repository.FindByIdAsync(id);
             if (entityObject is null)
@@ -36,7 +36,7 @@ namespace BLL.Services
             }
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             var objectList = await _repository.FindAllAsync();
             return _mapper.Map<IEnumerable<T>>(objectList);
@@ -48,10 +48,10 @@ namespace BLL.Services
             var mappedEmployee = _mapper.Map<T>(entityObject);
             return mappedEmployee;
         }
-        public async Task<T> UpdateAsync(T entity)
+        public virtual async Task<T> UpdateAsync(T entity)
         {
-            var mappedObject = _mapper.Map<TEntity>(entity);
-            var updateObject = await _repository.UpdateAsync(mappedObject);
+          //  var mappedObject = _mapper.Map<T>(entity);
+            var updateObject = await _repository.UpdateAsync(entity);
             var mappedObjectResult = _mapper.Map<T>(updateObject);
             return mappedObjectResult;
         }

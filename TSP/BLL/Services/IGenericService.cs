@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public interface IGenericService<T, Tentity>
+    public interface IGenericService<T>
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);

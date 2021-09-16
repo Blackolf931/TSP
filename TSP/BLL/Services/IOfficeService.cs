@@ -3,7 +3,7 @@ using DAL.Entities;
 
 namespace BLL.Services
 {
-    public interface IOfficeService : IGenericService<Office, OfficeEntity>
+    public interface IOfficeService : IGenericService<OfficeEntity>
     {
     }
 }
