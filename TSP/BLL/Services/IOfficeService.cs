@@ -1,15 +1,9 @@
 ﻿using BLL.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using DAL.Entities;
 
 namespace BLL.Services
 {
-    public interface IOfficeService
+    public interface IOfficeService : IGenericService<Office, OfficeEntity>
     {
-        Task<IEnumerable<Office>> GetAllAsync();
-        Task<Office> GetByIdAsync(int id);
-        Task<bool> DeleteByIdAsync(int id);
-        Task<Office> AddAsync(Office office);
-        Task<Office> UpdateOfficeByAsync(Office office);
     }
 }

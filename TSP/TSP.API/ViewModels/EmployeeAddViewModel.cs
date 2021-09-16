@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TSP.API.ViewModels
+﻿namespace TSP.API.ViewModels
 {
+#nullable disable
     public class EmployeeAddViewModel
     {
         public string Name { get; set; }
@@ -14,4 +10,5 @@ namespace TSP.API.ViewModels
         public string Position { get; set; }
         public int OfficeId { get; set; }
     }
+#nullable enable
 }

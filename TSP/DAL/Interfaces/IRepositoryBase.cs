@@ -1,16 +1,14 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-    public interface IRepositoryBase<T>
+    public interface IRepositoryBase<TEntity>
     {
-        IQueryable<T> FindAll(bool trackChanges);
-        IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges);
-        void Create(T entity);
-        void Update(T entity);
-        void Delete(T entity);
-
+        Task<IEnumerable<TEntity>> FindAllAsync();
+        ValueTask<TEntity> FindByIdAsync(int id);
+        Task DeleteByIdAsync(TEntity entity);
+        Task<TEntity> AddAsync(TEntity entity);
+        Task<TEntity> UpdateAsync(TEntity entity);
     }
 }

@@ -30,9 +30,9 @@ namespace TSP.API.Controllers
         }
 
         [HttpGet("GetEmployeeById")]
-        public async Task<ActionResult<Employee>> GetEmployeeByIdAsync([FromQuery] int id)
+        public async Task<ActionResult<EmployeeViewModel>> GetEmployeeByIdAsync([FromQuery] int id)
         {
-            var employees = await _service.GetEmployeeByIdAsync(id);
+            var employees = await _service.GetByIdAsync(id);
             var mappedEmployees = _mapper.Map<EmployeeViewModel>(employees);
             return Ok(mappedEmployees);
         }
@@ -44,14 +44,14 @@ namespace TSP.API.Controllers
         }
 
         [HttpPost("AddEmployee")]
-        public async Task<ActionResult<Employee>> AddEmployee([FromBody] EmployeeAddViewModel employee)
+        public async Task<ActionResult<EmployeeViewModel>> AddEmployee([FromBody] EmployeeAddViewModel employee)
         {
             await _validator.ValidateAndThrowAsync(employee);
             var mapped = _mapper.Map<Employee>(employee);
             return Ok(await _service.AddAsync(mapped));
         }
         [HttpPut("UpdateEmployee")]
-        public async Task<ActionResult<Employee>> UpdateEmployeeAsync([FromQuery] int id, [FromBody] EmployeeAddViewModel employee)
+        public async Task<ActionResult<EmployeeViewModel>> UpdateEmployeeAsync([FromQuery] int id, [FromBody] EmployeeAddViewModel employee)
         {
             await _validator.ValidateAndThrowAsync(employee);
             var mapped = _mapper.Map<Employee>(employee);

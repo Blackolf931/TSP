@@ -1,5 +1,6 @@
 ﻿namespace TSP.API.ViewModels
 {
+#nullable disable
     public class EmployeeViewModel
     {
         public int Id { get; set; }
@@ -11,4 +12,5 @@
         public int OfficeId { get; set; }
         public string AdditionalInformation { get; set; }
     }
+#nullable enable
 }

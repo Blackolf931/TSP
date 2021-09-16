@@ -13,8 +13,9 @@ namespace TestsServicesTSP.Moq
 {
     public class OfficeServiceTests
     {
-        private readonly OfficeService _ost;
-        private readonly Mock<IOfficeRepository> _officeRepoMock = new();
+        private readonly IOfficeService _ost;
+        private readonly Mock<IRepositoryBase<OfficeEntity>> _officeRepoMock = new();
+        private readonly IMapper _mapper;
 
         public OfficeServiceTests()
         {
@@ -22,8 +23,8 @@ namespace TestsServicesTSP.Moq
             {
                 cfg.AddProfile(new BllProfile());
             });
-            var mapper = mockMapper.CreateMapper();
-            _ost = new OfficeService(_officeRepoMock.Object, mapper);
+            _mapper = mockMapper.CreateMapper();
+            _ost = new OfficeService(_officeRepoMock.Object, _mapper);
         }
 
         [Fact]
@@ -38,7 +39,7 @@ namespace TestsServicesTSP.Moq
                 Address = "Test",
                 Country = "Test",
             };
-            _officeRepoMock.Setup(x => x.GetByIdAsync(officeId)).ReturnsAsync(officeEntity);
+            _officeRepoMock.Setup(x => x.FindByIdAsync(officeId)).ReturnsAsync(officeEntity);
 
             //Act
             var office = await _ost.GetByIdAsync(officeId);
@@ -48,12 +49,12 @@ namespace TestsServicesTSP.Moq
         }
 
         [Fact]
-        public async Task GetEOfficeById_ShouldReturnNothing_WhereOfficeDoesNotExists()
+        public async Task GetOfficeById_ShouldReturnNothing_WhereOfficeDoesNotExists()
         {
             //Arange
             var officeId = new Random().Next(1, 20);
 
-            _officeRepoMock.Setup(x => x.GetByIdAsync(officeId)).ReturnsAsync(() => null);
+            _officeRepoMock.Setup(x => x.FindByIdAsync(officeId)).ReturnsAsync(() => null);
 
             //Act
             var office = await _ost.GetByIdAsync(officeId);
@@ -64,16 +65,26 @@ namespace TestsServicesTSP.Moq
         [Fact]
         public async Task DeleteOfficeById_ShouldBeReturnTrue_WhereOfficeeExists()
         {
-            _officeRepoMock.Setup(x => x.DeleteByIdAsync(2)).ReturnsAsync(() => true);
-            var employee = await _ost.DeleteByIdAsync(2);
-            Assert.True(employee);
+            var officeId = new Random().Next(1, 20);
+            var officeEntity = new OfficeEntity
+            {
+                Id = officeId,
+                Name = "Test",
+                Address = "Test",
+                Country = "Test",
+            };
+            _officeRepoMock.Setup(x => x.FindByIdAsync(officeId)).ReturnsAsync(officeEntity);
+            var office = await _ost.GetByIdAsync(officeId);
+            var mapped = _mapper.Map<OfficeEntity>(office);
+            _officeRepoMock.Setup(x => x.DeleteByIdAsync(mapped));
+            var result = await _ost.DeleteByIdAsync(officeId);
+            Assert.True(result);
         }
         [Fact]
         public async Task DeleteOfficeById_ShouldBeReturnFalse_WhereOfficeDoesNotExists()
         {
-            _officeRepoMock.Setup(x => x.DeleteByIdAsync(99999)).ReturnsAsync(() => false);
-            var employee = await _ost.DeleteByIdAsync(999999);
-            Assert.False(employee);
+            var result = await _ost.DeleteByIdAsync(int.MaxValue);
+            Assert.False(result);
         }
         [Fact]
         public async Task UpdateOffice_shouldBeReturnOffice()
@@ -93,7 +104,7 @@ namespace TestsServicesTSP.Moq
                 Country = "Test"
             };
             _officeRepoMock.Setup(x => x.UpdateAsync(It.IsAny<OfficeEntity>())).ReturnsAsync(officeEntity);
-            var office = await _ost.UpdateOfficeByAsync(offices);
+            var office = await _ost.UpdateAsync(offices);
             Assert.Equal(2, office.Id);
         }
     }
