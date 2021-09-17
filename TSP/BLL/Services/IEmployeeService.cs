@@ -1,8 +1,9 @@
-﻿using DAL.Entities;
+﻿using BLL.Models;
+using DAL.Entities;
 
 namespace BLL.Services
 {
-    public interface IEmployeeService : IGenericService<EmployeeEntity>
+    public interface IEmployeeService : IGenericService<Employee>
     {
 
     }

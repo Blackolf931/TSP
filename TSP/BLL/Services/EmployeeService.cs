@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class EmployeeService : GenericService<EmployeeEntity>, IEmployeeService
+    public class EmployeeService : GenericService<Employee, EmployeeEntity>, IEmployeeService
     {
         private readonly IRepositoryBase<EmployeeEntity> _repository;
         private readonly IMapper _mapper;
@@ -20,12 +20,12 @@ namespace BLL.Services
             _strategy = strategy;
         }
 
-     /*   public override async Task<EmployeeEntity> GetByIdAsync(int id)
+        public override async Task<Employee> GetByIdAsync(int id)
         {
             var entityObject = await _repository.FindByIdAsync(id);
             if (entityObject is null)
             {
-                return null;
+                return _mapper.Map<Employee>(null);
             }
             var mappedEmployee = _mapper.Map<Employee>(entityObject);
             foreach (var strategy in _strategy)
@@ -37,6 +37,6 @@ namespace BLL.Services
                 }
             }
             return mappedEmployee;
-        }*/
+        }
     }
 }

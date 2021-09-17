@@ -1,9 +1,9 @@
-﻿using FluentValidation;
-using TSP.API.ViewModels;
+﻿using BLL.Models;
+using FluentValidation;
 
 namespace TSP.API.Validators
 {
-    public class EmployeeAddViewModelValidator : AbstractValidator<EmployeeAddViewModel>
+    public class EmployeeAddViewModelValidator : AbstractValidator<Employee>
     {
         public EmployeeAddViewModelValidator()
         {

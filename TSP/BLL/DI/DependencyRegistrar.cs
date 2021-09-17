@@ -9,7 +9,6 @@ namespace BLL.DI
     {
         public static void RegistarBuisnessComponents(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
             services.AddScoped<IStrategy, RetirePeopleSetadditionalInfoStrategy>();
             services.AddScoped<IStrategy, MiddlePeopleSetAdditionalInfoStrategy>();
             services.AddScoped<IStrategy, YoungPeopleSetAdditionalInfoStrategy>();
