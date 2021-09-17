@@ -11,7 +11,7 @@ namespace TSP.API.Controllers
     [Route("api/[controller]")]
     public class OfficeController : GenericController<Office, OfficeViewModel, OfficeAddViewModel>
     {
-        public OfficeController(IOfficeService service, IMapper mapper, IValidator<OfficeViewModel> validatorViewModel, IValidator<OfficeAddViewModel> validatorAddViewModel) : base(service, mapper, validatorViewModel, validatorAddViewModel)
+        public OfficeController(IOfficeService service, IMapper mapper, IValidator<OfficeAddViewModel> validatorAddViewModel) : base(service, mapper, validatorAddViewModel)
         {
         }
     }
