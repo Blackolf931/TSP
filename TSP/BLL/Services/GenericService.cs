@@ -9,19 +9,16 @@ namespace BLL.Services
     {
         private readonly IRepositoryBase<TEntity> _repository;
         private readonly IMapper _mapper;
-
         public GenericService(IRepositoryBase<TEntity> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
-
         public async Task<T> AddAsync(T entity)
         {
             var mappedObject = _mapper.Map<TEntity>(entity);
             return _mapper.Map<T>(await _repository.AddAsync(mappedObject));
         }
-
         public virtual async Task<bool> DeleteByIdAsync(int id)
         {
             var entityObject = await _repository.FindByIdAsync(id);
@@ -35,13 +32,11 @@ namespace BLL.Services
                 return true;
             }
         }
-
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             var objectList = await _repository.FindAllAsync();
             return _mapper.Map<IEnumerable<T>>(objectList);
         }
-
         public virtual async Task<T> GetByIdAsync(int id)
         {
             var entityObject = await _repository.FindByIdAsync(id);
@@ -55,6 +50,5 @@ namespace BLL.Services
             var mappedObjectResult = _mapper.Map<T>(updateObject);
             return mappedObjectResult;
         }
-
     }
 }
