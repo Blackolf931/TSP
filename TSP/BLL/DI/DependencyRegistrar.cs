@@ -1,4 +1,5 @@
-﻿using BLL.Services;
+﻿using BLL.Interfaces;
+using BLL.Services;
 using DAL.DI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,8 @@ namespace BLL.DI
             services.AddScoped<IStrategy, YoungPeopleSetAdditionalInfoStrategy>();
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IOfficeService, OfficeService>();
+            services.AddScoped<IOfficeSetId, SetOfficeId>();
+            services.AddScoped<IEmployeeSetId, SetEmployeeId>();
             DependencyDalRegistrar.RegistarDalComponents(services, configuration);
         }
     }

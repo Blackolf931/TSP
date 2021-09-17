@@ -1,5 +1,4 @@
 ﻿using BLL.Models;
-using DAL.Entities;
 
 namespace BLL.Services
 {

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BLL.Interfaces;
 using BLL.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +15,10 @@ namespace TSP.API.Controllers
         private readonly IMapper _mapper;
         private readonly IValidator<TViewModel> _validatorViewModel;
         private readonly IValidator<TAddViewModel> _validatorAddViewModel;
-        protected GenericController(IGenericService<T> service, IMapper mapper, IValidator<TViewModel> validatorViewModel, IValidator<TAddViewModel> validatorAddViewModel)
+        private readonly ISetId<T> _setId;
+        protected GenericController(IGenericService<T> service, IMapper mapper, IValidator<TViewModel> validatorViewModel, IValidator<TAddViewModel> validatorAddViewModel, ISetId<T> setId)
         {
+            _setId = setId;
             _mapper = mapper;
             _service = service;
             _validatorViewModel = validatorViewModel;
@@ -46,11 +49,12 @@ namespace TSP.API.Controllers
             var mapped = _mapper.Map<T>(addViewModel);
             return Ok(await _service.AddAsync(mapped));
         }
-        [HttpPut("Update")]
-        public virtual async Task<ActionResult<T>> UpdateAsync([FromQuery] int id, [FromBody] TViewModel viewModel)
+        [HttpPut("Update/{id}")]
+        public virtual async Task<ActionResult<T>> UpdateAsync(int id, [FromBody] TViewModel viewModel)
         {
             await _validatorViewModel.ValidateAndThrowAsync(viewModel);
             var mapped = _mapper.Map<T>(viewModel);
+            mapped = _setId.SetId(id, mapped);
             return Ok(await _service.UpdateAsync(mapped));
         }
     }

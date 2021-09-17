@@ -19,7 +19,7 @@ namespace BLL.Services
             var mappedObject = _mapper.Map<TEntity>(entity);
             return _mapper.Map<T>(await _repository.AddAsync(mappedObject));
         }
-        public virtual async Task<bool> DeleteByIdAsync(int id)
+        public async Task<bool> DeleteByIdAsync(int id)
         {
             var entityObject = await _repository.FindByIdAsync(id);
             if (entityObject is null)
