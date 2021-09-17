@@ -20,12 +20,12 @@ namespace BLL.Services
             _strategy = strategy;
         }
 
-        public override async Task<Employee> GetByIdAsync(int id)
+        public override async Task<Employee?> GetByIdAsync(int id)
         {
             var entityObject = await _repository.FindByIdAsync(id);
             if (entityObject is null)
             {
-                return _mapper.Map<Employee>(null);
+                return null;
             }
             var mappedEmployee = _mapper.Map<Employee>(entityObject);
             foreach (var strategy in _strategy)

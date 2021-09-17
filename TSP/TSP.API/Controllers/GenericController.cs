@@ -1,24 +1,23 @@
 ﻿using AutoMapper;
-using BLL.Interfaces;
 using BLL.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TSP.API.Interfaces;
 
 namespace TSP.API.Controllers
 {
     [ApiController]
     public class GenericController<T, TViewModel, TAddViewModel> : ControllerBase
+        where TViewModel : IHasIdBase
     {
         private readonly IGenericService<T> _service;
         private readonly IMapper _mapper;
         private readonly IValidator<TViewModel> _validatorViewModel;
         private readonly IValidator<TAddViewModel> _validatorAddViewModel;
-        private readonly ISetId<T> _setId;
-        protected GenericController(IGenericService<T> service, IMapper mapper, IValidator<TViewModel> validatorViewModel, IValidator<TAddViewModel> validatorAddViewModel, ISetId<T> setId)
+        protected GenericController(IGenericService<T> service, IMapper mapper, IValidator<TViewModel> validatorViewModel, IValidator<TAddViewModel> validatorAddViewModel)
         {
-            _setId = setId;
             _mapper = mapper;
             _service = service;
             _validatorViewModel = validatorViewModel;
@@ -31,7 +30,7 @@ namespace TSP.API.Controllers
             return Ok(result);
         }
         [HttpGet("GetById")]
-        public async Task<ActionResult<T>> GetEmployeeByIdAsync([FromQuery] int id)
+        public async Task<ActionResult<T>> GetByIdAsync([FromQuery] int id)
         {
             var result = await _service.GetByIdAsync(id);
             return Ok(_mapper.Map<T>(result));
@@ -53,8 +52,8 @@ namespace TSP.API.Controllers
         public virtual async Task<ActionResult<T>> UpdateAsync(int id, [FromBody] TViewModel viewModel)
         {
             await _validatorViewModel.ValidateAndThrowAsync(viewModel);
+            viewModel.Id = id;
             var mapped = _mapper.Map<T>(viewModel);
-            mapped = _setId.SetId(id, mapped);
             return Ok(await _service.UpdateAsync(mapped));
         }
     }

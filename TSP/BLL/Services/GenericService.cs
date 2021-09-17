@@ -32,18 +32,18 @@ namespace BLL.Services
                 return true;
             }
         }
-        public virtual async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             var objectList = await _repository.FindAllAsync();
             return _mapper.Map<IEnumerable<T>>(objectList);
         }
-        public virtual async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T?> GetByIdAsync(int id)
         {
             var entityObject = await _repository.FindByIdAsync(id);
             var mappedEmployee = _mapper.Map<T>(entityObject);
             return mappedEmployee;
         }
-        public virtual async Task<T> UpdateAsync(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
             var mappedObject = _mapper.Map<TEntity>(entity);
             var updateObject = await _repository.UpdateAsync(mappedObject);
