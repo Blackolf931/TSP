@@ -8,20 +8,22 @@ namespace DAL.Repositories
 {
     public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
     {
-        protected RepositoryContext _repositoryContext;
+        private readonly RepositoryContext _repositoryContext;
 
         public RepositoryBase(RepositoryContext repositoryContext)
         {
             _repositoryContext = repositoryContext;
         }
-        public async Task<IEnumerable<TEntity>> FindAllAsync()
+
+        public virtual async Task<IEnumerable<TEntity>> FindAllAsync()
         {
-            return await _repositoryContext.Set<TEntity>().ToListAsync();
+            var result = await _repositoryContext.Set<TEntity>().ToListAsync();
+            return result;
         }
 
         public ValueTask<TEntity> FindByIdAsync(int id)
         {
-            return  _repositoryContext.Set<TEntity>().FindAsync(id);
+            return _repositoryContext.Set<TEntity>().FindAsync(id);
         }
 
         public async Task DeleteByIdAsync(TEntity entity)

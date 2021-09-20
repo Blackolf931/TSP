@@ -12,11 +12,10 @@ using Xunit;
 
 namespace TSP.API.XUnitTests
 {
-
     public class EmployeeServiceTests
     {
         private readonly IEmployeeService _sut;
-        private readonly Mock<IRepositoryBase<EmployeeEntity>> _employeeRepoMock = new();
+        private readonly Mock<IEmployeeRepository> _employeeRepoMock = new();
         private readonly IEnumerable<IStrategy> strategies = new List<IStrategy> { new MiddlePeopleSetAdditionalInfoStrategy(), new RetirePeopleSetadditionalInfoStrategy(), new YoungPeopleSetAdditionalInfoStrategy() };
         private readonly IMapper _mapper;
 

@@ -7,7 +7,7 @@ using TSP.API.ViewModels;
 
 namespace TSP.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class EmployeeController : GenericController<Employee, EmployeeViewModel, EmployeeAddViewModel>
     {

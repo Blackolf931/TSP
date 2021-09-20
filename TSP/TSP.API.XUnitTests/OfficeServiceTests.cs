@@ -14,7 +14,7 @@ namespace TestsServicesTSP.Moq
     public class OfficeServiceTests
     {
         private readonly IOfficeService _ost;
-        private readonly Mock<IRepositoryBase<OfficeEntity>> _officeRepoMock = new();
+        private readonly Mock<IOfficeRepository> _officeRepoMock = new();
         private readonly IMapper _mapper;
 
         public OfficeServiceTests()

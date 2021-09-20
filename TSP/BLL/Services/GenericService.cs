@@ -32,7 +32,7 @@ namespace BLL.Services
                 return true;
             }
         }
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             var objectList = await _repository.FindAllAsync();
             return _mapper.Map<IEnumerable<T>>(objectList);
