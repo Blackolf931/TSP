@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using BLl.Interfaces;
+using System.Collections.Generic;
 
 namespace BLL.Models
 {
-    public class Office
+    public class Office : IHasIdBase
     {
         public int Id { get; set; }
         public string? Name { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace TSP.API.Interfaces
+﻿namespace BLl.Interfaces
 {
     public interface IHasIdBase
     {

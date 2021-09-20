@@ -1,6 +1,8 @@
-﻿namespace BLL.Models
+﻿using BLl.Interfaces;
+
+namespace BLL.Models
 {
-    public class Employee
+    public class Employee : IHasIdBase
     {
         public int Id { get; set; }
         public string? Name { get; set; }

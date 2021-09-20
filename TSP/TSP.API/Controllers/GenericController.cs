@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
+using BLl.Interfaces;
 using BLL.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TSP.API.Interfaces;
 
 namespace TSP.API.Controllers
 {
     [ApiController]
     public class GenericController<T, TViewModel, TAddViewModel, TUpdateViewModel> : ControllerBase
-        where TViewModel : IHasIdBase where TUpdateViewModel : IHasIdBase
+        where T : IHasIdBase
     {
         private readonly IGenericService<T> _service;
         private readonly IMapper _mapper;
@@ -52,8 +52,8 @@ namespace TSP.API.Controllers
         public virtual async Task<ActionResult<T>> UpdateAsync(int id, [FromBody] TUpdateViewModel viewModel)
         {
             await _validatorUpdateViewModel.ValidateAndThrowAsync(viewModel);
-            viewModel.Id = id;
             var mapped = _mapper.Map<T>(viewModel);
+            mapped.Id = id;
             return Ok(await _service.UpdateAsync(mapped));
         }
     }

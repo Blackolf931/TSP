@@ -3,9 +3,9 @@ using TSP.API.ViewModels;
 
 namespace TSP.API.Validators
 {
-    public class ViewModelUpdateEmployeeValidator : AbstractValidator<EmployeeUpdateViewModel>
+    public class EmployeeUpdateViewModelValidator : AbstractValidator<EmployeeUpdateViewModel>
     {
-        public ViewModelUpdateEmployeeValidator()
+        public EmployeeUpdateViewModelValidator()
         {
             RuleFor(x => x.Name).NotEmpty().Matches("^[A-Z][a-zA-Z]*$").WithMessage("This field is not meant to be empty!").MinimumLength(3);
             RuleFor(x => x.SecondName).NotEmpty().Matches("^[A-Z][a-zA-Z]*$").WithMessage("This field is not meant to be empty!").MinimumLength(3);

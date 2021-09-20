@@ -1,9 +1,7 @@
-﻿using TSP.API.Interfaces;
-
-namespace TSP.API.ViewModels
+﻿namespace TSP.API.ViewModels
 {
 #nullable disable
-    public class EmployeeViewModel : IHasIdBase
+    public class EmployeeViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
