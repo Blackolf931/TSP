@@ -9,17 +9,19 @@ using TSP.API.Interfaces;
 namespace TSP.API.Controllers
 {
     [ApiController]
-    public class GenericController<T, TViewModel, TAddViewModel> : ControllerBase
-        where TViewModel : IHasIdBase where TAddViewModel : IHasIdBase
+    public class GenericController<T, TViewModel, TAddViewModel, TUpdateViewModel> : ControllerBase
+        where TViewModel : IHasIdBase where TUpdateViewModel : IHasIdBase
     {
         private readonly IGenericService<T> _service;
         private readonly IMapper _mapper;
         private readonly IValidator<TAddViewModel> _validatorAddViewModel;
-        protected GenericController(IGenericService<T> service, IMapper mapper, IValidator<TAddViewModel> validatorAddViewModel)
+        private readonly IValidator<TUpdateViewModel> _validatorUpdateViewModel;
+        protected GenericController(IGenericService<T> service, IMapper mapper, IValidator<TAddViewModel> validatorAddViewModel, IValidator<TUpdateViewModel> validatorUpdateViewModel)
         {
             _mapper = mapper;
             _service = service;
             _validatorAddViewModel = validatorAddViewModel;
+            _validatorUpdateViewModel = validatorUpdateViewModel;
         }
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<T>>> GetAllAsync()
@@ -47,9 +49,9 @@ namespace TSP.API.Controllers
             return Ok(await _service.AddAsync(mapped));
         }
         [HttpPut("Update/{id}")]
-        public virtual async Task<ActionResult<T>> UpdateAsync(int id, [FromBody] TAddViewModel viewModel)
+        public virtual async Task<ActionResult<T>> UpdateAsync(int id, [FromBody] TUpdateViewModel viewModel)
         {
-            await _validatorAddViewModel.ValidateAndThrowAsync(viewModel);
+            await _validatorUpdateViewModel.ValidateAndThrowAsync(viewModel);
             viewModel.Id = id;
             var mapped = _mapper.Map<T>(viewModel);
             return Ok(await _service.UpdateAsync(mapped));

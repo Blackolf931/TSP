@@ -1,7 +1,9 @@
-﻿namespace TSP.API.ViewModels
+﻿using TSP.API.Interfaces;
+
+namespace TSP.API.ViewModels
 {
 #nullable disable
-    public class EmployeeAddViewModel
+    public class EmployeeUpdateViewModel : IHasIdBase
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -9,9 +9,9 @@ namespace TSP.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class EmployeeController : GenericController<Employee, EmployeeViewModel, EmployeeAddViewModel>
+    public class EmployeeController : GenericController<Employee, EmployeeViewModel, EmployeeAddViewModel, EmployeeUpdateViewModel>
     {
-        public EmployeeController(IEmployeeService service, IMapper mapper, IValidator<EmployeeAddViewModel> validatorAddViewModel) : base(service, mapper, validatorAddViewModel)
+        public EmployeeController(IEmployeeService service, IMapper mapper, IValidator<EmployeeAddViewModel> validatorAddViewModel, IValidator<EmployeeUpdateViewModel> validatorUpdateViewModel) : base(service, mapper, validatorAddViewModel, validatorUpdateViewModel)
         {
         }
     }
