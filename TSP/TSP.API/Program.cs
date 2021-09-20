@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
@@ -15,7 +14,8 @@ namespace TSP.API
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
                 .CreateLogger();
-            try {
+            try
+            {
                 Log.Information("Starting web host");
                 CreateHostBuilder(args).Build().Run();
             }
@@ -28,7 +28,6 @@ namespace TSP.API
                 Log.CloseAndFlush();
             }
         }
-
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
             .UseSerilog()

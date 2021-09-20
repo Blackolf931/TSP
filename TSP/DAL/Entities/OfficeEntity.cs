@@ -10,13 +10,13 @@ namespace DAL.Entities
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Office name is a required field.")]
-        [MaxLength(60, ErrorMessage ="Maximum length for the Name is 60 characters")]
+        [MaxLength(60, ErrorMessage = "Maximum length for the Name is 60 characters")]
         public string? Name { get; set; }
 
         [MaxLength(50, ErrorMessage = "Maximum length for the Address is 50 characters")]
         public string? Address { get; set; }
 
         public string? Country { get; set; }
-        public ICollection<EmployeeEntity>? Employess { get; set; }
+        public virtual List<EmployeeEntity> Employess { get; set; } = new List<EmployeeEntity>();
     }
 }

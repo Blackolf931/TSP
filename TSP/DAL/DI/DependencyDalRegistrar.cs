@@ -11,7 +11,8 @@ namespace DAL.DI
     {
         public static void RegistarDalComponents(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IOfficeRepository, OfficeRepository>();
             services.ConfigureSqlContext(configuration);
         }
         private static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>

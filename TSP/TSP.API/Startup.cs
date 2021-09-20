@@ -29,7 +29,9 @@ namespace TSP.API
             services.AddValidatorsFromAssemblyContaining<ValidationFilter>(ServiceLifetime.Transient);
             services.RegistarBuisnessComponents(Configuration);
             services.AddLogging();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TSP.API", Version = "v1" });

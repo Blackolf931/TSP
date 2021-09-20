@@ -5,11 +5,11 @@ namespace DAL.Entities
 {
     public class EmployeeEntity
     {
-        [Column("EmployeeId")] 
+        [Column("EmployeeId")]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Name is requared")]
-        [MaxLength(20,ErrorMessage = "Maximum Length for Name is 20 characters")]
+        [MaxLength(20, ErrorMessage = "Maximum Length for Name is 20 characters")]
         public string? Name { get; set; }
 
         [Required(ErrorMessage = "SecondName is requared")]
@@ -20,14 +20,14 @@ namespace DAL.Entities
         [MaxLength(20, ErrorMessage = "Maximum Length for Patronomic is 20 characters")]
         public string? Patronomic { get; set; }
 
-        [Required(ErrorMessage ="Age is requared")]
+        [Required(ErrorMessage = "Age is requared")]
         public int Age { get; set; }
 
-        [Required(ErrorMessage ="Position is requared")]
+        [Required(ErrorMessage = "Position is requared")]
         public string? Position { get; set; }
 
         [ForeignKey(nameof(Office))]
-        public int OfficeId { get; set; }
-        public OfficeEntity? Office { get; set; }
+        public virtual int OfficeId { get; set; }
+        public virtual OfficeEntity? Office { get; set; }
     }
 }
