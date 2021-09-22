@@ -2,6 +2,7 @@
 using BLl.Interfaces;
 using BLL.Services;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace TSP.API.Controllers
 {
     [ApiController]
+    [Authorize]
     public class GenericController<T, TViewModel, TAddViewModel, TUpdateViewModel> : ControllerBase
         where T : IHasIdBase
     {
