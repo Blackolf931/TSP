@@ -10,6 +10,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TSP.API.XUnitTests", "TSP.API.XUnitTests\TSP.API.XUnitTests.csproj", "{C84B9630-140D-4DE9-86C0-93126D40D818}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "..\IdentityServer\IdentityServer.csproj", "{F434BAAC-3326-4E1A-9584-10B32BFB98CB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JavaScriptClient", "..\JavaScriptClient\JavaScriptClient.csproj", "{A3FC5EA4-A45E-47CF-A551-E265932F257C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +36,14 @@ Global
 		{C84B9630-140D-4DE9-86C0-93126D40D818}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C84B9630-140D-4DE9-86C0-93126D40D818}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C84B9630-140D-4DE9-86C0-93126D40D818}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F434BAAC-3326-4E1A-9584-10B32BFB98CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F434BAAC-3326-4E1A-9584-10B32BFB98CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F434BAAC-3326-4E1A-9584-10B32BFB98CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F434BAAC-3326-4E1A-9584-10B32BFB98CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3FC5EA4-A45E-47CF-A551-E265932F257C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3FC5EA4-A45E-47CF-A551-E265932F257C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3FC5EA4-A45E-47CF-A551-E265932F257C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3FC5EA4-A45E-47CF-A551-E265932F257C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

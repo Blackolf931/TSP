@@ -2,13 +2,16 @@
 using BLl.Interfaces;
 using BLL.Services;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace TSP.API.Controllers
 {
     [ApiController]
+    [Authorize]
     public class GenericController<T, TViewModel, TAddViewModel, TUpdateViewModel> : ControllerBase
         where T : IHasIdBase
     {
@@ -23,6 +26,13 @@ namespace TSP.API.Controllers
             _validatorAddViewModel = validatorAddViewModel;
             _validatorUpdateViewModel = validatorUpdateViewModel;
         }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return new JsonResult(from c in User.Claims select new { c.Type, c.Value });
+        }
+
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<T>>> GetAllAsync()
         {

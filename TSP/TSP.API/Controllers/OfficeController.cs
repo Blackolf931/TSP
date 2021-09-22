@@ -7,8 +7,8 @@ using TSP.API.ViewModels;
 
 namespace TSP.API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
+
+    [Route("[controller]")]
     public class OfficeController : GenericController<Office, OfficeViewModel, OfficeAddViewModel, OfficeUpdateViewModel>
     {
         public OfficeController(IOfficeService service, IMapper mapper, IValidator<OfficeAddViewModel> validatorAddViewModel, IValidator<OfficeUpdateViewModel> validatorUpdateViewModel) : base(service, mapper, validatorAddViewModel, validatorUpdateViewModel)
