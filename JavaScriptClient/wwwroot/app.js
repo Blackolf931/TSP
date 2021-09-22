@@ -1,5 +1,3 @@
-/// <reference path="oidc-client.js" />
-
 function log() {
     document.getElementById('results').innerText = '';
 
