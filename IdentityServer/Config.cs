@@ -17,7 +17,7 @@ namespace IdentityServer
         public static IEnumerable<ApiScope> ApiScopes =>
             new List<ApiScope>
             {
-                new ApiScope("api1", "My API")
+                new ApiScope("api1", "TSP.API")
             };
 
         public static IEnumerable<Client> Clients =>
@@ -57,7 +57,7 @@ namespace IdentityServer
                 },
 
                 // JavaScript Client
-                new Client
+               /* new Client
                 {
                     ClientId = "js",
                     ClientName = "JavaScript Client",
@@ -74,7 +74,7 @@ namespace IdentityServer
                         IdentityServerConstants.StandardScopes.Profile,
                         "api1"
                     }
-                }
+                }*/
             };
     }
 }
