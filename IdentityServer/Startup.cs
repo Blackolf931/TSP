@@ -53,6 +53,7 @@ namespace IdentityServer
                         RoleClaimType = "role"
                     };
                 });
+            services.AddCors();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -62,7 +63,11 @@ namespace IdentityServer
                 app.UseDeveloperExceptionPage();
             }
             InitializeDatabase(app);
+            app.UseCors(options =>options.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
 
+            
             app.UseStaticFiles();
             app.UseRouting();
 

@@ -28,7 +28,7 @@ var mgr = new Oidc.UserManager(config);
 
 mgr.getUser().then(function (user) {
     if (user) {
-        log("User logged in", user.profile);
+        log("User logged in", user);
     }
     else {
         log("User not logged in");
@@ -40,8 +40,9 @@ function login() {
 }
 
 function api() {
+   
     mgr.getUser().then(function (user) {
-        var url = "https://localhost:6001/Employee/GetAll";
+        var url = "https://localhost:6001/api/office/GetAll";
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
