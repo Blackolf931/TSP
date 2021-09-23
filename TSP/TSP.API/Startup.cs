@@ -54,19 +54,11 @@ namespace TSP.API
                 });
             });
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("default", policy =>
-                {
-                    policy.WithOrigins("https://localhost:5003")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
-                });
-            });
+            services.AddCors();
             services.AddSwaggerGen(c =>
-                {
-                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "TSP.API", Version = "v1" });
-                });
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TSP.API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,12 +71,16 @@ namespace TSP.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TSP.API v1"));
             }
 
+            app.UseCors(options => options.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+
             app.UseMiddleware<ExceptionMiddleWare>();
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
