@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ComputerService.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Authorize]
     public class ComputerController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("GET")]
         public ActionResult<string> Get()
         {
             return "GetAll";
