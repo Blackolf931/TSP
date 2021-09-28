@@ -1,20 +1,21 @@
-﻿using MediatR;
+﻿using Domain;
+using MediatR;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Application.CQRS.Commands
 {
-    public class UpdateOfficeCommandHandler : IRequestHandler<UpdateOfficeCommand, int>
+    public class UpdateOfficeCommandHandler : IRequestHandler<UpdateOfficeCommand, Office>
     {
-        private readonly IAppDbContext _context;
+        private readonly IRepositoryContext _context;
 
-        public UpdateOfficeCommandHandler(IAppDbContext context)
+        public UpdateOfficeCommandHandler(IRepositoryContext context)
         {
             _context = context;
         }
 
-        public async Task<int> Handle(UpdateOfficeCommand request, CancellationToken cancellationToken)
+        public async Task<Office> Handle(UpdateOfficeCommand request, CancellationToken cancellationToken)
         {
             var office = _context.Offices.Where(a => a.OfficeId == request.OfficeId).FirstOrDefault();
             if (office is null)
@@ -25,7 +26,7 @@ namespace Application.CQRS.Commands
             office.Address = request.Address;
             office.Country = request.Country;
             await _context.SaveChangesAsync();
-            return office.OfficeId;
+            return office;
         }
     }
 }

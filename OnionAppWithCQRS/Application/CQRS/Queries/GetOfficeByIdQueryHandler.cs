@@ -9,9 +9,9 @@ namespace Application.CQRS.Queries
 {
     public class GetOfficeByIdQueryHandler : IRequestHandler<GetOfficeByIdQuery, Office>
     {
-        private readonly IAppDbContext _context;
+        private readonly IRepositoryContext _context;
 
-        public GetOfficeByIdQueryHandler(IAppDbContext context)
+        public GetOfficeByIdQueryHandler(IRepositoryContext context)
         {
             _context = context;
         }

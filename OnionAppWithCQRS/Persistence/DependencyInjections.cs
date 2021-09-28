@@ -9,10 +9,10 @@ namespace Persistence
     {
         public static void AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContext<RepositoryContext>(options =>
                 options.UseSqlServer(
                     configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IAppDbContext>(provider => provider.GetService<AppDbContext>());
+            services.AddScoped<IRepositoryContext>(provider => provider.GetService<RepositoryContext>());
         }
     }
 }

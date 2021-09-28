@@ -1,10 +1,12 @@
 using Application;
+using Application.AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using OnionAppWithCQRS.AutoMapper;
 using Persistence;
 
 namespace OnionAppWithCQRS
@@ -21,9 +23,10 @@ namespace OnionAppWithCQRS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(ApiProfile), typeof(AppMapper));
             services.AddApplication();
             services.AddPersistence(Configuration);
-            
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

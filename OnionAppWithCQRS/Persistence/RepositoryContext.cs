@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Persistence
 {
-    public class AppDbContext : DbContext, IAppDbContext
+    public class RepositoryContext : DbContext, IRepositoryContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public RepositoryContext(DbContextOptions<RepositoryContext> options) : base(options)
         {
         }
 

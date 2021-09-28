@@ -1,27 +1,26 @@
-﻿using Domain;
+﻿using AutoMapper;
+using Domain;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Application.CQRS.Commands
 {
-    public class CreateOfficeHandlerCommand : IRequestHandler<CreateOfficeCommand, int>
+    public class CreateOfficeHandlerCommand : IRequestHandler<CreateOfficeCommand, OfficeAddEntity>
     {
-        private readonly IAppDbContext _context;
-        public CreateOfficeHandlerCommand(IAppDbContext context)
+        private readonly IRepositoryContext _context;
+        private readonly IMapper _mapper;
+        public CreateOfficeHandlerCommand(IRepositoryContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<int> Handle(CreateOfficeCommand request, CancellationToken cancellationToken)
+        public async Task<OfficeAddEntity> Handle(CreateOfficeCommand request, CancellationToken cancellationToken)
         {
-            Office office = new();
-            office.Name = request.Name;
-            office.Country = request.Country;
-            office.Address = request.Address;
-            _context.Offices.Add(office);
+            _context.Offices.Add(_mapper.Map<Office>(request));
             await _context.SaveChangesAsync();
-            return office.OfficeId;
+            return _mapper.Map<OfficeAddEntity>(request);
         }
     }
 }

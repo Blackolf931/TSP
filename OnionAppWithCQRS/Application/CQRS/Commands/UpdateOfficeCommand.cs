@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using Domain;
+using MediatR;
 
 namespace Application.CQRS.Commands
 {
-    public class UpdateOfficeCommand : IRequest<int>
+    public class UpdateOfficeCommand : IRequest<Office>
     {
         public int OfficeId { get; set; }
         public string Name { get; set; }
