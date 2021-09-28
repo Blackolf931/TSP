@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.CQRS.Commands
 {
-    public class DeleteOfficeByIdCommand : IRequest<Office>
+    public class OfficeDeleteByIdCommand : IRequest<bool>
     {
         public int Id { get; set; }
     }

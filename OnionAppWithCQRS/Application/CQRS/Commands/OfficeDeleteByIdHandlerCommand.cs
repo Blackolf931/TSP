@@ -7,25 +7,25 @@ using System.Threading.Tasks;
 
 namespace Application.CQRS.Commands
 {
-    public class DeleteOfficeByIdHandlerCommand : IRequestHandler<DeleteOfficeByIdCommand, Office>
+    public class OfficeDeleteByIdHandlerCommand : IRequestHandler<OfficeDeleteByIdCommand, bool>
     {
         private readonly IRepositoryContext _context;
 
-        public DeleteOfficeByIdHandlerCommand(IRepositoryContext context)
+        public OfficeDeleteByIdHandlerCommand(IRepositoryContext context)
         {
             _context = context;
         }
 
-        public async Task<Office> Handle(DeleteOfficeByIdCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(OfficeDeleteByIdCommand request, CancellationToken cancellationToken)
         {
             var office = await _context.Offices.Where(x => x.OfficeId == request.Id).FirstOrDefaultAsync();
             if (office is null)
             {
-                return default;
+                return false;
             }
             _context.Offices.Remove(office);
             await _context.SaveChangesAsync();
-            return office;
+            return true;
         }
     }
 }

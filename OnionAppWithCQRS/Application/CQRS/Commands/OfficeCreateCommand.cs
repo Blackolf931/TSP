@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.CQRS.Commands
 {
-    public class CreateOfficeCommand : IRequest<OfficeAddEntity>
+    public class OfficeCreateCommand : IRequest<OfficeAddEntity>
     {
         public string Name { get; set; }
         public string Address{ get; set; }

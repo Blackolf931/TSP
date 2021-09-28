@@ -1,6 +1,7 @@
 ﻿using Application.CQRS.Commands;
 using AutoMapper;
 using Domain;
+using System.Threading.Tasks;
 
 namespace Application.AutoMapper
 {
@@ -9,7 +10,8 @@ namespace Application.AutoMapper
         public AppMapper()
         {
             CreateMap<OfficeAddEntity, Office>().ReverseMap();
-            CreateMap<CreateOfficeCommand, Office>().ReverseMap();
+            CreateMap<OfficeCreateCommand, Office>().ReverseMap();
+            CreateMap<OfficeUpdateCommand, Office>().ReverseMap();
         }
     }
 }

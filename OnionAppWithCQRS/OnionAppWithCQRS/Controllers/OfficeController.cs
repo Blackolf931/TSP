@@ -25,7 +25,7 @@ namespace OnionAppWithCQRS.Controllers
         public async Task<IActionResult> Create(OfficeAddViewModel officeAddView)
         {
             var res = _mapper.Map<OfficeAddEntity>(officeAddView);
-            var result1 = _mapper.Map<CreateOfficeCommand>(res);
+            var result1 = _mapper.Map<OfficeCreateCommand>(res);
             var result = await _mediator.Send(result1);
             return Ok(_mapper.Map<OfficeAddViewModel>(result));
         }
@@ -33,27 +33,23 @@ namespace OnionAppWithCQRS.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _mediator.Send(new GetAllOfficeQuery()));
+            return Ok(await _mediator.Send(new OfficeGetAllQuery()));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            return Ok(await _mediator.Send(new GetOfficeByIdQuery { OfficeId = id }));
+            return Ok(await _mediator.Send(new OfficeGetByIdQuery { OfficeId = id }));
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            return Ok(await _mediator.Send(new DeleteOfficeByIdCommand { Id = id }));
-        }
+        public async Task<IActionResult> Delete(int id) => await _mediator.Send(new OfficeDeleteByIdCommand { Id = id }) == true ? Ok() : BadRequest();
 
         [HttpPut("[action]")]
         public async Task<IActionResult> Update([FromQuery] int id, OfficeUpdateViewModel officeUpdateViewModel)
         {
-            var office = _mapper.Map<Office>(officeUpdateViewModel);
-            office.OfficeId = id;
-            var result = _mapper.Map<UpdateOfficeCommand>(office);
+            var result = _mapper.Map<OfficeUpdateCommand>(officeUpdateViewModel);
+            result.Id = id;
             return Ok(await _mediator.Send(result));
         }
     }

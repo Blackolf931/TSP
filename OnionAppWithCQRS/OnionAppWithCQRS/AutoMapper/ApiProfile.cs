@@ -10,9 +10,9 @@ namespace OnionAppWithCQRS.AutoMapper
         public ApiProfile()
         {
             CreateMap<OfficeAddEntity, OfficeAddViewModel>().ReverseMap();
-            CreateMap<CreateOfficeCommand, OfficeAddEntity>().ReverseMap();
-            CreateMap<OfficeUpdateViewModel, Office>().ReverseMap();
-            CreateMap<UpdateOfficeCommand, Office>().ReverseMap();
+            CreateMap<OfficeCreateCommand, OfficeAddEntity>().ReverseMap();
+            CreateMap<OfficeUpdateViewModel, OfficeUpdateCommand>().ReverseMap();
+            CreateMap<OfficeUpdateCommand, Office>().ReverseMap();
         }
     }
 }

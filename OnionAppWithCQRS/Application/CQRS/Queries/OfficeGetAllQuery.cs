@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Application.CQRS.Queries
 {
-    public class GetAllOfficeQuery : IRequest<IEnumerable<Office>>
+    public class OfficeGetAllQuery : IRequest<IEnumerable<Office>>
     {
     }
 }

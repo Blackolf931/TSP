@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Application.CQRS.Queries
 {
-    public class GetAllOfficeQueryHandler : IRequestHandler<GetAllOfficeQuery, IEnumerable<Office>>
+    public class OfficeGetAllQueryHandler : IRequestHandler<OfficeGetAllQuery, IEnumerable<Office>>
     {
         private readonly IRepositoryContext _context;
 
-        public GetAllOfficeQueryHandler(IRepositoryContext context)
+        public OfficeGetAllQueryHandler(IRepositoryContext context)
         {
             _context = context;
         }
 
-        public async Task<IEnumerable<Office>> Handle(GetAllOfficeQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Office>> Handle(OfficeGetAllQuery request, CancellationToken cancellationToken)
         {
             var offices = await _context.Offices.ToListAsync();
             if (offices is null)
