@@ -41,7 +41,7 @@ namespace OnionAppWithCQRS.Controllers
         }
 
         [HttpPut("[action]")]
-        public async Task<IActionResult> Update(int id, UpdateCommand command)
+        public async Task<IActionResult> Update(int id, UpdateOfficeCommand command)
         {
             if (id != command.OfficeId)
             {

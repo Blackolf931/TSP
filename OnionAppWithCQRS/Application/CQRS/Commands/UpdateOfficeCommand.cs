@@ -2,7 +2,7 @@
 
 namespace Application.CQRS.Commands
 {
-    public class UpdateCommand : IRequest<int>
+    public class UpdateOfficeCommand : IRequest<int>
     {
         public int OfficeId { get; set; }
         public string Name { get; set; }

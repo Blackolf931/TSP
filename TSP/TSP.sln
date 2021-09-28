@@ -16,10 +16,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JavaScriptClient", "..\Java
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocelot.API", "..\Ocelot.API\Ocelot.API.csproj", "{E12BF20C-CB99-4DB3-BE2B-9E80759924FF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OnionWithCQRS", "OnionWithCQRS", "{440FB312-9B91-4C39-AD6C-350064BFF42B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionAppWithCQRS", "..\OnionAppWithCQRS\OnionAppWithCQRS.csproj", "{B6F6D5D6-8EB8-4ED3-9E57-E8C522576F80}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,16 +50,9 @@ Global
 		{E12BF20C-CB99-4DB3-BE2B-9E80759924FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E12BF20C-CB99-4DB3-BE2B-9E80759924FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E12BF20C-CB99-4DB3-BE2B-9E80759924FF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B6F6D5D6-8EB8-4ED3-9E57-E8C522576F80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B6F6D5D6-8EB8-4ED3-9E57-E8C522576F80}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B6F6D5D6-8EB8-4ED3-9E57-E8C522576F80}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B6F6D5D6-8EB8-4ED3-9E57-E8C522576F80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{B6F6D5D6-8EB8-4ED3-9E57-E8C522576F80} = {440FB312-9B91-4C39-AD6C-350064BFF42B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B674B62-6C0A-4638-9D99-35E184ED1097}

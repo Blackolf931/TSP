@@ -1,14 +1,11 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Application.CQRS.Commands
 {
-    public class UpdateOfficeCommandHandler : IRequestHandler<UpdateCommand, int>
+    public class UpdateOfficeCommandHandler : IRequestHandler<UpdateOfficeCommand, int>
     {
         private readonly IAppDbContext _context;
 
@@ -17,7 +14,7 @@ namespace Application.CQRS.Commands
             _context = context;
         }
 
-        public async Task<int> Handle(UpdateCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(UpdateOfficeCommand request, CancellationToken cancellationToken)
         {
             var office = _context.Offices.Where(a => a.OfficeId == request.OfficeId).FirstOrDefault();
             if (office is null)
