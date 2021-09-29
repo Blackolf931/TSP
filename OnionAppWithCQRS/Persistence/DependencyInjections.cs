@@ -1,4 +1,4 @@
-﻿using Application;
+﻿using Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +12,7 @@ namespace Persistence
             services.AddDbContext<RepositoryContext>(options =>
                 options.UseSqlServer(
                     configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IRepositoryContext>(provider => provider.GetService<RepositoryContext>());
+            services.AddScoped<IRepositoryContext, RepositoryContext>();
         }
     }
 }

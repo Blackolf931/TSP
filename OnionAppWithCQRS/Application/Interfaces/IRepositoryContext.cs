@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-namespace Application
+namespace Application.Interfaces
 {
     public interface IRepositoryContext
     {

@@ -49,7 +49,7 @@ namespace OnionAppWithCQRS.Controllers
         public async Task<IActionResult> Update([FromQuery] int id, OfficeUpdateViewModel officeUpdateViewModel)
         {
             var result = _mapper.Map<OfficeUpdateCommand>(officeUpdateViewModel);
-            result.Id = id;
+            result.OfficeId = id;
             return Ok(await _mediator.Send(result));
         }
     }

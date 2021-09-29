@@ -1,5 +1,5 @@
-using Application;
 using Application.AutoMapper;
+using Application.DI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
