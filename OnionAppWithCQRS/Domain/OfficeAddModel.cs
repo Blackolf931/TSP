@@ -1,6 +1,6 @@
 ﻿namespace Domain
 {
-    public class OfficeAddEntity
+    public class OfficeAddModel
     {
         public string Name { get; set; }
         public string Address { get; set; }

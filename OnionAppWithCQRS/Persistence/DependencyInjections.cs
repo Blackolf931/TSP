@@ -12,7 +12,7 @@ namespace Persistence
             services.AddDbContext<RepositoryContext>(options =>
                 options.UseSqlServer(
                     configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IRepositoryContext, RepositoryContext>();
+            services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
         }
     }
 }

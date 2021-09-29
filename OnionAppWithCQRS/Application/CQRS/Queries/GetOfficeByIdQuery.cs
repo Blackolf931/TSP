@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.CQRS.Queries
 {
-    public class OfficeGetByIdQuery : IRequest<Office>
+    public class GetOfficeByIdQuery : IRequest<Office>
     {
         public int OfficeId { get; set; }
     }
