@@ -1,11 +1,13 @@
 ﻿using Domain;
 using MediatR;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Application.CQRS.Commands
 {
     public class UpdateOfficeCommand : IRequest<Office>
     {
-        public int OfficeId { get; set; }
+        [Column("OfficeId")]
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Country { get; set; }

@@ -38,7 +38,7 @@ namespace OnionAppWithCQRS.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            return Ok(await _mediator.Send(new GetOfficeByIdQuery { OfficeId = id }));
+            return Ok(await _mediator.Send(new GetOfficeByIdQuery { Id = id }));
         }
 
         [HttpDelete("{id}")]
@@ -48,7 +48,7 @@ namespace OnionAppWithCQRS.Controllers
         public async Task<IActionResult> Update([FromQuery] int id, OfficeUpdateViewModel officeUpdateViewModel)
         {
             var result = _mapper.Map<UpdateOfficeCommand>(officeUpdateViewModel);
-            result.OfficeId = id;
+            result.Id = id;
             return Ok(await _mediator.Send(result));
         }
     }

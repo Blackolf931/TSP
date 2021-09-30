@@ -17,7 +17,7 @@ namespace Application.CQRS.Queries
 
         public async Task<Office> Handle(GetOfficeByIdQuery request, CancellationToken cancellationToken)
         {
-            var office = await _repositoryBase.FindByIdAsync(request.OfficeId);
+            var office = await _repositoryBase.FindByIdAsync(request.Id);
             return office;
         }
     }
