@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.CQRS.Commands
 {
-    public class CreateOfficeCommandHandler : IRequestHandler<CreateOfficeCommand, OfficeAddModel>
+    public class CreateOfficeCommandHandler : IRequestHandler<CreateOfficeCommand, Office>
     {
         private readonly IMapper _mapper;
         private readonly IRepositoryBase<Office> _repositoryBase;
@@ -17,10 +17,10 @@ namespace Application.CQRS.Commands
             _repositoryBase = repositoryBase;
         }
 
-        public async Task<OfficeAddModel> Handle(CreateOfficeCommand request, CancellationToken cancellationToken)
+        public async Task<Office> Handle(CreateOfficeCommand request, CancellationToken cancellationToken)
         {
             await _repositoryBase.AddAsync(_mapper.Map<Office>(request));
-            return _mapper.Map<OfficeAddModel>(request);
+            return _mapper.Map<Office>(request);
         }
     }
 }

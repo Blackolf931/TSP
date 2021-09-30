@@ -7,7 +7,6 @@ namespace Application.AutoMapper
     {
         public AppMapper()
         {
-            CreateMap<OfficeAddModel, Office>().ReverseMap();
             CreateMap<CreateOfficeCommand, Office>().ReverseMap();
             CreateMap<UpdateOfficeCommand, Office>().ReverseMap();
         }

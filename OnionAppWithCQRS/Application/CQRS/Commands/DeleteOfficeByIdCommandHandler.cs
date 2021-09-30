@@ -17,8 +17,15 @@ namespace Application.CQRS.Commands
         public async Task<bool> Handle(DeleteOfficeByIdCommand request, CancellationToken cancellationToken)
         {
             var office = await _repositoryBase.FindByIdAsync(request.Id);
-            await _repositoryBase.DeleteByIdAsync(office);
-            return true;
+            if (office is null)
+            {
+                return false;
+            }
+            else
+            {
+                await _repositoryBase.DeleteByIdAsync(office);
+                return true;
+            }
         }
     }
 }

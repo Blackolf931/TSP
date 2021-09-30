@@ -18,10 +18,6 @@ namespace Application.CQRS.Queries
         public async Task<Office> Handle(GetOfficeByIdQuery request, CancellationToken cancellationToken)
         {
             var office = await _repositoryBase.FindByIdAsync(request.OfficeId);
-            if (office is null)
-            {
-                return default;
-            }
             return office;
         }
     }
