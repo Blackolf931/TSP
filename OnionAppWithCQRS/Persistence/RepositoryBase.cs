@@ -16,7 +16,7 @@ namespace Persistence
 
         public async Task<TEntity> AddAsync(TEntity entity)
         {
-            _repositoryContext.Add(entity);
+            await _repositoryContext.AddAsync(entity);
             await _repositoryContext.SaveChangesAsync();
             return entity;
         }
