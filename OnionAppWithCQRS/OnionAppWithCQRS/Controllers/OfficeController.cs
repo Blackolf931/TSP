@@ -13,7 +13,7 @@ namespace OnionAppWithCQRS.Controllers
     [Route("[controller]")]
     public class OfficeController : ControllerBase
     {
-        private IMediator _mediator;
+        private readonly IMediator _mediator;
         private readonly IMapper _mapper;
         public OfficeController(IMediator mediator, IMapper mapper)
         {
