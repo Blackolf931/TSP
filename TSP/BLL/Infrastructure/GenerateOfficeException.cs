@@ -1,26 +1,25 @@
 ﻿using BLL.Models;
 using System.Text.RegularExpressions;
 
-namespace BLL.Infastructure
+namespace BLL.Infrastructure
 {
     public class GenerateOfficeException
     {
         public GenerateOfficeException(Office? officeDto)
         {
-            if (officeDto is not null)
-            {
-                CheckData(officeDto.Id);
-                CheckData(officeDto.Name);
-                CheckData(officeDto.Country);
-            }
+            if (officeDto is null) return;
+            CheckData(officeDto.Id);
+            CheckData(officeDto.Name);
+            CheckData(officeDto.Country);
         }
 
-        public static void CheckData(int id)
+        private static void CheckData(int id)
         {
             if (id <= 0)
                 throw new OfficeException("Id cannot be less or equals zero");
         }
-        public static void CheckData(string? str)
+
+        private static void CheckData(string? str)
         {
             if (string.IsNullOrWhiteSpace(str))
                 throw new OfficeException("String cannot be less or equals null");

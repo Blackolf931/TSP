@@ -8,6 +8,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TSP.API.Controllers;
 using Xunit;
 
 namespace TSP.API.XUnitTests
@@ -28,6 +29,12 @@ namespace TSP.API.XUnitTests
             _mapper = mockMapper.CreateMapper();
             _sut = new EmployeeService(_employeeRepoMock.Object, _mapper, strategies);
         }
+
+      /*  [Fact]
+        public async Task Test()
+        {
+            var controller = new EmployeeController
+        }*/
 
         [Fact]
         public async Task GetEmployeeById_ShouldReturnEmployee_WhereEmployeeExists()
@@ -105,7 +112,7 @@ namespace TSP.API.XUnitTests
                 Id = 2,
                 Name = "Test",
                 SecondName = "Test",
-                Patronomic = "Test",
+                Patronymic = "Test",
                 Age = 25,
                 Position = "Test",
                 OfficeId = 2

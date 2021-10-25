@@ -28,7 +28,7 @@ namespace TSP.API
         {
             services.AddAutoMapper(typeof(ApiProfile), typeof(BllProfile));
             services.AddValidatorsFromAssemblyContaining<ValidationFilter>(ServiceLifetime.Transient);
-            services.RegistarBuisnessComponents(Configuration);
+            services.RegisterBusinessComponents(Configuration);
             services.AddLogging();
             services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore

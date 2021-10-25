@@ -1,28 +1,27 @@
 ﻿using BLL.Models;
 using System.Text.RegularExpressions;
 
-namespace BLL.Infastructure
+namespace BLL.Infrastructure
 {
     public class GenerateEmployeeException
     {
         public GenerateEmployeeException(Employee? dto)
         {
-            if (dto is not null)
-            {
-                CheckData(dto.Id);
-                CheckData(dto.Name);
-                CheckData(dto.Patronomic);
-                CheckData(dto.Age);
-                CheckData(dto.Position);
-            }
+            if (dto is null) return;
+            CheckData(dto.Id);
+            CheckData(dto.Name);
+            CheckData(dto.Patronymic);
+            CheckData(dto.Age);
+            CheckData(dto.Position);
         }
 
-        public static void CheckData(int id)
+        private static void CheckData(int id)
         {
             if (id <= 0)
                 throw new EmployeeException("Id cannot be less or equals zero");
         }
-        public static void CheckData(string? str)
+
+        private static void CheckData(string? str)
         {
             if (string.IsNullOrWhiteSpace(str))
                 throw new EmployeeException("String cannot be less or equals null");

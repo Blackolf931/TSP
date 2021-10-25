@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BLL.Infastructure
+namespace BLL.Infrastructure
 {
     public class OfficeException : Exception
     {
