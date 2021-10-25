@@ -33,5 +33,5 @@ jobs:
         dotnetTestArguments: --no-build --verbosity normal AIS/AIS.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
         sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
       env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_TOKEN: ${{ d15805bfb071be7e4b97f679955b2baecc64fe67 }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
