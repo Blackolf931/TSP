@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "..\Identi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JavaScriptClient", "..\JavaScriptClient\JavaScriptClient.csproj", "{2ABA4645-4839-43B6-ADC6-2F6D3B556A01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocelot.API", "..\Ocelot.API\Ocelot.API.csproj", "{E12BF20C-CB99-4DB3-BE2B-9E80759924FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocelot.API", "..\Ocelot.API\Ocelot.API.csproj", "{E12BF20C-CB99-4DB3-BE2B-9E80759924FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
