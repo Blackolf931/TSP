@@ -23,3 +23,15 @@ jobs:
       run: dotnet build --no-restore TSP
     - name: Test
       run: dotnet test --no-build --verbosity normal TSP
+    - name: sonarscan-dotnet
+      uses: highbyte/sonarscan-dotnet@v2.1.1-beta
+      with:
+        sonarProjectKey: Blackolf931_TSP
+        sonarProjectName: TSP
+        sonarOrganization: blackolf931
+        dotnetBuildArguments: TSP/TSP.sln
+        dotnetTestArguments: --no-build --verbosity normal AIS/AIS.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+        sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
